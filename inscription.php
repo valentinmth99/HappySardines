@@ -1,4 +1,7 @@
 <?php
+    session_start();
+
+    require('bdd.php');
 
 
 ?>
@@ -13,6 +16,8 @@
     </head>
 
     <body>
+
+        
 
      <!-- REQUIRE LE HEADER -->
 
