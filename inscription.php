@@ -20,18 +20,15 @@
 
             <form action="inscription.php" method="post">
                 
-                <input type="text" name="login" placeholder="login">
-                <input type="text" name="prenom" placeholder="prenom">
-                <input type="text" name="email" placeholder="email">
-                <input type="text" name="confemail" placeholder="Confirmer l'email">
-                <input type="password" name="password" placeholder="Mot de passe">
-                <input type="password" name="confpassword" placeholder="Confirmer le mot de passe">
-                <input type="submit" name="submit">
-
-
-
-
-
+                <div><input type="text" name="login" placeholder="login"></div>
+                <div><input type="text" name="prenom" placeholder="prenom"></div>
+                <div><input type="text" name="email" placeholder="email"></div>
+                <div><input type="text" name="confemail" placeholder="Confirmer l'email"></div>
+                <div><input type="password" name="password" placeholder="Mot de passe"></div>
+                <div><input type="password" name="confpassword" placeholder="Confirmer le mot de passe"></div>
+                <div><input type="submit" name="inscription" value="Inscription"></div>
+            </form>
+        </main>
 
      <!-- REQUIRE LE FOOTER -->
     
