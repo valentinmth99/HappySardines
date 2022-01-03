@@ -2,20 +2,10 @@
     session_start();
 
     require('bdd.php');
-    require('class_user.php');
+    require('classes/class_user.php');
 
     if (!empty($_POST)) {
         extract($_POST);
-
-        $login = trim($_POST['login']);
-        $email = trim($_POST['email']);
-        $prenom = trim($_POST['prenom']);
-        $nom = trim($_POST['nom']);
-        $confemail = trim($_POST['confemail']);
-        $confpassword = trim($_POST['confpassword']);
-        $password = trim($_POST['password']);
-
-        $valid = (boolean) true;
 
         if (isset($_POST['inscription'])) {
 
@@ -31,13 +21,10 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Inscription</title>
-    
+        <title>Inscription</title> 
     </head>
 
     <body>
-
-        
 
      <!-- REQUIRE LE HEADER -->
 
@@ -58,6 +45,5 @@
 
      <!-- REQUIRE LE FOOTER -->
     
-   
     </body>
 </html>

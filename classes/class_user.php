@@ -13,7 +13,7 @@ class User {
     // DECLARATION DES METHODES 
 
     public function __construct() {
-        require('bdd.php');
+        require('../bdd.php');
         $this->connexion=$bdd;
     }
 
