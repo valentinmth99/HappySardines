@@ -21,6 +21,7 @@
 
             $create_user = new User();
             $create_user->register("$login", "$email", "$prenom", "$nom", "$confemail", "$password", "$confpassword");
+            
         }
     }
 ?>

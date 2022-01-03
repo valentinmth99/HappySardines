@@ -1,8 +1,6 @@
 <?php
 
 
-
-
 class User {
 
     private $id;
@@ -14,18 +12,29 @@ class User {
     
     // DECLARATION DES METHODES 
 
-    public function __construct() {}
+    public function __construct() {
+        require('bdd.php');
+        $this->connexion=$bdd;
+    }
 
     // FONCTION REGISTER --------------------------------------------------
 
     public function register($login, $password, $email, $prenom, $nom) {
 
-        require('bdd.php');
+        $login = trim($_POST['login']);
+        $email = trim($_POST['email']);
+        $prenom = trim($_POST['prenom']);
+        $nom = trim($_POST['nom']);
+        $confemail = trim($_POST['confemail']);
+        $confpassword = trim($_POST['confpassword']);
+        $password = trim($_POST['password']);
+
+        $valid = (boolean) true;
 
 
         // VERIF LOGIN -------------
 
-        $reqlog = $bdd->prepare("SELECT * FROM utilisateurs WHERE login ='".$login."'");
+        $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login ='".$login."'");
         $reqlog->setFetchMode();
         $reqlog->execute();
 
@@ -61,13 +70,12 @@ class User {
 
         // VERIF EMAIL ----------
 
-        $reqmail = $bdd->prepare("SELECT * FROM utilisateurs WHERE email ='".$email."'");
+        $reqmail = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE email ='".$email."'");
         $reqmail->setFetchMode();
         $reqmail->execute();
 
         $resultmail = $reqmail->fetch();
-        
-        var_dump($resultmail);
+    
 
         if (empty($email)) {
             $valid=false;
@@ -76,16 +84,16 @@ class User {
 
         }
 
-        elseif(!preg_match("#^[a-z0-9_-]+((\.[a-z0-9_-]+){1,})?@[a-z0-9_-]+((\.[a-z0-9_-]+){1,})?\.[a-z]{2,30}$#i",$email)) {
+        elseif(filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
             $valid=false;
-            $err_email = "Votre adresse email n'est pas au bon format";
-            echo "L'adresse email n'est pas au bon format.";
+            $err_email = "Votre email n'est pas au bon format";
+            echo "Votre email n'est pas au bon format";
         }
-
+        
         elseif ($resultmail) {
             $valid = false;
             $err_email = "Cette adresse mail est déjà utilisée.";
-            $this->email = '';
+            $email = '';
             echo "Cette adresse mail est déjà utilisée.";
         }
 
@@ -95,7 +103,7 @@ class User {
             echo "Veuillez confirmer votre email.";
         }
 
-        elseif ($confemail =! $email) {
+        elseif ($confemail !== $email) {
             $valid = false;
             $err_confemail = "Les emails ne correspondent pas.";
             $confemail = "";
@@ -114,7 +122,7 @@ class User {
         elseif (!preg_match("#^[a-z]+$#", $prenom)) {
             $valid = false;
             $err_prenom ="Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
-            $this->prenom = "";
+            $prenom = "";
             echo "Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
         }
 
@@ -127,7 +135,7 @@ class User {
         elseif (!preg_match("#^[a-z]+$#", $nom)) {
             $valid = false;
             $err_nom = "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
-            $this->nom = "";
+            $nom = "";
             echo "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
         }
 
@@ -146,7 +154,7 @@ class User {
             echo "Veuillez confirmer votre mot de passe.";
         }
 
-        elseif ($password =! $confpassword) {
+        elseif ($password !== $confpassword) {
             $valid = false;
             $err_confpassword = "Les mots de passe ne correspondent pas.";
             $confpassword = "";
@@ -154,17 +162,18 @@ class User {
         }
 
         if ($valid==true) {
-            $register = $bdd->prepare("INSERT into utilisateurs (login, email, prenom, nom, password) VALUES ('".$login."', '".$email."', '".$prenom."','".$nom."' , '".md5($password)."')");
+            $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, prenom, nom, password) VALUES ('".$login."', '".$email."', '".$prenom."','".$nom."' , '".md5($password)."')");
             $register->execute();
+
+            $this->id = $id;
+            $this->login = $login;
+            $this->email = $email;
+            $this->nom = $nom;
+            $this->prenom = $prenom;
+            
 
             $message = "Vous êtes inscrit.";
             echo "Vous êtes inscrit.";
-
-            $destinataire = $email;
-            $sujet = "Confirmation d'inscription.";
-            $message = "Bonjour '".$login."', merci de votre inscription sur le site de CHS. Connectez vous <a href='localhost/connexion.php'>ici</a>"; 
-
-            mail($destinaire, $sujet, $message);
         }
     }
 }
