@@ -9,11 +9,13 @@ class User {
     public $prenom;
     public $nom;
     public $connexion;
+    public $session;
+
     
     // DECLARATION DES METHODES 
 
     public function __construct() {
-        require('../bdd.php');
+        require('./bdd.php');
         $this->connexion=$bdd;
     }
 
@@ -21,10 +23,11 @@ class User {
 
     public function register($login, $password, $email, $prenom, $nom) {
 
+        
         $login = trim($_POST['login']);
         $email = trim($_POST['email']);
-        $prenom = trim($_POST['prenom']);
-        $nom = trim($_POST['nom']);
+        $prenom = trim(ucwords(strtolower($_POST['prenom'])));
+        $nom = trim(ucwords(strtolower($_POST['nom'])));
         $confemail = trim($_POST['confemail']);
         $confpassword = trim($_POST['confpassword']);
         $password = trim($_POST['password']);
@@ -43,28 +46,28 @@ class User {
 
         if (empty($login)) {
             $valid = false;
-            $err_login = "Veuillez renseigner votre login.";
-            echo "Veuillez renseigner votre login.";
+            $err_login = "Renseignez votre login.";
+            echo "Renseignez votre login.";
         }
 
-        elseif (strlen($login)>20) {
+        elseif (strlen(6>$login)>20) {
             $valid = false;
-            $err_login = "Le login ne doit pas dépasser 20 caratères";
-            $this->login="";
-            echo "Le login ne doit pas dépasser 20 caractères.";
+            $err_login = "Le login doit contenir entre 6 et 20 caractères.";
+            $login="";
+            echo "Le login doit contenir entre 6 et 20 caractères.";
         }
 
-        elseif (!preg_match("#^[a-z0-9]+$#" ,$login)) {
+        elseif (!preg_match("#^[a-z0-9A-Z]+$#" ,$login)) {
             $valid = false;
             $err_login = "Le login doit uniquement contenir des lettres minuscules et des chiffres.";
-            $this->login="";
+            $login="";
             echo "Le login doit uniquement contenir des lettres minuscules et des chiffres. ";
         }
 
         elseif ($resultlog) {
             $valid = false;
             $err_login = "Ce login est déjà utilisé.";
-            $this->login = '';
+            $login ="";
             echo "Ce login est déjà utilisé.";
         }
 
@@ -75,7 +78,6 @@ class User {
         $reqmail->execute();
 
         $resultmail = $reqmail->fetch();
-    
 
         if (empty($email)) {
             $valid=false;
@@ -87,13 +89,14 @@ class User {
         elseif(filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
             $valid=false;
             $err_email = "Votre email n'est pas au bon format";
+            $email="";
             echo "Votre email n'est pas au bon format";
         }
         
         elseif ($resultmail) {
             $valid = false;
             $err_email = "Cette adresse mail est déjà utilisée.";
-            $email = '';
+            $email ="";
             echo "Cette adresse mail est déjà utilisée.";
         }
 
@@ -115,27 +118,27 @@ class User {
 
         if (empty($prenom)) {
             $valid = false;
-            $err_prenom = "Veuillez renseigner votre prénom.";
-            echo "Veuillez renseigner votre prénom.";
+            $err_prenom = "Renseignez votre prénom.";
+            echo "Renseignez votre prénom.";
         }
 
-        elseif (!preg_match("#^[a-z]+$#", $prenom)) {
+        elseif (!preg_match("#^[a-zA-Z]+$#", $prenom)) {
             $valid = false;
             $err_prenom ="Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
-            $prenom = "";
+            $prenom ="";
             echo "Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
         }
 
         if (empty($nom)) {
             $valid = false;
-            $err_nom = "Veuillez renseigner votre nom.";
-            echo "Veuillez renseigner votre nom.";
+            $err_nom = "Renseignez votre nom.";
+            echo "Renseignez votre nom.";
         }
 
-        elseif (!preg_match("#^[a-z]+$#", $nom)) {
+        elseif (!preg_match("#^[a-zA-Z]+$#", $nom)) {
             $valid = false;
             $err_nom = "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
-            $nom = "";
+            $nom ="";
             echo "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
         }
 
@@ -143,21 +146,27 @@ class User {
 
         if (empty($password)) {
             $valid = false;
-            $err_password = "Veuillez renseigner votre mot de passe.";
-            echo "Veuillez renseigner votre mot de passe.";
+            $err_password = "Renseignez votre mot de passe.";
+            echo "Renseignez votre mot de passe.";
+        }
+
+        elseif (strlen($password)<8) {
+            $valid = false;
+            $err_password = "Le mot de passe doit être de 8 caractères minimum.";
+            $password="";
+            echo "Le mot de passe doit être de 8 caractères minimum.";
         }
 
         elseif (empty($confpassword)) {
             $valid = false;
-            $err_confpassword = "Veuillez confirmer votre mot de passe.";
-            $confpassword = "";
-            echo "Veuillez confirmer votre mot de passe.";
+            $err_confpassword = "Confirmez votre mot de passe.";
+            echo "Confirmez votre mot de passe.";
         }
 
         elseif ($password !== $confpassword) {
             $valid = false;
             $err_confpassword = "Les mots de passe ne correspondent pas.";
-            $confpassword = "";
+            $confpassword ="";
             echo "Les mots de passe ne correspondent pas.";
         }
 
@@ -165,15 +174,51 @@ class User {
             $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, prenom, nom, password) VALUES ('".$login."', '".$email."', '".$prenom."','".$nom."' , '".md5($password)."')");
             $register->execute();
 
-            $this->id = $id;
-            $this->login = $login;
-            $this->email = $email;
-            $this->nom = $nom;
-            $this->prenom = $prenom;
-            
-
             $message = "Vous êtes inscrit.";
             echo "Vous êtes inscrit.";
+            
+        }
+    }
+
+    //FUNCTION CONNECT
+
+    public function connect($login, $password) {
+
+        $login = $_POST['login'];
+        $password = $_POST['password'];
+
+        $valid = (boolean) true;
+
+        if (empty($login)) {
+            $valid = false;
+            $err_login = "Veuillez renseigner votre login.";
+            echo "Veuillez renseigner votre login.";
+        }
+
+        if (empty($password)) {
+            $valid = false;
+            $err_login = "Veuillez renseigner votre mot de passe.";
+            echo "Veuillez renseigner votre mot de passe.";
+        }
+
+        if($valid == true) {
+            $connect = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$login."' && password='".md5($password)."'");
+            $connect->setFetchMode(FETCH_ASSOC);
+            $connect->execute();
+
+            $connectresult = $connect->fetch();
+
+            if($connectresult) {
+                echo "Vous êtes connecté.";
+                var_dump($connectresult);
+                $_SESSION['login'] = $login;
+                
+            }
+
+            else {
+                echo "Le login et/ou le mot de passe est incorrect.";
+                $err_connexion = "Le login et/ou le mot de passe est incorrect.";
+            }
         }
     }
 }

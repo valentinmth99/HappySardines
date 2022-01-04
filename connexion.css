@@ -1,0 +1,13 @@
+
+
+.container {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+
+.signin {
+    display:flex;
+    flex-direction:column;
+}
+
