@@ -80,13 +80,15 @@ if (isset($_SESSION['login'])) {
                 </div>
             <?php } ?>
 
+            <!--  AFFICHAGE DU COMPTE SI CONNECTE  -->
+
             <?php if(isset($_SESSION['login'])) { ?> 
             
             <section class="connected">
 
-                <div class="infostable">
+                <div class="infosbox">
 
-                    <p class="corpus"> Vos informations </p>
+                    <div><h2 class="boxtitle"> Vos informations </h2></div>
 
                     <table border="1">
                         <tr>
@@ -111,7 +113,13 @@ if (isset($_SESSION['login'])) {
                         <input type="submit" name="changeinfos" value="Modifier">
                     </form>
 
-                   
+                </div>
+
+                <div class="reservationsbox">
+
+                    <div><h2 class="boxtitle"> Vos réservations </h2></div>
+
+                
                 </div>
             </section>
 
