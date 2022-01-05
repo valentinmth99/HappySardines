@@ -23,25 +23,31 @@ class User {
 
     public function register($login, $password, $email, $prenom, $nom) {
 
+        
+        $login = trim($_POST['login']);
+        $email = trim($_POST['email']);
+        $prenom = trim(ucwords(strtolower($_POST['prenom'])));
+        $nom = trim(ucwords(strtolower($_POST['nom'])));
         $confemail = trim($_POST['confemail']);
         $confpassword = trim($_POST['confpassword']);
+        $password = trim($_POST['password']);
 
         $data = [
-            'login'=>trim($_POST['login']),
-            'email'=>trim($_POST['email']),
-            'prenom'=>trim(ucwords(strtolower($_POST['prenom'])));,
-            'nom'=>trim(ucwords(strtolower($_POST['nom'])));,
-            'password'=>md5(trim($_POST['$password'])),
-        ] ;
+            'login'=>$login,
+            'email'=>$email,
+            'prenom'=>$prenom,
+            'nom'=>$nom,
+            'password'=>md5($password),
+        ];
 
         $valid = (boolean) true;
 
 
         // VERIF LOGIN -------------
 
-        $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login =:login");
+        $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login ='".$login."'");
         $reqlog->setFetchMode();
-        $reqlog->execute($data['login']);
+        $reqlog->execute();
 
         $resultlog = $reqlog->fetch();
 
