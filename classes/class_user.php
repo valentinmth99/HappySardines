@@ -203,15 +203,21 @@ class User {
 
         if($valid == true) {
             $connect = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$login."' && password='".md5($password)."'");
-            $connect->setFetchMode(FETCH_ASSOC);
+            $connect->setFetchMode(PDO::FETCH_ASSOC);
             $connect->execute();
 
-            $connectresult = $connect->fetch();
+            $connectresult = $connect->fetchall();
 
             if($connectresult) {
                 echo "Vous êtes connecté.";
                 var_dump($connectresult);
                 $_SESSION['login'] = $login;
+                return $this->session = $_SESSION['login'];
+                    $this->id = $connectresult['id'];
+                    $this->login = $connectresult['login'];
+                    $this->email = $connectresult['email'];
+                    $this->prenom = $connectresult['prenom'];
+                    $this->nom = $connectresult['nom'];
                 
             }
 

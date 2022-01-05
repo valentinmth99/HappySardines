@@ -21,7 +21,7 @@
                 <div class="nav-container">
                     <ul class="nav-tabs">
                         <li class="nav-tab"><a href="index.php">Accueil</a></li>
-                        <li class="nav-tab"><a href="connexion.php">Compte</a></li>
+                        <li class="nav-tab"><a href="compte.php">Mon Compte</a></li>
                         <li class="nav-tab"><a href="camping.php">Camping</a></li>
                         <li class="nav-tab"><a href="reservations.php">Réservations</a></li>
                         <li class="nav-tab"><a href="tarif.php">Tarifs</a></li>
