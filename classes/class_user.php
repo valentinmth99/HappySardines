@@ -45,9 +45,9 @@ class User {
 
         // VERIF LOGIN -------------
 
-        $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login ='".$login."'");
+        $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login =:login");
         $reqlog->setFetchMode();
-        $reqlog->execute();
+        $reqlog->execute(['login'=> $login]);
 
         $resultlog = $reqlog->fetch();
 
@@ -81,9 +81,9 @@ class User {
 
         // VERIF EMAIL ----------
 
-        $reqmail = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE email ='".$email."'");
+        $reqmail = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE email =:email");
         $reqmail->setFetchMode();
-        $reqmail->execute();
+        $reqmail->execute(['email'=>$email]);
 
         $resultmail = $reqmail->fetch();
 
@@ -179,8 +179,8 @@ class User {
         }
 
         if ($valid==true) {
-            $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, prenom, nom, password) VALUES ('".$login."', '".$email."', '".$prenom."','".$nom."' , '".md5($password)."')");
-            $register->execute();
+            $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, prenom, nom, password) VALUES (:login, :email, :prenom, :nom, :password)");
+            $register->execute($data);
 
             $message = "Vous êtes inscrit.";
             echo "Vous êtes inscrit.";
