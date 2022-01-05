@@ -212,12 +212,6 @@ class User {
                 echo "Vous êtes connecté.";
 
                 $_SESSION['login'] = $login;
-                return $this->session = $_SESSION['login'];
-                $this->id = $connectresult['id'];
-                $this->login = $connectresult['login'];
-                $this->email = $connectresult['email'];
-                $this->prenom = $connectresult['prenom'];
-                $this->nom = $connectresult['nom'];  
             }
 
             else {
@@ -236,15 +230,11 @@ class User {
 
         $getinfosresult = $getinfos->fetchall();
 
-        var_dump($getinfosresult);
-
-        return $login = $getinfosresult['0']['login'];
-        $email = $getinfosresult['0']['email'];
-        $prenom = $getinfosresult['0']['prenom'];
-        $nom = $getinfosresult['0']['nom'];
-
-        echo $login;
-
+        $this->login = $getinfosresult[0]['login'];
+        $this->email = $getinfosresult[0]['email'];
+        $this->prenom = $getinfosresult[0]['prenom'];
+        $this->nom = $getinfosresult[0]['nom'];
+        $this->session=$_SESSION['login'];
     }
 }
 

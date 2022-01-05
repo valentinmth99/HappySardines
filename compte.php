@@ -4,12 +4,6 @@ session_start();
 
 require('classes/class_user.php');
 
-$login = '';
-$prenom = '';
-$id = '';
-$password ='';
-$nom = '';
-$prenom = '';
 
 if (isset($_POST['suscribe'])) {
     header ('Location: inscription.php');
@@ -19,7 +13,6 @@ if (!empty($_POST)){
     extract($_POST);
     
     if (isset($_POST['connexion'])) {
-    
         $connect_user = new User ;
         $connect_user->connect("$login", "$password");
 
@@ -27,7 +20,6 @@ if (!empty($_POST)){
 }
 
 if (isset($_SESSION['login'])) {
-
     $getinfos_user = new User;
     $getinfos_user->Getinfos();
 }
@@ -99,9 +91,27 @@ if (isset($_SESSION['login'])) {
                     <table border="1">
                         <tr>
                             <td>Login</td>
-                            <td><?php echo $login ; ?></td>
+                            <td><?php echo $getinfos_user->login;?></td>
+                        </tr>
+                        <tr>
+                            <td>Nom</td>
+                            <td><?php echo $getinfos_user->nom;?></td>
+                        </tr>
+                        <tr>
+                            <td>Prenom</td>
+                            <td><?php echo $getinfos_user->prenom;?></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><?php echo $getinfos_user->email;?></td>
                         </tr>
                     </table>
+
+                    <form action="compte.php" method="post">
+                        <input type="submit" name="changeinfos" value="modifier">
+                    </form>
+
+                   
                 </div>
             </section>
 
