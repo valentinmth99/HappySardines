@@ -109,7 +109,7 @@ if (isset($_SESSION['login'])) {
                         </tr>
                     </table>
 
-                    <form action="compte.php" method="post">
+                    <form action="change-infos.php" method="post">
                         <input type="submit" name="changeinfos" value="Modifier">
                     </form>
 
