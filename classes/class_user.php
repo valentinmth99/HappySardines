@@ -236,6 +236,10 @@ class User {
         $this->nom = $getinfosresult[0]['nom'];
         $this->session=$_SESSION['login'];
     }
+
+    //UPDATEINFOS
+
+
 }
 
 

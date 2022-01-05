@@ -48,7 +48,7 @@ if (isset($_SESSION['login'])) {
 
                         <div><h2 class="boxtitle">J'ai déjà un compte</h2></div>
 
-                        <form action="connexion.php" method="post">
+                        <form action="compte.php" method="post">
 
                             <div><label for="login" class="userlabel">Login</label></div>
                             <div><input type="text" class="userinput" name="login"></div>
@@ -108,7 +108,7 @@ if (isset($_SESSION['login'])) {
                     </table>
 
                     <form action="compte.php" method="post">
-                        <input type="submit" name="changeinfos" value="modifier">
+                        <input type="submit" name="changeinfos" value="Modifier">
                     </form>
 
                    
