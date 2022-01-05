@@ -210,15 +210,14 @@ class User {
 
             if($connectresult) {
                 echo "Vous êtes connecté.";
-                var_dump($connectresult);
+
                 $_SESSION['login'] = $login;
                 return $this->session = $_SESSION['login'];
-                    $this->id = $connectresult['id'];
-                    $this->login = $connectresult['login'];
-                    $this->email = $connectresult['email'];
-                    $this->prenom = $connectresult['prenom'];
-                    $this->nom = $connectresult['nom'];
-                
+                $this->id = $connectresult['id'];
+                $this->login = $connectresult['login'];
+                $this->email = $connectresult['email'];
+                $this->prenom = $connectresult['prenom'];
+                $this->nom = $connectresult['nom'];  
             }
 
             else {
@@ -226,6 +225,26 @@ class User {
                 $err_connexion = "Le login et/ou le mot de passe est incorrect.";
             }
         }
+    }
+
+    // GETINFOS
+
+    public function Getinfos() {
+        $getinfos = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."'");
+        $getinfos->setFetchMode(PDO::FETCH_ASSOC);
+        $getinfos->execute();
+
+        $getinfosresult = $getinfos->fetchall();
+
+        var_dump($getinfosresult);
+
+        return $login = $getinfosresult['0']['login'];
+        $email = $getinfosresult['0']['email'];
+        $prenom = $getinfosresult['0']['prenom'];
+        $nom = $getinfosresult['0']['nom'];
+
+        echo $login;
+
     }
 }
 

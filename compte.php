@@ -4,6 +4,13 @@ session_start();
 
 require('classes/class_user.php');
 
+$login = '';
+$prenom = '';
+$id = '';
+$password ='';
+$nom = '';
+$prenom = '';
+
 if (isset($_POST['suscribe'])) {
     header ('Location: inscription.php');
 }
@@ -17,6 +24,12 @@ if (!empty($_POST)){
         $connect_user->connect("$login", "$password");
 
     }
+}
+
+if (isset($_SESSION['login'])) {
+
+    $getinfos_user = new User;
+    $getinfos_user->Getinfos();
 }
 
 ?>
@@ -74,6 +87,27 @@ if (!empty($_POST)){
 
                 </div>
             <?php } ?>
+
+            <?php if(isset($_SESSION['login'])) { ?> 
+            
+            <section class="connected">
+
+                <div class="infostable">
+
+                    <p class="corpus"> Vos informations </p>
+
+                    <table border="1">
+                        <tr>
+                            <td>Login</td>
+                            <td><?php echo $login ; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <?php } ?>
+
+
         </main>
 
      <!-- REQUIRE LE FOOTER -->
