@@ -46,7 +46,7 @@ class User {
         // VERIF LOGIN -------------
 
         $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login =:login");
-        $reqlog->setFetchMode();
+        $reqlog->setFetchMode(PDO::FETCH_ASSOC);
         $reqlog->execute(['login'=> $login]);
 
         $resultlog = $reqlog->fetch();
@@ -82,7 +82,7 @@ class User {
         // VERIF EMAIL ----------
 
         $reqmail = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE email =:email");
-        $reqmail->setFetchMode();
+        $reqmail->setFetchMode(PDO::FETCH_ASSOC);
         $reqmail->execute(['email'=>$email]);
 
         $resultmail = $reqmail->fetch();
