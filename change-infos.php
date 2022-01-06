@@ -13,14 +13,20 @@ $getinfos_user->Getinfos();
 
 if (!empty($_POST)){
     extract($_POST);
-    
     if (isset($_POST['updateinfos'])) {
-
         $changeinfos_user = new User();
         $changeinfos_user->Updateinfos("$newlogin", "$newprenom", "$newemail", "$newnom");
-
     }
+}
 
+if (!empty($_POST)){
+    extract($_POST);
+
+    if (isset($_POST['updatepassword'])) {
+
+        $changepassword_user = new User();
+        $changepassword_user->Updateinfos("$newpassword");
+    }
 }
 
 
@@ -66,8 +72,8 @@ if (!empty($_POST)){
 
                     <form action="change-infos.php" method="post">
 
-                        <div><input type="password" name="actualpassword" placeholder="Mot de passe"></div>
-                        <div><input type="password" name="newpassword" placeholder="Mot de passe"></div>
+                        <div><input type="password" name="actualpassword" placeholder="Mot de passe actuel"></div>
+                        <div><input type="password" name="newpassword" placeholder="Nouveau mot de passe"></div>
                         <div><input type="password" name="confpassword" placeholder="Confirmer le mot de passe"></div>
                         <div><input type="submit" name="updatepassword" value="Changer le mot de passe"></div>
 

@@ -409,10 +409,79 @@ class User {
         
     }
 
+    //UPDATEPASSWORD ---------------------------------------------------------------------------------------------
+
+    public function Updatepassword($password){
+
+        $password = $_POST['actualpassword'];
+        $newpassword = $_POST['newpassword'];
+        $confpassword = $_POST['confpassword'];
+
+        $valid = (boolean) true;
+
+        $reqpassword = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' AND password ='".md5($password)."'");
+        $reqpassword->setFetchMode();
+        $reqpassword->execute();
+
+        $resultpassword = $reqpassword->fetch();
+
+        if(empty($password)) {
+            $valid = false;
+            $err_password = "Renseignez votre mot de passe actuel.";
+            echo "Renseignez votre mot de passe actuel.";
+        }
+
+        elseif($reqpassword == false) {
+            $valid = false;
+            $password = '';
+            $err_password = "Le mot de passe actuel est incorrect.";
+            echo "Le mot de passe actuel est incorrect.";
+        }
+
+        if(empty($newpassword)) {
+            $valid = false;
+            $err_newpassword = "Renseignez votre nouveau mot de passe.";
+            echo "Renseignez votre nouveau mot de passe.";
+        }
+
+        elseif (strlen($newpassword)<8) {
+            $valid = false;
+            $newpassword ='';
+            $err_newpassword ="Le mot de passe doit contenir au moins 8 caractères.";
+            echo "Le mot de passe doit contenir au moins 8 caractères.";
+        }
+
+        elseif(empty($confpassword)) {
+            $valid = false;
+            $err_confpassword = "Confirmez votre mot de passe.";
+            echo "Confirmez votre mot de passe.";
+
+        }
+
+        elseif($newpassword !== $confpassword) {
+            $valid = false;
+            $err_passwords = "Les mots de passe ne correspondent pas.";
+            echo "Les mots de passe ne correspondent pas.";
+        }
+
+        if ($valid == true) {
+
+            $updatepassword = $this->connexion->prepare("UPDATE utilisateurs SET password='".$newpassword."'");
+            $updatepassword->execute();
+
+            $message = "Le nouveau mot de passe a bien été enregistré.";
+
+            echo "Le nouveau mot de passe a bien été enregistré.";
+
+        }
+
+
+        
+    }
+
 
 
 
 }
-
 
 ?>
