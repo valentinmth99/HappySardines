@@ -17,7 +17,7 @@ session_start();
               
             <section class="content">
 
-                <h1 class="titre">RÉSERVATION</h1>
+                <h2 class="titre">RÉSERVATION</h2>
 
                 <?php if(isset($_SESSION['login'])) { ?>
 
