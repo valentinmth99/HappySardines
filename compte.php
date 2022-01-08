@@ -65,9 +65,9 @@ if (isset($_SESSION['login'])) {
 
                         <h2 class="boxtitle">Je créé un compte</h2>
 
-                        <div class="boxtext">Je peux réserver un séjour chez Happy Sardines.</div>
-                        <div class="boxtext">Je peux consulter mes réservations.</div>
-                        <div class="boxtext">Je peux consulter et modifier mes informations.</div>
+                        <div class="textbox">Je peux réserver un séjour chez Happy Sardines.</div>
+                        <div class="textbox">Je peux consulter mes réservations.</div>
+                        <div class="textbox">Je peux consulter et modifier mes informations.</div>
 
                         <form action="inscription.php" method="post"><input type="submit" name="suscribe" class="usersubmit" value="Inscription"></form>
 
@@ -96,12 +96,12 @@ if (isset($_SESSION['login'])) {
                             <td><?php echo $getinfos_user->login;?></td>
                         </tr>
                         <tr>
-                            <td>Nom</td>
-                            <td><?php echo $getinfos_user->nom;?></td>
+                            <td>lastname</td>
+                            <td><?php echo $getinfos_user->lastname;?></td>
                         </tr>
                         <tr>
-                            <td>Prenom</td>
-                            <td><?php echo $getinfos_user->prenom;?></td>
+                            <td>firstname</td>
+                            <td><?php echo $getinfos_user->firstname;?></td>
                         </tr>
                         <tr>
                             <td>Email</td>
@@ -109,8 +109,8 @@ if (isset($_SESSION['login'])) {
                         </tr>
                     </table>
 
-                    <form action="change-infos.php" method="post">
-                        <input type="submit" name="changeinfos" value="Modifier">
+                    <form action="update-infos.php" method="post">
+                        <input type="submit" name="updateinfos" value="Modifier">
                     </form>
 
                 </div>

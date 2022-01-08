@@ -14,21 +14,16 @@ $getinfos_user->Getinfos();
 if (!empty($_POST)){
     extract($_POST);
     if (isset($_POST['updateinfos'])) {
-        $changeinfos_user = new User();
-        $changeinfos_user->Updateinfos("$newlogin", "$newprenom", "$newemail", "$newnom");
+        $updateinfos_user = new User();
+        $updateinfos_user->Updateinfos("$newlogin", "$newfirstname", "$newemail", "$newlastname");
     }
-}
-
-if (!empty($_POST)){
-    extract($_POST);
 
     if (isset($_POST['updatepassword'])) {
 
-        $changepassword_user = new User();
-        $changepassword_user->Updateinfos("$newpassword");
+        $updatepassword_user = new User();
+        $updatepassword_user->Updatepassword("$newpassword");
     }
 }
-
 
 ?>
 
@@ -44,20 +39,20 @@ if (!empty($_POST)){
 
         <main>
             
-            <section class="boxcentral">
+            <section class="centralbox">
 
                 <div><h2 class="boxtitle">Modifier vos informations</h2></div>
                 <div><?php if (isset($message)) { echo $message;}?></div>
 
                 <div class="form">
 
-                    <form action="change-infos.php" method="post">
+                    <form action="update-infos.php" method="post">
 
                         <div><input type="text" name="newlogin" placeholder="login" value="<?php if (isset($newlogin)) { echo $newlogin ;} else echo $getinfos_user->login ;?>"></div>
-                        <div><input type="text" name="newprenom" placeholder="prenom" value="<?php if (isset($newprenom)) { echo $newprenom ;} else echo $getinfos_user->prenom ; ?>"></div>
-                        <div><input type="text" name="newnom" placeholder="nom" value="<?php if (isset($newnom)) { echo $newnom ;} else echo $getinfos_user->nom ?>"></div>
+                        <div><input type="text" name="newfirstname" placeholder="firstname" value="<?php if (isset($newfirstname)) { echo $newfirstname ;} else echo $getinfos_user->firstname ; ?>"></div>
+                        <div><input type="text" name="newlastname" placeholder="lastname" value="<?php if (isset($newlastname)) { echo $newlastname ;} else echo $getinfos_user->lastname ?>"></div>
                         <div><input type="text" name="newemail" placeholder="email"value="<?php if (isset($newmail)) { echo $newmail; } else echo $getinfos_user->email ?>"></div>
-                        <div><input type="text" name="confemail" placeholder="Confirmer l'email" value="<?php if(isset($confemail)){echo $confemail;} ?>"></div>
+                        <div><input type="text" name="checkemail" placeholder="Confirmer l'email" value="<?php if(isset($confemail)){echo $confemail;} ?>"></div>
                         <div><input type="password" name="password" placeholder="Confirmez avec votre mot de passe."></div>
                         <div><input type="submit" name="updateinfos" value="Changer les informations"></div>
 
@@ -74,7 +69,7 @@ if (!empty($_POST)){
 
                         <div><input type="password" name="actualpassword" placeholder="Mot de passe actuel"></div>
                         <div><input type="password" name="newpassword" placeholder="Nouveau mot de passe"></div>
-                        <div><input type="password" name="confpassword" placeholder="Confirmer le mot de passe"></div>
+                        <div><input type="password" name="checkpassword" placeholder="Confirmer le mot de passe"></div>
                         <div><input type="submit" name="updatepassword" value="Changer le mot de passe"></div>
 
                     </form>

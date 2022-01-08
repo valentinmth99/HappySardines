@@ -9,7 +9,7 @@
         if (isset($_POST['inscription'])) {
 
             $create_user = new User();
-            $create_user->register("$login", "$email", "$prenom", "$nom", "$confemail", "$password", "$confpassword");
+            $create_user->register("$login", "$email", "$firstname", "$lastname", "$checkemail", "$password", "$checkpassword");
             
         }
     }
@@ -35,18 +35,18 @@
                 
                 
                 <div><input type="text" name="login" placeholder="login" value="<?php if(isset($login)){echo $login;} ?>"></div>
-                <div><?php if(isset($err_prenom)){echo $err_prenom;}?></div>
-                <div><input type="text" name="prenom" placeholder="prenom" value="<?php if(isset($prenom)){echo $prenom;} ?>"></div>
-                <div><?php if(isset($err_nom)){echo $err_nom;}?></div>
-                <div><input type="text" name="nom" placeholder="nom" value="<?php if(isset($nom)){echo $nom;} ?>"></div>
+                <div><?php if(isset($err_firstname)){echo $err_firstname;}?></div>
+                <div><input type="text" name="firstname" placeholder="prenom" value="<?php if(isset($firstname)){echo $firstname;} ?>"></div>
+                <div><?php if(isset($err_lastname)){echo $err_lastname;}?></div>
+                <div><input type="text" name="lastname" placeholder="nom" value="<?php if(isset($lastname)){echo $lastname;} ?>"></div>
                 <div><?php if(isset($err_email)){echo $err_email;}?></div>
                 <div><input type="text" name="email" placeholder="email"value="<?php if(isset($email)){echo $email;} ?>"></div>
-                <div><?php if(isset($err_confemail)){echo $err_confemail;}?></div>
-                <div><input type="text" name="confemail" placeholder="Confirmer l'email" value="<?php if(isset($confemail)){echo $confemail;} ?>"></div>
+                <div><?php if(isset($err_checkemail)){echo $err_checkemail;}?></div>
+                <div><input type="text" name="checkemail" placeholder="Confirmer l'email" value="<?php if(isset($checkemail)){echo $checkemail;} ?>"></div>
                 <div><?php if(isset($err_password)){echo $err_password;}?></div>
                 <div><input type="password" name="password" placeholder="Mot de passe"></div>
-                <div><?php if(isset($err_confpassword)){echo $err_confpassword;}?></div>
-                <div><input type="password" name="confpassword" placeholder="Confirmer le mot de passe"></div>
+                <div><?php if(isset($err_checkpassword)){echo $err_checkpassword;}?></div>
+                <div><input type="password" name="checkpassword" placeholder="Confirmer le mot de passe"></div>
                 <div><input type="submit" name="inscription" value="Inscription"></div>
             </form>
         </main>

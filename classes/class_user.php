@@ -431,7 +431,7 @@ class User {
             echo "Renseignez votre mot de passe actuel.";
         }
 
-        elseif($reqpassword == false) {
+        elseif($resultpassword == false) {
             $valid = false;
             $password = '';
             $err_password = "Le mot de passe actuel est incorrect.";
@@ -466,7 +466,7 @@ class User {
 
         if ($valid == true) {
 
-            $updatepassword = $this->connexion->prepare("UPDATE utilisateurs SET password='".$newpassword."'");
+            $updatepassword = $this->connexion->prepare("UPDATE utilisateurs SET password='".md5($newpassword)."' WHERE login ='".$_SESSION['login']."'");
             $updatepassword->execute();
 
             $message = "Le nouveau mot de passe a bien été enregistré.";

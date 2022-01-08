@@ -1,0 +1,96 @@
+# Query: prenom
+# ContextLines: 1
+
+43 results - 4 files
+
+change-infos.php:
+  17          $changeinfos_user = new User();
+  18:         $changeinfos_user->Updateinfos("$newlogin", "$newfirstname", "$newemail", "$newnom");
+  19      }
+
+  51                          <div><input type="text" name="newlogin" placeholder="login" value="<?php if (isset($newlogin)) { echo $newlogin ;} else echo $getinfos_user->login ;?>"></div>
+  52:                         <div><input type="text" name="newfirstname" placeholder="prenom" value="<?php if (isset($newfirstname)) { echo $newfirstname ;} else echo $getinfos_user->firstname ; ?>"></div>
+  53                          <div><input type="text" name="newnom" placeholder="nom" value="<?php if (isset($newnom)) { echo $newnom ;} else echo $getinfos_user->nom ?>"></div>
+
+compte.php:
+  102                          <tr>
+  103:                             <td>Prenom</td>
+  104:                             <td><?php echo $getinfos_user->firstname;?></td>
+  105                          </tr>
+
+inscription.php:
+  11              $create_user = new User();
+  12:             $create_user->register("$login", "$email", "$firstname", "$nom", "$confemail", "$password", "$confpassword");
+  13              
+
+  37                  <div><input type="text" name="login" placeholder="login" value="<?php if(isset($login)){echo $login;} ?>"></div>
+  38:                 <div><?php if(isset($err_firstname)){echo $err_firstname;}?></div>
+  39:                 <div><input type="text" name="firstname" placeholder="prenom" value="<?php if(isset($firstname)){echo $firstname;} ?>"></div>
+  40                  <div><?php if(isset($err_nom)){echo $err_nom;}?></div>
+
+classes\class_user.php:
+    8      public $email;
+    9:     public $firstname;
+   10      public $lastname;
+
+   23  
+   24:     public function register($login, $password, $email, $firstname, $lastname) {
+   25  
+
+   28          $email = trim($_POST['email']);
+   29:         $firstname = trim(ucwords(strtolower($_POST['firstname'])));
+   30          $lastname = trim(ucwords(strtolower($_POST['lastname'])));
+
+   37              'email'=>$email,
+   38:             'firstname'=>$firstname,
+   39              'lastname'=>$lastname,
+
+  124  
+  125:         // CHECK FIRSTNAME/LASTNAME ------
+  126  
+  127:         if (empty($firstname)) {
+  128              $valid = false;
+  129:             $err_firstname = "Renseignez votre prénom.";
+  130              echo "Renseignez votre prénom.";
+
+  132  
+  133:         elseif (!preg_match("#^[a-zA-Z]+$#", $firstname)) {
+  134              $valid = false;
+  135:             $err_firstname ="Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
+  136:             $firstname ="";
+  137              echo "Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
+
+  181          if ($valid==true) {
+  182:             $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, firstname, lastname, password) VALUES (:login, :email, :firstname, :lastname, :password)");
+  183              $register->execute($data);
+
+  244          $this->email = $getinfosresult[0]['email'];
+  245:         $this->firstname = $getinfosresult[0]['firstname'];
+  246          $this->lastname = $getinfosresult[0]['lastname'];
+
+  254          $newemail = trim($_POST['newemail']);
+  255:         $newfirstname = trim(ucwords(strtolower($_POST['newfirstname'])));
+  256          $newlastname = trim(ucwords(strtolower($_POST['newlastname'])));
+
+  263              'lastname'=>$newlastname,
+  264:             'firstname'=>$newfirstname,
+  265          ];
+
+  348  
+  349:         // CHECK FIRSTNAME/LASTNAME ------
+  350  
+  351:         if (empty($newfirstname)) {
+  352              $valid = false;
+  353:             $err_firstname = "Renseignez votre prénom.";
+  354              echo "Renseignez votre prénom.";
+
+  356  
+  357:         elseif (!preg_match("#^[a-zA-Z]+$#", $newfirstname)) {
+  358              $valid = false;
+  359:             $err_firstname ="Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
+  360:             $firstname ="";
+  361              echo "Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
+
+  395              email=:email, 
+  396:             firstname =:firstname,
+  397              lastname =:lastname
