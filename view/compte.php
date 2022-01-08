@@ -1,12 +1,7 @@
 <?php
 
 session_start();
-
-require('classes/class_user.php');
-
-if (isset($_POST['suscribe'])) {
-    header ('Location: inscription.php');
-}
+require('../controller/compteController.php')
 
 ?>
 
@@ -14,7 +9,7 @@ if (isset($_POST['suscribe'])) {
     <head>
         <meta charset="utf-8">
         <title>Compte</title> 
-        <link rel="stylesheet" type="text/css" href="compte.css">
+        <link rel="stylesheet" type="text/css" href="style/compte.css">
     </head>
 
     <body>

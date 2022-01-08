@@ -69,6 +69,3 @@ $getinfos_user->Getinfos();
     
     </body>
 </html>
-
-
-
