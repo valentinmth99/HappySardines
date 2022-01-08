@@ -28,8 +28,8 @@ class User {
         $email = trim($_POST['email']);
         $prenom = trim(ucwords(strtolower($_POST['prenom'])));
         $nom = trim(ucwords(strtolower($_POST['nom'])));
-        $confemail = trim($_POST['confemail']);
-        $confpassword = trim($_POST['confpassword']);
+        $checkemail = trim($_POST['checkemail']);
+        $checkpassword = trim($_POST['checkpassword']);
         $password = trim($_POST['password']);
 
         $data = [
@@ -43,7 +43,7 @@ class User {
         $valid = (boolean) true;
 
 
-        // VERIF LOGIN -------------
+        // check LOGIN -------------
 
         $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login =:login");
         $reqlog->setFetchMode(PDO::FETCH_ASSOC);
@@ -79,7 +79,7 @@ class User {
             echo "Ce login est déjà utilisé.";
         }
 
-        // VERIF EMAIL ----------
+        // check EMAIL ----------
 
         $reqmail = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE email =:email");
         $reqmail->setFetchMode(PDO::FETCH_ASSOC);
@@ -108,21 +108,21 @@ class User {
             echo "Cette adresse mail est déjà utilisée.";
         }
 
-        elseif (empty($confemail)) {
+        elseif (empty($checkemail)) {
             $valid = false;
-            $err_confemail = "Veuillez confirmer votre email.";
+            $err_checkemail = "Veuillez confirmer votre email.";
             echo "Veuillez confirmer votre email.";
         }
 
-        elseif ($confemail !== $email) {
+        elseif ($checkemail !== $email) {
             $valid = false;
-            $err_confemail = "Les emails ne correspondent pas.";
-            $confemail = "";
+            $err_checkemail = "Les emails ne correspondent pas.";
+            $checkemail = "";
             echo "Les emails ne correspondent pas.";
         }
 
 
-        // VERIF PRENOM/NOM ------
+        // check PRENOM/NOM ------
 
         if (empty($prenom)) {
             $valid = false;
@@ -150,7 +150,7 @@ class User {
             echo "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
         }
 
-        // VERIF PASSWORD  ------
+        // check PASSWORD  ------
 
         if (empty($password)) {
             $valid = false;
@@ -165,16 +165,16 @@ class User {
             echo "Le mot de passe doit être de 8 caractères minimum.";
         }
 
-        elseif (empty($confpassword)) {
+        elseif (empty($checkpassword)) {
             $valid = false;
-            $err_confpassword = "Confirmez votre mot de passe.";
+            $err_checkpassword = "Confirmez votre mot de passe.";
             echo "Confirmez votre mot de passe.";
         }
 
-        elseif ($password !== $confpassword) {
+        elseif ($password !== $checkpassword) {
             $valid = false;
-            $err_confpassword = "Les mots de passe ne correspondent pas.";
-            $confpassword ="";
+            $err_checkpassword = "Les mots de passe ne correspondent pas.";
+            $checkpassword ="";
             echo "Les mots de passe ne correspondent pas.";
         }
 
@@ -254,7 +254,7 @@ class User {
         $newemail = trim($_POST['newemail']);
         $newprenom = trim(ucwords(strtolower($_POST['newprenom'])));
         $newnom = trim(ucwords(strtolower($_POST['newnom'])));
-        $confemail = trim($_POST['confemail']);
+        $checkemail = trim($_POST['checkemail']);
         $password = trim($_POST['password']);
 
         $data = [
@@ -267,7 +267,7 @@ class User {
         $valid = (boolean) true;
 
 
-        // VERIF LOGIN -------------
+        // check LOGIN -------------
 
         $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login ='".$newlogin."'");
         $reqlog->setFetchMode();
@@ -303,7 +303,7 @@ class User {
             echo "Ce login est déjà utilisé.";
         }
 
-        // VERIF EMAIL ----------
+        // check EMAIL ----------
 
         $reqmail = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE email ='".$newemail."'");
         $reqmail->setFetchMode();
@@ -332,21 +332,21 @@ class User {
             echo "Cette adresse mail est déjà utilisée.";
         }
 
-        elseif (empty($confemail)) {
+        elseif (empty($checkemail)) {
             $valid = false;
-            $err_confemail = "Veuillez confirmer votre email.";
+            $err_checkemail = "Veuillez confirmer votre email.";
             echo "Veuillez confirmer votre email.";
         }
 
-        elseif ($confemail !== $newemail) {
+        elseif ($checkemail !== $newemail) {
             $valid = false;
-            $err_confemail = "Les emails ne correspondent pas.";
-            $confemail = "";
+            $err_checkemail = "Les emails ne correspondent pas.";
+            $checkemail = "";
             echo "Les emails ne correspondent pas.";
         }
 
 
-        // VERIF PRENOM/NOM ------
+        // check PRENOM/NOM ------
 
         if (empty($newprenom)) {
             $valid = false;
@@ -374,7 +374,7 @@ class User {
             echo "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
         }
 
-        // VERIF PASSWORD  ------
+        // check PASSWORD  ------
 
         $reqpassword = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' && password ='".md5($password)."'");
         $reqpassword->setFetchMode();
@@ -415,7 +415,7 @@ class User {
 
         $password = $_POST['actualpassword'];
         $newpassword = $_POST['newpassword'];
-        $confpassword = $_POST['confpassword'];
+        $checkpassword = $_POST['checkpassword'];
 
         $valid = (boolean) true;
 
@@ -451,14 +451,14 @@ class User {
             echo "Le mot de passe doit contenir au moins 8 caractères.";
         }
 
-        elseif(empty($confpassword)) {
+        elseif(empty($checkpassword)) {
             $valid = false;
-            $err_confpassword = "Confirmez votre mot de passe.";
+            $err_checkpassword = "Confirmez votre mot de passe.";
             echo "Confirmez votre mot de passe.";
 
         }
 
-        elseif($newpassword !== $confpassword) {
+        elseif($newpassword !== $checkpassword) {
             $valid = false;
             $err_passwords = "Les mots de passe ne correspondent pas.";
             echo "Les mots de passe ne correspondent pas.";
