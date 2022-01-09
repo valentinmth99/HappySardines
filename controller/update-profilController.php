@@ -1,5 +1,7 @@
 <?php
 
+require('../model/bdd.php');
+
 // CONTROLLER FUNCTION UPDATEINFOS
 
 if (!empty($_POST)){
@@ -26,7 +28,7 @@ if (!empty($_POST)){
 
         // check LOGIN -------------
 
-        $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login ='".$newlogin."'");
+        $reqlog = $bdd->prepare("SELECT * FROM utilisateurs WHERE login ='".$newlogin."'");
         $reqlog->setFetchMode();
         $reqlog->execute();
 
@@ -62,7 +64,7 @@ if (!empty($_POST)){
 
         // check EMAIL ----------
 
-        $reqmail = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE email ='".$newemail."'");
+        $reqmail = $bdd->prepare("SELECT * FROM utilisateurs WHERE email ='".$newemail."'");
         $reqmail->setFetchMode();
         $reqmail->execute();
 
@@ -133,7 +135,7 @@ if (!empty($_POST)){
 
         // check PASSWORD  ------
 
-        $reqpassword = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' && password ='".md5($password)."'");
+        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' && password ='".md5($password)."'");
         $reqpassword->setFetchMode();
         $reqpassword->execute();
 
@@ -167,7 +169,7 @@ if (!empty($_POST)){
 
         $valid = (boolean) true;
 
-        $reqpassword = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' AND password ='".md5($password)."'");
+        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' AND password ='".md5($password)."'");
         $reqpassword->setFetchMode();
         $reqpassword->execute();
 

@@ -38,8 +38,16 @@ class User {
 
     public function register($login, $email, $firstname, $lastname, $password) {
 
-        $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, firstname, lastname, password) VALUES ('".$login."', '".$email."', '".$firstname."', '".$lastname."', '".md5($password)."'");
-        $register->execute();
+        $data = [
+            'login'=>$login,
+            'email'=>$email,
+            'firstname'=>$firstname,
+            'lastname'=>$lastname,
+            'password'=>md5($password),
+        ];
+
+        $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, firstname, lastname, password) VALUES (:login, :email, :firstname, :lastname, :password)");
+        $register->execute($data);
 
         $message = "Vous êtes inscrit.";
         echo "Vous êtes inscrit.";

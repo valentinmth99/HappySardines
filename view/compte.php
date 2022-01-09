@@ -27,7 +27,7 @@ require('../controller/compteController.php')
 
                         <div><h2 class="boxtitle">J'ai déjà un compte</h2></div>
 
-                        <form action="compteController.php" method="post">
+                        <form action="compte.php" method="post">
 
                             <div><label for="login" class="userlabel">Login</label></div>
                             <div><input type="text" class="userinput" name="login"></div>
@@ -48,7 +48,7 @@ require('../controller/compteController.php')
                         <div class="textbox">Je peux consulter mes réservations.</div>
                         <div class="textbox">Je peux consulter et modifier mes informations.</div>
 
-                        <form action="compteController.php" method="post"><input type="submit" name="suscribe" class="usersubmit" value="Inscription"></form>
+                        <form action="compte.php" method="post"><input type="submit" name="suscribe" class="usersubmit" value="Inscription"></form>
 
 
                     </div>
@@ -88,7 +88,7 @@ require('../controller/compteController.php')
                         </tr>
                     </table>
 
-                    <form action="update-infosController.php" method="post">
+                    <form action="update-profil.php" method="post">
                         <input type="submit" name="updateinfos" value="Modifier">
                     </form>
 

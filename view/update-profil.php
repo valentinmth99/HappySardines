@@ -2,7 +2,8 @@
 
 session_start();
 
-require('classes/class_user.php');
+require('../model/classes/class_user.php');
+require('../controller/update-profilController.php');
 
 echo $_SESSION['login'];
 
@@ -32,7 +33,7 @@ $getinfos_user->Getinfos();
 
                 <div class="form">
 
-                    <form action="update-infosController.php" method="post">
+                    <form action="update-profil.php" method="post">
 
                         <div><input type="text" name="newlogin" placeholder="login" value="<?php if (isset($newlogin)) { echo $newlogin ;} else echo $getinfos_user->login ;?>"></div>
                         <div><input type="text" name="newfirstname" placeholder="firstname" value="<?php if (isset($newfirstname)) { echo $newfirstname ;} else echo $getinfos_user->firstname ; ?>"></div>
