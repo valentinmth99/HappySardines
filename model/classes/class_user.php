@@ -17,7 +17,7 @@ class User {
     
     // DECLARATION DES METHODES 
 
-     public function __construct() {  //VOIR POURQUOI LE CHEMIN REQUIRE FONCTIONNE PAS SA MERE
+    public function __construct() {  //VOIR POURQUOI LE CHEMIN REQUIRE FONCTIONNE PAS SA MERE
         $bdd = new PDO('mysql:host=localhost;dbname=camping', 'root', '');
 
         try {
@@ -36,7 +36,7 @@ class User {
 
     // FONCTION REGISTER -----------------------------------------------------------------------------------------------
 
-    public function register($login, $email, $firstname, $lastname, $password) {
+    public function Register($login, $email, $firstname, $lastname, $password) {
 
         $data = [
             'login'=>$login,
@@ -55,7 +55,7 @@ class User {
 
     //FUNCTION CONNECT ---------------------------------------------------------------------------------------
 
-    public function connect($login, $password) {
+    public function Connect($login, $password) {
 
 
         $connect = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$login."' && password='".md5($password)."'");
@@ -81,7 +81,7 @@ class User {
 
     // GETINFOS -----------------------------------------------------------------------------------------
 
-    public function Getinfos() {
+    public function GetInfos() {
         $getinfos = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE id='".$_SESSION['id']."'");
         $getinfos->setFetchMode(PDO::FETCH_ASSOC);
         $getinfos->execute();
@@ -97,11 +97,16 @@ class User {
 
     //UPDATEINFOS ---------------------------------------------------------------------------------------------
 
-    public function Updateinfos() {
+    public function UpdateInfos($newlogin, $newlastname, $newfirstname) {
+
+        $data = [
+            'login'=>$newlogin,
+            'lastname'=>$newlastname,
+            'firstname'=>$newfirstname,
+        ];
 
         $updateinfos = $this->connexion->prepare("UPDATE utilisateurs SET
         login=:login, 
-        email=:email, 
         firstname =:firstname,
         lastname =:lastname
         WHERE login ='".$_SESSION['login']."'");
@@ -116,7 +121,7 @@ class User {
 
     //UPDATEPASSWORD ---------------------------------------------------------------------------------------------
 
-    public function Updatepassword($password){
+    public function UpdatePassword($newpassword){
 
         $updatepassword = $this->connexion->prepare("UPDATE utilisateurs SET password='".md5($newpassword)."' WHERE login ='".$_SESSION['login']."'");
         $updatepassword->execute();
@@ -125,6 +130,20 @@ class User {
 
         echo "Le nouveau mot de passe a bien été enregistré.";
     }
+
+    //UPDATEEMAIL ---------------------------------------------------------------------------------------------
+
+    public function UpdateEmail($newemail){
+
+        $updateemail = $this->connexion->prepare("UPDATE utilisateurs SET email='".$newemail."' WHERE login ='".$_SESSION['login']."'");
+        $updateemail->execute();
+
+        $message = "La nouvelle adresse email a été enregistrée.";
+
+        echo "La nouvelle adresse email a été enregistrée.";
+    }
+
+    
 
 
 

@@ -27,7 +27,7 @@
                         <li class="nav-tab"><a href="reservations.php">Réservations</a></li>
                         <li class="nav-tab"><a href="tarif.php">Tarifs</a></li>
                         <li class="nav-tab"><a href="contacts.php">Contacts</a></li>
-                        <li class="nav-tab"><?php if(isset($_SESSION['login'])){?><a href="deconnexion.php">Déconnexion</a><?php }?></li> 
+                        <li class="nav-tab"><?php if(isset($_SESSION['login'])){?><a href="../model/deconnexion.php">Déconnexion</a><?php }?></li> 
                     </ul>
                 </div>
             </nav>

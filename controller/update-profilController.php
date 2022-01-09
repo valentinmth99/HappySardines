@@ -2,23 +2,22 @@
 
 require('../model/bdd.php');
 
+require('../model/classes/class_user.php');
+
 // CONTROLLER FUNCTION UPDATEINFOS
 
-if (!empty($_POST)){
+if (isset($_POST)){
     extract($_POST);
 
     if (isset($_POST['updateinfos'])) {
 
         $newlogin = trim($_POST['newlogin']);
-        $newemail = trim($_POST['newemail']);
         $newfirstname = trim(ucwords(strtolower($_POST['newfirstname'])));
         $newlastname = trim(ucwords(strtolower($_POST['newlastname'])));
-        $checkemail = trim($_POST['checkemail']);
-        $password = trim($_POST['password']);
+        $password = $_POST['password'];
 
         $data = [
             'login'=>$newlogin,
-            'email'=>$newemail,
             'lastname'=>$newlastname,
             'firstname'=>$newfirstname,
         ];
@@ -28,7 +27,7 @@ if (!empty($_POST)){
 
         // check LOGIN -------------
 
-        $reqlog = $bdd->prepare("SELECT * FROM utilisateurs WHERE login ='".$newlogin."'");
+        $reqlog = $bdd->prepare("SELECT * FROM utilisateurs WHERE login ='".$newlogin."' AND id!='".$_SESSION['id']."'");
         $reqlog->setFetchMode();
         $reqlog->execute();
 
@@ -61,6 +60,137 @@ if (!empty($_POST)){
             $login ="";
             echo "Ce login est déjà utilisé.";
         }
+
+
+        // check firstname/lastname ------
+
+        if (empty($newfirstname)) {
+            $valid = false;
+            $err_firstname = "Renseignez votre prénom.";
+            echo "Renseignez votre prénom.";
+        }
+
+        elseif (!preg_match("#^[a-zA-Z]+$#", $newfirstname)) {
+            $valid = false;
+            $err_firstname ="Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
+            $firstname ="";
+            echo "Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
+        }
+
+        if (empty($newlastname)) {
+            $valid = false;
+            $err_lastname = "Renseignez votre nom.";
+            echo "Renseignez votre nom.";
+        }
+
+        elseif (!preg_match("#^[a-zA-Z]+$#", $newlastname)) {
+            $valid = false;
+            $err_lastname = "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
+            $lastname ="";
+            echo "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
+        }
+
+        // check PASSWORD  ------
+
+        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE id='".$_SESSION['id']."' && password ='".md5($password)."'");
+        $reqpassword->setFetchMode();
+        $reqpassword->execute();
+
+        $resultpassword = $reqpassword->fetch();
+
+        if($resultpassword == false ) {
+            $valid = false;
+            $err_passwordinfos = "Le mot de passe est incorrect.";
+            echo "Le mot de passe est incorrect.";
+        }
+
+        if($valid==true) {
+
+            $updateinfos_user = new User();
+            $updateinfos_user->UpdateInfos("$newlogin", "$newfirstname", "$newlastname");
+        }
+    }
+}
+
+// CONTROLLER FUNCTION UPDATEPASSWORD
+
+if (!empty($_POST)){
+    extract($_POST);
+
+    if (isset($_POST['updatepassword'])) {
+
+        $password = $_POST['actualpassword'];
+        $newpassword = $_POST['newpassword'];
+        $checkpassword = $_POST['checkpassword'];
+
+        $valid = (boolean) true;
+
+        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' AND password ='".md5($password)."'");
+        $reqpassword->setFetchMode();
+        $reqpassword->execute();
+
+        $resultpassword = $reqpassword->fetch();
+
+        if(empty($password)) {
+            $valid = false;
+            $err_actualpassword = "Renseignez votre mot de passe actuel.";
+            echo "Renseignez votre mot de passe actuel.";
+        }
+
+        elseif($resultpassword == false) {
+            $valid = false;
+            $password = '';
+            $err_actualpassword = "Le mot de passe actuel est incorrect.";
+            echo "Le mot de passe actuel est incorrect.";
+        }
+
+        if(empty($newpassword)) {
+            $valid = false;
+            $err_newpassword = "Renseignez votre nouveau mot de passe.";
+            echo "Renseignez votre nouveau mot de passe.";
+        }
+
+        elseif (strlen($newpassword)<8) {
+            $valid = false;
+            $newpassword ='';
+            $err_newpassword ="Le mot de passe doit contenir au moins 8 caractères.";
+            echo "Le mot de passe doit contenir au moins 8 caractères.";
+        }
+
+        elseif(empty($checkpassword)) {
+            $valid = false;
+            $err_checkpassword = "Confirmez votre mot de passe.";
+            echo "Confirmez votre mot de passe.";
+
+        }
+
+        elseif($newpassword !== $checkpassword) {
+            $valid = false;
+            $err_passwords = "Les mots de passe ne correspondent pas.";
+            echo "Les mots de passe ne correspondent pas.";
+        }
+
+        if ($valid == true) {
+
+            $updatepassword_user = new User();
+            $updatepassword_user->UpdatePassword("$newpassword");
+        }
+    }
+}
+
+// CONTROLLER FUNCTION UPDATEEMAIL
+
+
+if (!empty($_POST)) {
+    extract($_POST);
+
+    if(isset($_POST['updateemail'])) {
+
+        $newemail = trim($_POST['newemail']);
+        $checkemail = trim($_POST['checkemail']);
+        $passwword = trim($_POST['password']);
+
+        $valid = (boolean) true;
 
         // check EMAIL ----------
 
@@ -104,124 +234,37 @@ if (!empty($_POST)){
             echo "Les emails ne correspondent pas.";
         }
 
+       // check PASSWORD  ------
 
-        // check firstname/lastname ------
+       $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' && password ='".md5($password)."'");
+       $reqpassword->setFetchMode();
+       $reqpassword->execute();
 
-        if (empty($newfirstname)) {
-            $valid = false;
-            $err_firstname = "Renseignez votre prénom.";
-            echo "Renseignez votre prénom.";
-        }
+       $resultpassword = $reqpassword->fetch();
 
-        elseif (!preg_match("#^[a-zA-Z]+$#", $newfirstname)) {
-            $valid = false;
-            $err_firstname ="Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
-            $firstname ="";
-            echo "Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
-        }
+       if(empty($password)) {
+           $valid = false;
+           $err_password = "Renseignez votre mot de passe.";
+       }
 
-        if (empty($newlastname)) {
-            $valid = false;
-            $err_lastname = "Renseignez votre nom.";
-            echo "Renseignez votre nom.";
-        }
-
-        elseif (!preg_match("#^[a-zA-Z]+$#", $newlastname)) {
-            $valid = false;
-            $err_lastname = "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
-            $lastname ="";
-            echo "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
-        }
-
-        // check PASSWORD  ------
-
-        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' && password ='".md5($password)."'");
-        $reqpassword->setFetchMode();
-        $reqpassword->execute();
-
-        $resultpassword = $reqpassword->fetch();
-
-        if($resultpassword == false ) {
-            $valid = false;
-            $err_password = "Le mot de passe est incorrect.";
-            echo "Le mot de passe est incorrect.";
+        elseif($resultpassword == false ) {
+           $valid = false;
+           $err_password = "Le mot de passe est incorrect.";
+           echo "Le mot de passe est incorrect.";
         }
 
         if($valid==true) {
-
-            require('class_user.php');
-            $updateinfos_user = new User();
-            $updateinfos_user->Updateinfos("$newlogin", "$newfirstname", "$newemail", "$newlastname");
+            $updateemail = new User ();
+            $updateemail->UpdateEmail($newemail);
         }
+
+
+
+        
+
+
     }
 }
-
-// CONTROLLER FUNCTION UPDATEPASSWORD
-
-if (!empty($_POST)){
-    extract($_POST);
-
-    if (isset($_POST['updatepassword'])) {
-
-        $password = $_POST['actualpassword'];
-        $newpassword = $_POST['newpassword'];
-        $checkpassword = $_POST['checkpassword'];
-
-        $valid = (boolean) true;
-
-        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' AND password ='".md5($password)."'");
-        $reqpassword->setFetchMode();
-        $reqpassword->execute();
-
-        $resultpassword = $reqpassword->fetch();
-
-        if(empty($password)) {
-            $valid = false;
-            $err_password = "Renseignez votre mot de passe actuel.";
-            echo "Renseignez votre mot de passe actuel.";
-        }
-
-        elseif($resultpassword == false) {
-            $valid = false;
-            $password = '';
-            $err_password = "Le mot de passe actuel est incorrect.";
-            echo "Le mot de passe actuel est incorrect.";
-        }
-
-        if(empty($newpassword)) {
-            $valid = false;
-            $err_newpassword = "Renseignez votre nouveau mot de passe.";
-            echo "Renseignez votre nouveau mot de passe.";
-        }
-
-        elseif (strlen($newpassword)<8) {
-            $valid = false;
-            $newpassword ='';
-            $err_newpassword ="Le mot de passe doit contenir au moins 8 caractères.";
-            echo "Le mot de passe doit contenir au moins 8 caractères.";
-        }
-
-        elseif(empty($checkpassword)) {
-            $valid = false;
-            $err_checkpassword = "Confirmez votre mot de passe.";
-            echo "Confirmez votre mot de passe.";
-
-        }
-
-        elseif($newpassword !== $checkpassword) {
-            $valid = false;
-            $err_passwords = "Les mots de passe ne correspondent pas.";
-            echo "Les mots de passe ne correspondent pas.";
-        }
-
-        if ($valid == true) {
-            require('class_user.php');
-            $updatepassword_user = new User();
-            $updatepassword_user->Updatepassword("$newpassword");
-        }
-    }
-}
-
 
     
 ?>

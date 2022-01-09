@@ -12,7 +12,7 @@
 
     <body>
 
-        <?php require('header.php')?>
+        <?php require('view/header.php')?>
 
         <main>
 

@@ -4,6 +4,7 @@ require('../model/bdd.php');
 
 require('../model/classes/class_user.php');
 
+
 // CONTROLLER FUNCTION REGISTER
 
 if (!empty($_POST)) {
@@ -161,7 +162,7 @@ if (!empty($_POST)) {
         if ($valid==true) {
 
             $create_user = new User();
-            $create_user->register("$login", "$email", "$firstname", "$lastname", "$password");
+            $create_user->Register("$login", "$email", "$firstname", "$lastname", "$password");
                 
         }
     }

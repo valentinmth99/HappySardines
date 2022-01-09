@@ -89,7 +89,7 @@ require('../controller/compteController.php')
                     </table>
 
                     <form action="update-profil.php" method="post">
-                        <input type="submit" name="updateinfos" value="Modifier">
+                        <input type="submit" name="updateprofil" value="Modifier">
                     </form>
 
                 </div>

@@ -29,7 +29,7 @@ if (!empty($_POST)){
         if($valid == true) {
 
             $connect_user = new User ;
-            $connect_user->connect("$login", "$password");
+            $connect_user->Connect("$login", "$password");
         }
 
     }
@@ -39,14 +39,17 @@ if (!empty($_POST)){
 
 if (isset($_SESSION['login'])) {
     $getinfos_user = new User;
-    $getinfos_user->Getinfos();
+    $getinfos_user->GetInfos();
 }
 
 // REDIRECTION PAGE INSCRIPTION
 
 if (isset($_POST['suscribe'])) {
-    header ('Location: inscription.php');
+    header ('Location: ../view/inscription.php');
 }
+
+// REDIRECTION COMPTE
+
 
 
 
