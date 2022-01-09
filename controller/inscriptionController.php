@@ -19,13 +19,6 @@ if (!empty($_POST)) {
         $checkpassword = trim($_POST['checkpassword']);
         $password = trim($_POST['password']);
 
-        $data = [
-            'login'=>$login,
-            'email'=>$email,
-            'firstname'=>$firstname,
-            'lastname'=>$lastname,
-            'password'=>md5($password),
-        ];
 
         $valid = (boolean) true;
 
@@ -168,7 +161,7 @@ if (!empty($_POST)) {
         if ($valid==true) {
 
             $create_user = new User();
-            $create_user->register("$login", "$email", "$firstname", "$lastname", "$checkemail", "$password", "$checkpassword");
+            $create_user->register("$login", "$email", "$firstname", "$lastname", "$password");
                 
         }
     }

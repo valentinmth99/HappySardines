@@ -32,7 +32,7 @@ $getinfos_user->Getinfos();
 
                 <div class="form">
 
-                    <form action="update-infos.php" method="post">
+                    <form action="update-infosController.php" method="post">
 
                         <div><input type="text" name="newlogin" placeholder="login" value="<?php if (isset($newlogin)) { echo $newlogin ;} else echo $getinfos_user->login ;?>"></div>
                         <div><input type="text" name="newfirstname" placeholder="firstname" value="<?php if (isset($newfirstname)) { echo $newfirstname ;} else echo $getinfos_user->firstname ; ?>"></div>

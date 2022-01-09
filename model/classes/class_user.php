@@ -1,8 +1,10 @@
 <?php
 
-require('../bdd.php');
+
 
 class User {
+
+    
 
     private $id;
     public $login;
@@ -15,23 +17,29 @@ class User {
     
     // DECLARATION DES METHODES 
 
-    public function __construct() {}
+     public function __construct() {  //VOIR POURQUOI LE CHEMIN REQUIRE FONCTIONNE PAS SA MERE
+        $bdd = new PDO('mysql:host=localhost;dbname=camping', 'root', '');
+
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=camping', 'root', '');
+            echo "Connecté à la bdd";
+            $this->connexion=$bdd;
+            
+        }
+
+        catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+        }
+    }
        
 
     // FONCTION REGISTER -----------------------------------------------------------------------------------------------
 
-    public function register($login, $password, $email, $firstname, $lastname) {
+    public function register($login, $email, $firstname, $lastname, $password) {
 
-        $data = [
-            'login'=>$login,
-            'email'=>$email,
-            'firstname'=>$firstname,
-            'lastname'=>$lastname,
-            'password'=>md5($password),
-        ];
-
-        $register = $bdd->prepare("INSERT into utilisateurs (login, email, firstname, lastname, password) VALUES (:login, :email, :firstname, :lastname, :password)");
-        $register->execute($data);
+        $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, firstname, lastname, password) VALUES ('".$login."', '".$email."', '".$firstname."', '".$lastname."', '".md5($password)."'");
+        $register->execute();
 
         $message = "Vous êtes inscrit.";
         echo "Vous êtes inscrit.";
