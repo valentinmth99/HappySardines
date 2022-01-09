@@ -1,5 +1,7 @@
 <?php
 
+require('../model/classes/class_user.php');
+
 // FUNCTION CONNECT CONTROLLER
 
 if (!empty($_POST)){
@@ -25,7 +27,6 @@ if (!empty($_POST)){
         }
 
         if($valid == true) {
-            require('class_user.php');
 
             $connect_user = new User ;
             $connect_user->connect("$login", "$password");

@@ -1,5 +1,6 @@
 <?php
 
+require('../bdd.php');
 
 class User {
 
@@ -14,18 +15,22 @@ class User {
     
     // DECLARATION DES METHODES 
 
-    public function __construct() {
-        require('./bdd.php');
-        $this->connexion=$bdd;
-    }
+    public function __construct() {}
+       
 
     // FONCTION REGISTER -----------------------------------------------------------------------------------------------
 
     public function register($login, $password, $email, $firstname, $lastname) {
 
-        require('inscriptionController.php');
+        $data = [
+            'login'=>$login,
+            'email'=>$email,
+            'firstname'=>$firstname,
+            'lastname'=>$lastname,
+            'password'=>md5($password),
+        ];
 
-        $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, firstname, lastname, password) VALUES (:login, :email, :firstname, :lastname, :password)");
+        $register = $bdd->prepare("INSERT into utilisateurs (login, email, firstname, lastname, password) VALUES (:login, :email, :firstname, :lastname, :password)");
         $register->execute($data);
 
         $message = "Vous êtes inscrit.";

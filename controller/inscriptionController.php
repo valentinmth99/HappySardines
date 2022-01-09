@@ -1,5 +1,9 @@
 <?php
 
+require('../model/bdd.php');
+
+require('../model/classes/class_user.php');
+
 // CONTROLLER FUNCTION REGISTER
 
 if (!empty($_POST)) {
@@ -28,7 +32,7 @@ if (!empty($_POST)) {
 
         // CHECK LOGIN -------------
 
-        $reqlog = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login =:login");
+        $reqlog = $bdd->prepare("SELECT * FROM utilisateurs WHERE login =:login");
         $reqlog->setFetchMode(PDO::FETCH_ASSOC);
         $reqlog->execute(['login'=> $login]);
 
@@ -64,7 +68,7 @@ if (!empty($_POST)) {
 
         // CHECK EMAIL ----------
 
-        $reqmail = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE email =:email");
+        $reqmail = $bdd->prepare("SELECT * FROM utilisateurs WHERE email =:email");
         $reqmail->setFetchMode(PDO::FETCH_ASSOC);
         $reqmail->execute(['email'=>$email]);
 
@@ -162,7 +166,6 @@ if (!empty($_POST)) {
         }
 
         if ($valid==true) {
-            require('class_user.php');
 
             $create_user = new User();
             $create_user->register("$login", "$email", "$firstname", "$lastname", "$checkemail", "$password", "$checkpassword");

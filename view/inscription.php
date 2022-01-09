@@ -1,10 +1,9 @@
 <?php  
 session_start();
 
+require('../controller/inscriptionController.php');
 
 ?>
-
-
 
 <html lang="fr">
     <head>
