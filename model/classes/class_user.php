@@ -46,7 +46,7 @@ class User {
             'password'=>md5($password),
         ];
 
-        $register = $this->connexion->prepare("INSERT into utilisateurs (login, email, firstname, lastname, password) VALUES (:login, :email, :firstname, :lastname, :password)");
+        $register = $this->connexion->prepare("INSERT into users (login, email, firstname, lastname, password) VALUES (:login, :email, :firstname, :lastname, :password)");
         $register->execute($data);
 
         $message = "Vous êtes inscrit.";
@@ -58,7 +58,7 @@ class User {
     public function Connect($login, $password) {
 
 
-        $connect = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE login='".$login."' && password='".md5($password)."'");
+        $connect = $this->connexion->prepare("SELECT * FROM users WHERE login='".$login."' && password='".md5($password)."'");
         $connect->setFetchMode(PDO::FETCH_ASSOC);
         $connect->execute();
 
@@ -82,7 +82,7 @@ class User {
     // GETINFOS -----------------------------------------------------------------------------------------
 
     public function GetInfos() {
-        $getinfos = $this->connexion->prepare("SELECT * FROM utilisateurs WHERE id='".$_SESSION['id']."'");
+        $getinfos = $this->connexion->prepare("SELECT * FROM users WHERE id='".$_SESSION['id']."'");
         $getinfos->setFetchMode(PDO::FETCH_ASSOC);
         $getinfos->execute();
 
@@ -105,7 +105,7 @@ class User {
             'lastname'=>$newlastname,
         ];
 
-        $updateinfos = $this->connexion->prepare("UPDATE utilisateurs SET
+        $updateinfos = $this->connexion->prepare("UPDATE users SET
         login=:login, 
         firstname =:firstname,
         lastname =:lastname
@@ -123,7 +123,7 @@ class User {
 
     public function UpdatePassword($newpassword){
 
-        $updatepassword = $this->connexion->prepare("UPDATE utilisateurs SET password='".md5($newpassword)."' WHERE login ='".$_SESSION['login']."'");
+        $updatepassword = $this->connexion->prepare("UPDATE users SET password='".md5($newpassword)."' WHERE login ='".$_SESSION['login']."'");
         $updatepassword->execute();
 
         $message = "Le nouveau mot de passe a bien été enregistré.";
@@ -135,7 +135,7 @@ class User {
 
     public function UpdateEmail($newemail){
 
-        $updateemail = $this->connexion->prepare("UPDATE utilisateurs SET email='".$newemail."' WHERE login ='".$_SESSION['login']."'");
+        $updateemail = $this->connexion->prepare("UPDATE users SET email='".$newemail."' WHERE login ='".$_SESSION['login']."'");
         $updateemail->execute();
 
         $message = "La nouvelle adresse email a été enregistrée.";

@@ -41,7 +41,7 @@ require('../controller/inscriptionController.php');
 
                 <div><?php if(isset($err_checkpassword)){echo $err_checkpassword;}?></div>
                 <div><input type="password" name="checkpassword" placeholder="Confirmer le mot de passe"></div>
-                <div><input type="submit" name="inscription" value="Inscription"></div>
+                <div><input type="submit" name="suscribe" value="Inscription"></div>
             </form>
         </main>
 

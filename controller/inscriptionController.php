@@ -10,7 +10,7 @@ require('../model/classes/class_user.php');
 if (!empty($_POST)) {
     extract($_POST);
 
-    if (isset($_POST['inscription'])) {
+    if (isset($_POST['suscribe'])) {
 
         $login = trim($_POST['login']);
         $email = trim($_POST['email']);
@@ -26,7 +26,7 @@ if (!empty($_POST)) {
 
         // CHECK LOGIN -------------
 
-        $reqlog = $bdd->prepare("SELECT * FROM utilisateurs WHERE login =:login");
+        $reqlog = $bdd->prepare("SELECT * FROM users WHERE login =:login");
         $reqlog->setFetchMode(PDO::FETCH_ASSOC);
         $reqlog->execute(['login'=> $login]);
 
@@ -62,7 +62,7 @@ if (!empty($_POST)) {
 
         // CHECK EMAIL ----------
 
-        $reqmail = $bdd->prepare("SELECT * FROM utilisateurs WHERE email =:email");
+        $reqmail = $bdd->prepare("SELECT * FROM users WHERE email =:email");
         $reqmail->setFetchMode(PDO::FETCH_ASSOC);
         $reqmail->execute(['email'=>$email]);
 

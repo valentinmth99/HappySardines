@@ -36,36 +36,36 @@ session_start();
 
                             <div class="errform"><?php if (isset($err_depart)) { echo $err_depart ;} ?></div>
                             <label for="departure">Date de départ :</label>
-                            <div><input type="date" name="depart"></div>
+                            <div><input type="date" name="departure"></div>
 
-                            <label for="habit">Tente ou camping-car ?</label>
-                            <div><select name="habit" id="habit-select">
+                            <label for="equipments">Tente ou camping-car ?</label>
+                            <div><select name="equipments" id="equipment-select">
                                 <option value="tente">Tente</option>
                                 <option value="campingcar">Camping-car</option>
                             </select></div>
 
                             <label for="location">Choisissez votre emplacement :</label>
-                            <div><select name="location" id="emplacement-choice">
+                            <div><select name="location" id="location-choice">
                                 <option value="plage">La Plage</option>
                                 <option value="pins">Les Pins</option>
                                 <option value="maquis">Le Maquis</option>
                             </select></div>
 
-                            <div class="errform"><?php if (isset($err_dispo)) { echo $err_dispo ;} ?></div>
+                            <div class="errform"><?php if (isset($err_spaces)) { echo $err_spaces ;} ?></div>
 
                             <fieldset>
                                 <legend>Désirez-vous des options ?</legend>
-                                    <div><input type="checkbox" id="elec" name="option">
-                                    <label for="elec">Borne électrique</label></div>
+                                    <div><input type="checkbox" id="elec" name="option_borne">
+                                    <label for="option_borne">Borne électrique</label></div>
 
-                                    <div><input type="checkbox" id="club" name="option">
-                                    <label for="club">Accès au Disco-Club</label></div>
+                                    <div><input type="checkbox" id="club" name="option_discoclub">
+                                    <label for="option_discoclub">Accès au Disco-Club</label></div>
 
-                                    <div><input type="checkbox" id="activities" name="option">
+                                    <div><input type="checkbox" id="activities" name="option_activities">
                                     <label for="activities">Accès aux activités</label></div>
                             </fieldset>
 
-                            <input type="submit" name="calcul_tarif" value="Voir le tarif" class="submitbtn">
+                            <input type="submit" name="calculate" value="Voir le tarif" class="submitbtn">
 
                         </form>
 

@@ -27,7 +27,7 @@ if (isset($_POST)){
 
         // check LOGIN -------------
 
-        $reqlog = $bdd->prepare("SELECT * FROM utilisateurs WHERE login ='".$newlogin."' AND id!='".$_SESSION['id']."'");
+        $reqlog = $bdd->prepare("SELECT * FROM users WHERE login ='".$newlogin."' AND id!='".$_SESSION['id']."'");
         $reqlog->setFetchMode(PDO::FETCH_ASSOC);
         $reqlog->execute();
 
@@ -92,7 +92,7 @@ if (isset($_POST)){
 
         // check PASSWORD  ------
 
-        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE id='".$_SESSION['id']."' && password ='".md5($password)."'");
+        $reqpassword = $bdd->prepare("SELECT * FROM users WHERE id='".$_SESSION['id']."' && password ='".md5($password)."'");
         $reqpassword->setFetchMode(PDO::FETCH_ASSOC);
         $reqpassword->execute();
 
@@ -125,7 +125,7 @@ if (!empty($_POST)){
 
         $valid = (boolean) true;
 
-        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' AND password ='".md5($password)."'");
+        $reqpassword = $bdd->prepare("SELECT * FROM users WHERE login='".$_SESSION['login']."' AND password ='".md5($password)."'");
         $reqpassword->setFetchMode(PDO::FETCH_ASSOC);
         $reqpassword->execute();
 
@@ -194,7 +194,7 @@ if (!empty($_POST)) {
 
         // check EMAIL ----------
 
-        $reqmail = $bdd->prepare("SELECT * FROM utilisateurs WHERE email ='".$newemail."'");
+        $reqmail = $bdd->prepare("SELECT * FROM users WHERE email ='".$newemail."'");
         $reqmail->setFetchMode(PDO::FETCH_ASSOC);
         $reqmail->execute();
 
@@ -236,7 +236,7 @@ if (!empty($_POST)) {
 
        // check PASSWORD  ------
 
-       $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' && password ='".md5($password)."'");
+       $reqpassword = $bdd->prepare("SELECT * FROM users WHERE login='".$_SESSION['login']."' && password ='".md5($password)."'");
        $reqpassword->setFetchMode(PDO::FETCH_ASSOC);
        $reqpassword->execute();
 
