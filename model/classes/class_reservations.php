@@ -2,10 +2,10 @@
 
 class Reservations {
 
-    private $id, $id_utilisateur, $id_habit, $id_lieux, $id_option;
-    public $debut, $fin, $duree, $prix;
+    private $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
+    public $arrival, $departure, $length, $rate;
 
-    public function contruct(){
+    public function Contruct(){
         
         try {
 
@@ -24,44 +24,44 @@ class Reservations {
     
     }
 
-    public function reserver($debut, $fin, $duree, $id_utilisateur, $id_habit, $id_lieux, $id_option, $prix){
+    public function Booking($arrival, $departure, $length, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub, $rate){
 
-        $reservation = $this->connexion->prepare("INSERT INTO reservations (debut, fin, duree, id_utilisateur, id_habit, id_lieux, id_option, prix) VALUES ($debut, $fin, $duree, $id_utilisateur, $id_habit, $id_lieux, $id_option, $prix)");
-        $reservation->execute();
+        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, id_user, id_habit, id_location, option_activities, option_borne, option_discoclub, rate) VALUES ($arrival, $departure, $length, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub, $rate)");
+        $booking->execute();
 
         echo "Votre réservation est confirmée.";
 
     }
 
-    public function updateresa($debut, $fin, $duree, $id_habit, $id_lieux, $id_option, $prix){
+    public function UpdateBooking($arrival, $departure, $length, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub, $rate){
 
-        $updateresa = $this->connexion->prepare("UPDATE reservations SET debut=$debut, fin=$fin, duree=$duree, id_habit=$id_habit, id_lieux=$id_lieux, id_option=$id_option, prix=$prix WHERE id_utilisateur =$id_utilisateur");
-        $updateresa->execute();
+        $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=$arrival, departure=$departure, length=$length, id_habit=$id_habit, id_location=$id_location, option_activities = $option_activities, option_borne = $option_borne, option_discoclub = $option_discoclub, rate=$rate WHERE id_user = $id_user");
+        $updatebooking->execute();
 
         echo "Votre réservation a bien été modifiée.";
 
     }
 
-    public function consulter($debut, $fin, $id_habit, $id_lieux, $id_option, $prix){
+    public function Consult(){
 
-        $consulter = $this->connexion->prepare("SELECT debut, fin, id_habit, id_lieux, id_option, prix FROM reservations WHERE id_utilisateur=$id_utilisateur");
-        $consulter->execute();
+        $consult = $this->connexion->prepare("SELECT arrival, departure, id_habit, id_location, option_activities, option_borne, option_discoclub, rate FROM reservations WHERE id_user=$id_user");
+        $consult->execute();
 
         // Convertir id_habit en habit, id_lieux en lieu, id_option en options
         
 
     }
 
-    public function annuler($id){
+    public function Cancel(){
 
-        $annuler = $this->connexion->prepare("DELETE * FROM reservations WHERE id=$id");
-        $annuler->execute();
+        $cancel = $this->connexion->prepare("DELETE * FROM reservations WHERE id=$id");
+        $cancel->execute();
 
         echo "Votre reservation a bien été annulée.";
 
     }
 
-    public function consultall(){
+    public function ConsultAll(){
 
         $consultall = $this->connexion->prepare("SELECT * FROM reservations");
         $consultall->setFetchMode(PDO::FETCH_ASSOC);
@@ -71,7 +71,7 @@ class Reservations {
 
     }
 
-    public function calcultarif ($prix) {
+    public function CalculRate ($rate) {
 
 
     }
