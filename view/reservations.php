@@ -31,11 +31,11 @@ session_start();
                         <form action="reservations.php" method="post" class="styleform">
 
                             <div class="errform"><?php if (isset($err_arrival)) { echo $err_arrival ;} ?></div>
-                            <label for="arrival-date">Date d'arrivée :</label>
+                            <label for="arrival">Date d'arrivée :</label>
                             <div><input type="date" name="arrival"></div>
 
                             <div class="errform"><?php if (isset($err_depart)) { echo $err_depart ;} ?></div>
-                            <label for="depart-date">Date de départ :</label>
+                            <label for="departure">Date de départ :</label>
                             <div><input type="date" name="depart"></div>
 
                             <label for="habit">Tente ou camping-car ?</label>
@@ -44,8 +44,8 @@ session_start();
                                 <option value="campingcar">Camping-car</option>
                             </select></div>
 
-                            <label for="emplacement">Choisissez votre emplacement :</label>
-                            <div><select name="emplacement" id="emplacement-choice">
+                            <label for="location">Choisissez votre emplacement :</label>
+                            <div><select name="location" id="emplacement-choice">
                                 <option value="plage">La Plage</option>
                                 <option value="pins">Les Pins</option>
                                 <option value="maquis">Le Maquis</option>
@@ -61,8 +61,8 @@ session_start();
                                     <div><input type="checkbox" id="club" name="option">
                                     <label for="club">Accès au Disco-Club</label></div>
 
-                                    <div><input type="checkbox" id="activites" name="option">
-                                    <label for="activites">Accès aux activités</label></div>
+                                    <div><input type="checkbox" id="activities" name="option">
+                                    <label for="activities">Accès aux activités</label></div>
                             </fieldset>
 
                             <input type="submit" name="calcul_tarif" value="Voir le tarif" class="submitbtn">
