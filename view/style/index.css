@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Merriweather:wght@700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#section_welcome {
+    background-image: url('../assets/welcome.jpg');
+    width:100%;
+    height: 100vh;
+    text-align: center;
+}
+
+#titre_index {
+    color: white;
+    font-size: 50px;
+    font-family: 'Merriweather';
+    padding-top: 10vh;
+}
+
+#intro_index {
+    color: white;
+    font-size: 27px;
+    font-family: 'Luxurious Roman';
+}

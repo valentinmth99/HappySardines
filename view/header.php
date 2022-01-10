@@ -10,7 +10,7 @@
 <header>
         <div class="nav-wrapper">
             <div class="logo-container">
-                <img class="logo" src="assets/logo" alt="Logo">
+                <img class="logo" src="assets/logo.png" alt="Logo">
             </div>
             <nav>
                 <input class="hidden" type="checkbox" id="menuToggle">
@@ -23,7 +23,7 @@
                     <ul class="nav-tabs">
                         <li class="nav-tab"><a href="index.php">Accueil</a></li>
                         <li class="nav-tab"><a href="compte.php">Mon Compte</a></li>
-                        <li class="nav-tab"><a href="camping.php">Camping</a></li>
+                        <li class="nav-tab"><a href="camping.php">Le Camping</a></li>
                         <li class="nav-tab"><a href="reservations.php">Réservations</a></li>
                         <li class="nav-tab"><a href="tarif.php">Tarifs</a></li>
                         <li class="nav-tab"><a href="contacts.php">Contacts</a></li>
