@@ -34,7 +34,7 @@ session_start();
                             <label for="arrival">Date d'arrivée :</label>
                             <div><input type="date" name="arrival"></div>
 
-                            <div class="errform"><?php if (isset($err_depart)) { echo $err_depart ;} ?></div>
+                            <div class="errform"><?php if (isset($err_departure)) { echo $err_departure ;} ?></div>
                             <label for="departure">Date de départ :</label>
                             <div><input type="date" name="departure"></div>
 
