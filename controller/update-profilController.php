@@ -28,7 +28,7 @@ if (isset($_POST)){
         // check LOGIN -------------
 
         $reqlog = $bdd->prepare("SELECT * FROM utilisateurs WHERE login ='".$newlogin."' AND id!='".$_SESSION['id']."'");
-        $reqlog->setFetchMode();
+        $reqlog->setFetchMode(PDO::FETCH_ASSOC);
         $reqlog->execute();
 
         $resultlog = $reqlog->fetch();
@@ -93,7 +93,7 @@ if (isset($_POST)){
         // check PASSWORD  ------
 
         $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE id='".$_SESSION['id']."' && password ='".md5($password)."'");
-        $reqpassword->setFetchMode();
+        $reqpassword->setFetchMode(PDO::FETCH_ASSOC);
         $reqpassword->execute();
 
         $resultpassword = $reqpassword->fetch();
@@ -126,7 +126,7 @@ if (!empty($_POST)){
         $valid = (boolean) true;
 
         $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' AND password ='".md5($password)."'");
-        $reqpassword->setFetchMode();
+        $reqpassword->setFetchMode(PDO::FETCH_ASSOC);
         $reqpassword->execute();
 
         $resultpassword = $reqpassword->fetch();
@@ -195,7 +195,7 @@ if (!empty($_POST)) {
         // check EMAIL ----------
 
         $reqmail = $bdd->prepare("SELECT * FROM utilisateurs WHERE email ='".$newemail."'");
-        $reqmail->setFetchMode();
+        $reqmail->setFetchMode(PDO::FETCH_ASSOC);
         $reqmail->execute();
 
         $resultmail = $reqmail->fetch();
@@ -237,7 +237,7 @@ if (!empty($_POST)) {
        // check PASSWORD  ------
 
        $reqpassword = $bdd->prepare("SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."' && password ='".md5($password)."'");
-       $reqpassword->setFetchMode();
+       $reqpassword->setFetchMode(PDO::FETCH_ASSOC);
        $reqpassword->execute();
 
        $resultpassword = $reqpassword->fetch();

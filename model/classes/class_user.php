@@ -97,12 +97,12 @@ class User {
 
     //UPDATEINFOS ---------------------------------------------------------------------------------------------
 
-    public function UpdateInfos($newlogin, $newlastname, $newfirstname) {
+    public function UpdateInfos($newlogin, $newfirstname, $newlastname) {
 
         $data = [
             'login'=>$newlogin,
-            'lastname'=>$newlastname,
             'firstname'=>$newfirstname,
+            'lastname'=>$newlastname,
         ];
 
         $updateinfos = $this->connexion->prepare("UPDATE utilisateurs SET
