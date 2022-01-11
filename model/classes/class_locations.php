@@ -39,7 +39,8 @@ class Locations {
 
         $getcheckspaces = $checkspaces->fetchall();
 
-        return $getcheckspaces[0]['spaces'];
+        $availablespaces = $getcheckspaces[0]['spaces'];
+        return $availablespaces;
 
     }
 
