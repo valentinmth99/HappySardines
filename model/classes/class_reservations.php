@@ -50,9 +50,22 @@ class Reservations {
 
     }
 
-    public function UpdateBooking($arrival, $departure, $length, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub, $rate){
+    public function UpdateBooking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_location, $id_habit){
 
-        $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=$arrival, departure=$departure, length=$length, id_habit=$id_habit, id_location=$id_location, option_activities = $option_activities, option_borne = $option_borne, option_discoclub = $option_discoclub, rate=$rate WHERE id_user = $id_user");
+        $data = [
+            'arrival'=>$arrival,
+            'departure'=>$departure,
+            'length'=>$length,
+            'option_borne'=>$option_borne,
+            'option_discoclub'=>$option_discoclub,
+            'option_activities'=>$option_activities,
+            'rate'=>$rate,
+            'id_location'=>$id_location,
+            'id_habit'=>$id_habit,
+        ];
+
+        
+        $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=:arrival, departure=:departure, length=:length, option_borne = :option_borne, option_discoclub = :option_discoclub, option_activities = :option_activities, rate = :rate, id_location = :id_location, id_habit = :id_habit WHERE id_user ='".$id_user."'");
         $updatebooking->execute();
 
         echo "Votre réservation a bien été modifiée.";
@@ -66,7 +79,6 @@ class Reservations {
 
         // Convertir id_habit en habit, id_lieux en lieu, id_option en options
         
-
     }
 
     public function Cancel(){
@@ -89,8 +101,6 @@ class Reservations {
     }
 
     public function CalculRate ($rate) {
-
-
 
     }
 

@@ -3,7 +3,7 @@
 class Locations {
 
     private $id;
-    public $name, $spaces;
+    public $name, $spaces, $location;
 
     public function Contruct(){
         
@@ -30,11 +30,11 @@ class Locations {
 
     }
 
-    public function CheckSpaces($spaces){
+    public function CheckSpaces($location){
 
         $checkspaces = $this->connexion->prepare("SELECT spaces FROM locations WHERE name='".$location."'");
         $checkspaces->execute();
 
     }
-    
+
 }
