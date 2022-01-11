@@ -36,6 +36,7 @@ class Equipments {
         return $size;
 
         var_dump($getchecksize);
+        
     }
 
     public function ModifRate($rate) {
