@@ -3,9 +3,9 @@
 class Locations {
 
     private $id;
-    public $name, $spaces, $location;
+    public $name, $spaces, $location, $connexion;
 
-    public function Contruct(){
+    public function __construct(){
         
         try {
 
@@ -33,7 +33,12 @@ class Locations {
     public function CheckSpaces($location){
 
         $checkspaces = $this->connexion->prepare("SELECT spaces FROM locations WHERE name='".$location."'");
+        $checkspaces->setFetchMode(PDO::FETCH_ASSOC);
         $checkspaces->execute();
+
+        $getcheckspaces = $checkspaces->fetchall();
+
+        var_dump ($getcheckspaces);
 
     }
 

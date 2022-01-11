@@ -5,7 +5,7 @@ class Equipments {
     private $id; 
     public $name, $size, $rate;
 
-    public function Contruct(){
+    public function __construct(){
         
         try {
 
@@ -26,6 +26,6 @@ class Equipments {
 
     public function ModifRate($rate) {
 
-        
+
     }
 }

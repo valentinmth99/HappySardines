@@ -73,6 +73,7 @@ class User {
         }
 
         else {
+            
             echo "Le login et/ou le mot de passe est incorrect.";
             $err_connexion = "Le login et/ou le mot de passe est incorrect.";
             

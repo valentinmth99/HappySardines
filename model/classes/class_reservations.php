@@ -5,7 +5,7 @@ class Reservations {
     private $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
     public $arrival, $departure, $length, $rate, $connexion;
 
-    public function Contruct(){
+    public function __construct(){
         
         try {
 

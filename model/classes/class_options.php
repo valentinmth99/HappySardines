@@ -5,7 +5,7 @@ class Options {
     private $id;
     public $name, $rate;
 
-    public function Contruct(){
+    public function __construct(){
         
         try {
 
@@ -26,7 +26,7 @@ class Options {
 
     public function ModifRate($rate) {
         
-        
+
 
     }
     
