@@ -4,10 +4,10 @@ require('../model/classes/class_locations.php');
 
 $location = 'maquis';
 $availablespaces = new Locations();
-$availablespaces->CheckSpaces();
+$availablespaces->CheckSpaces($location);
 
 
-
+var_dump($avalaiblespaces);
 
 
 

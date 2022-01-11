@@ -35,10 +35,11 @@ class Locations {
         $checkspaces = $this->connexion->prepare("SELECT spaces FROM locations WHERE name='".$location."'");
         $checkspaces->setFetchMode(PDO::FETCH_ASSOC);
         $checkspaces->execute();
+        var_dump($checkspaces);
 
         $getcheckspaces = $checkspaces->fetchall();
 
-        var_dump ($getcheckspaces);
+        return $getcheckspaces[0]['spaces'];
 
     }
 
