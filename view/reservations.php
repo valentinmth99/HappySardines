@@ -2,6 +2,8 @@
 
 session_start();
 
+require('../controller/reservationController.php')
+
 ?>
 
 <html>
@@ -30,28 +32,25 @@ session_start();
 
                         <form action="reservations.php" method="post" class="styleform">
 
-                            <div class="errform"><?php if (isset($err_arrival)) { echo $err_arrival ;} ?></div>
-                            <label for="arrival">Date d'arrivée :</label>
+                            <label for="arrival">Date d'arrivée* :</label>
                             <div><input type="date" name="arrival"></div>
 
-                            <div class="errform"><?php if (isset($err_departure)) { echo $err_departure ;} ?></div>
-                            <label for="departure">Date de départ :</label>
+                            <label for="departure">Date de départ* :</label>
                             <div><input type="date" name="departure"></div>
 
-                            <label for="equipments">Tente ou camping-car ?</label>
+                            <label for="equipments">Tente ou camping-car* ?</label>
                             <div><select name="equipments" id="equipment-select">
                                 <option value="tente">Tente</option>
                                 <option value="campingcar">Camping-car</option>
                             </select></div>
 
-                            <label for="location">Choisissez votre emplacement :</label>
+                            <label for="location">Choisissez votre emplacement* :</label>
                             <div><select name="location" id="location-choice">
                                 <option value="plage">La Plage</option>
                                 <option value="pins">Les Pins</option>
                                 <option value="maquis">Le Maquis</option>
                             </select></div>
 
-                            <div class="errform"><?php if (isset($err_spaces)) { echo $err_spaces ;} ?></div>
 
                             <fieldset>
                                 <legend>Désirez-vous des options ?</legend>

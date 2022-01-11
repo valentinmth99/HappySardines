@@ -38,7 +38,7 @@ class Reservations {
 
     }
 
-    public function Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate,$id_user,$id_location,$id_habit){
+    public function Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate,$id_user,$id_location,$id_equipment){
 
         $data = [
             'arrival'=>$arrival,

@@ -8,6 +8,7 @@ require('../model/classes/class_locations.php');
 
 require('../model/classes/class_equipments.php');
 
+
 // CONTROLLER FUNCTION BOOKING
 
 if (!empty($_POST)) {
@@ -21,7 +22,7 @@ if (!empty($_POST)) {
         $location = $_POST['location'];
         $option_borne = $_POST['option_borne'];
         $option_discoclub = $_POST['option_discoclub'];
-        $option_activites = $_POST['activites'];
+        $option_activites = $_POST['activities'];
 
         $today = date('Y-m-d');
         $tomorrow = date($today + "+1day");
@@ -55,22 +56,35 @@ if (!empty($_POST)) {
         // Check if available spaces on the location the user choose with CheckSpaces function (for the location) and CheckSize function(for the size of the equipment)
 
         $spaces = new Locations();
-        $availablespaces = $spaces->CheckSpaces($location);
+        $availables_paces = $spaces->CheckSpaces($location);
 
         $size = new Equipments();
-        $equipmentsize = $size->CheckSize($equipment);
+        $equipment_size = $size->CheckSize($equipment);
 
         if(($availablespaces - $equipmentsize) < 0) {
             $valid = false;
             $err_spaces ="L'espace sélectionné ne peut pas vous accueillir.";
-            echo "L'espace sélectionné ne peut pas vous accueillir."
+            echo "L'espace sélectionné ne peut pas vous accueillir.";
         }
 
+        if($valid == true) {
 
+            // getting the length
 
+            $booking_length = new Reservations ();
+            $length = $booking_length->CalculLength($arrival, $departure);
 
+            // getting the rate 
 
+            $booking_rate = new Reservations ();
+            $rate = $booking_rate->CalculRate($equipment, $option_borne, $option_discoclub, $option_activities, $lenght);
 
+            // booking in BDD
+
+            $booking = new Reservations ();
+            $booking->Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, '', '', '');
+
+        }
     }
 }
 
