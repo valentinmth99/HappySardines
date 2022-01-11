@@ -24,6 +24,20 @@ class Equipments {
     
     }
 
+    public function CheckSize() {
+
+        $checksize = $this->connexion->prepare("SELECT size FROM equipments WHERE name = '".$equipment."'");
+        $checksize->setFetchMode(PDO::FETCH_ASSOC);
+        $checksize->execute();
+
+        $getchecksize = $checksize->fetchall();
+        
+        $size = $getchecksize[0]['size'];
+        return $size;
+
+        var_dump($getchecksize);
+    }
+
     public function ModifRate($rate) {
 
 
