@@ -28,7 +28,7 @@ if (!empty($_POST)) {
 
         $valid = (boolean) true;
 
-        // Check if all necessary fiels are fulfilled
+        // Check if all necessary fields are fulfilled
 
         if(empty($arrival) || empty($departure) || empty($equipment) || empty($location)) {
             $valid = false;
@@ -44,7 +44,7 @@ if (!empty($_POST)) {
             echo "La date d'arrivée ne peut être antérieure à celle du jour.";
         }
         
-        // Check if departure is logic
+        // Check if departure date is at least one day after arrival
 
         if($departure < $tomorrow) {
             $valid = false;
@@ -52,13 +52,19 @@ if (!empty($_POST)) {
             echo "La réservation doit être minimum de deux jorus et une nuit.";
         }
 
-        // Check if available spaces on the location the user choose with CheckSpaces function
+        // Check if available spaces on the location the user choose with CheckSpaces function (for the location) and CheckSize function(for the size of the equipment)
 
         $spaces = new Locations();
         $availablespaces = $spaces->CheckSpaces($location);
 
         $size = new Equipments();
-        $size = $size->CheckSize($equipment);
+        $equipmentsize = $size->CheckSize($equipment);
+
+        if(($availablespaces - $equipmentsize) < 0) {
+            $valid = false;
+            $err_spaces ="L'espace sélectionné ne peut pas vous accueillir.";
+            echo "L'espace sélectionné ne peut pas vous accueillir."
+        }
 
 
 

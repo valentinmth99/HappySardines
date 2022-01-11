@@ -32,10 +32,12 @@ class Equipments {
 
         $getchecksize = $checksize->fetchall();
         
-        $size = $getchecksize[0]['size'];
+        $size = intval($getchecksize[0]['size']);
+
+        echo ($size);
+        
         return $size;
 
-        var_dump($getchecksize);
         
     }
 
