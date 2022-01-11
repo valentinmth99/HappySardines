@@ -3,7 +3,7 @@
 class Reservations {
 
     private $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
-    public $arrival, $departure, $length, $rate;
+    public $arrival, $departure, $length, $rate, $connexion;
 
     public function Contruct(){
         
@@ -24,11 +24,28 @@ class Reservations {
     
     }
 
-    public function Booking($arrival, $departure, $length, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub, $rate){
+    // public function CalculLength($length){
 
-        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, id_user, id_habit, id_location, option_activities, option_borne, option_discoclub, rate) VALUES ($arrival, $departure, $length, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub, $rate)");
-        $booking->execute();
 
+    // }
+    public function Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate,$id_user,$id_location,$id_habit){
+
+        $data = [
+            'arrival'=>$arrival,
+            'departure'=>$departure,
+            'length'=>$length,
+            'option_borne'=>$option_borne,
+            'option_discoclub'=>$option_discoclub,
+            'option_activities'=>$option_activities,
+            'rate'=>$rate,
+            'id_user'=>$id_user,
+            'id_location'=>$id_location,
+            'id_habit'=>$id_habit,
+        ];
+
+        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_habit) VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_habit)");
+        $booking->execute($data);
+        
         echo "Votre réservation est confirmée.";
 
     }
@@ -72,6 +89,7 @@ class Reservations {
     }
 
     public function CalculRate ($rate) {
+
 
 
     }
