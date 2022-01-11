@@ -1,14 +1,12 @@
 <?php
 
-require('../model/classes/class_locations.php');
+require('../model/classes/class_equipments.php');
 
+$equipment = "Tente";
+$size = new Equipments();
+$equipmentsize = $size->CheckSize($equipment);
 
-$spaces = new Locations();
-$availablespaces = $spaces->CheckSpaces($location);
-
-
-echo $test;
-
+echo $equipmentsize;
 
 
 ?>

@@ -6,6 +6,8 @@ require('../model/classes/class_reservations.php');
 
 require('../model/classes/class_locations.php');
 
+require('../model/classes/class_equipments.php');
+
 // CONTROLLER FUNCTION BOOKING
 
 if (!empty($_POST)) {
@@ -50,9 +52,17 @@ if (!empty($_POST)) {
             echo "La réservation doit être minimum de deux jorus et une nuit.";
         }
 
-        // Check if available spaces on the location the user choose 
+        // Check if available spaces on the location the user choose with CheckSpaces function
 
-        if()
+        $spaces = new Locations();
+        $availablespaces = $spaces->CheckSpaces($location);
+
+        $size = new Equipments();
+        $size = $size->CheckSize($equipment);
+
+
+
+
 
 
     }
