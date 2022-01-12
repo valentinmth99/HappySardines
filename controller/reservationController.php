@@ -112,6 +112,11 @@ if (!empty($_POST)) {
             $booking_rate = new Reservations ();
             $rate = $booking_rate->CalculRate($equipment, $option_borne, $option_discoclub, $option_activities, $length);
 
+            //getting ids
+
+            $booking_ids = new Reservations ();
+            $booking_ids->GetIds($equipment, $location);
+
             // booking in BDD
 
             $booking = new Reservations ();

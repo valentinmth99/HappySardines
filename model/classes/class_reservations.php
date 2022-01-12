@@ -38,7 +38,7 @@ class Reservations {
 
     }
 
-    public function GetIds($equipment){
+    public function GetIds($equipment, $location){
 
         $id_user = $_SESSION['id'];
 
