@@ -2,15 +2,14 @@
 
 class Reservations {
 
-    private $id, $option_activities, $option_borne, $option_discoclub;
-    public $arrival, $departure, $length, $rate, $connexion, $location, $id_user, $id_habit, $id_location;
+    private $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
+    public $arrival, $departure, $length, $rate, $connexion;
 
     public function __construct(){
         
         try {
 
             $bdd = new PDO('mysql:host=localhost;dbname=camping', 'root', '');
-            echo "Connecté à la bdd";
             $this->connexion=$bdd;
             
         }
@@ -38,71 +37,8 @@ class Reservations {
 
     }
 
-    public function GetIds($equipment, $location){
 
-        $id_user = $_SESSION['id'];
 
-        $get_id_location = $this->connexion->prepare("SELECT id FROM locations WHERE name = '".$location."'");
-        $get_id_location->setFetchMode(PDO::FETCH_ASSOC);
-        $get_id_location->execute();
-        $fetch_id_location = $get_id_location->fetch();
-
-        $id_location = intval(($fetch_id_location)['id']);
-
-        $get_id_equipment = $this->connexion->prepare("SELECT id FROM equipments WHERE name = '".$equipment."'");
-        $get_id_equipment->setFetchMode(PDO::FETCH_ASSOC);
-        $get_id_equipment->execute();
-        $fetch_id_equipment = $get_id_equipment->fetch();
-
-        $id_equipment = intval(($fetch_id_equipment)['id']);
-
-    }
-
-    public function Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate,$id_user,$id_location,$id_equipment){
-
-        $data = [
-            'arrival'=>$arrival,
-            'departure'=>$departure,
-            'length'=>$this->length,
-            'option_borne'=>$option_borne,
-            'option_discoclub'=>$option_discoclub,
-            'option_activities'=>$option_activities,
-            'rate'=>$rate,
-            'id_user'=>$id_user,
-            'id_location'=>$id_location,
-            'id_equipment'=>$id_equipment,
-        ];
-
-        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_equipment) VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)");
-        $booking->execute($data);
-        
-        echo "Votre réservation est confirmée.";
-
-    }
-
-    // FONCTION UPDATE BOOKING 
-
-    public function UpdateBooking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_location, $id_habit){
-
-        $data = [
-            'arrival'=>$arrival,
-            'departure'=>$departure,
-            'length'=>$length,
-            'option_borne'=>$option_borne,
-            'option_discoclub'=>$option_discoclub,
-            'option_activities'=>$option_activities,
-            'rate'=>$rate,
-            'id_location'=>$id_location,
-            'id_habit'=>$id_habit,
-        ];
-
-        
-        $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=:arrival, departure=:departure, length=:length, option_borne = :option_borne, option_discoclub = :option_discoclub, option_activities = :option_activities, rate = :rate, id_location = :id_location, id_habit = :id_habit WHERE id_user ='".$id_user."'");
-        $updatebooking->execute();
-
-        echo "Votre réservation a bien été modifiée.";
-
-    }
 
     // FONCTION AFFICHAGE RESERVATION
 
@@ -154,7 +90,7 @@ class Reservations {
         
     // CALCUL PRIX OPTIONS
 
-       if ($option_borne==true) {
+       if ($option_borne==1) {
 
             $get_rate_option_1 = $this->connexion->prepare("SELECT rate from options WHERE id='1'");
             $get_rate_option_1->setFetchMode(PDO::FETCH_ASSOC);
@@ -169,10 +105,9 @@ class Reservations {
         else {
 
             $rate_option_1 = 0;
-        
         }
 
-        if ($option_discoclub==true) {
+        if ($option_discoclub==1) {
 
             $get_rate_option_2 = $this->connexion->prepare("SELECT rate from options WHERE id='2'");
             $get_rate_option_2->setFetchMode(PDO::FETCH_ASSOC);
@@ -190,7 +125,7 @@ class Reservations {
 
         }
 
-        if ($option_activities==true) {
+        if ($option_activities==1) {
 
             $get_rate_option_3 = $this->connexion->prepare("SELECT rate from options WHERE id='3'");
             $get_rate_option_3->setFetchMode(PDO::FETCH_ASSOC);
@@ -210,10 +145,80 @@ class Reservations {
 
         //CALCUL PRIX TOTAL SEJOUR 
         
-        $totalrate = ($rate_equipment + $rate_option_1 + $rate_option_2 + $rate_option_3) * $length;
+        $rate = ($rate_equipment + $rate_option_1 + $rate_option_2 + $rate_option_3) * $length;
 
-        return $totalrate;
+        return $rate;
 
     }
+
+    public function GetIdLocation($location){
+
+        $get_id_location = $this->connexion->prepare("SELECT id FROM locations WHERE name = '".$location."'");
+        $get_id_location->setFetchMode(PDO::FETCH_ASSOC);
+        $get_id_location->execute();
+        $fetch_id_location = $get_id_location->fetch();
+
+        return $id_location = intval(($fetch_id_location)['id']);
+    }
+
+    public function GetIdEquipment($equipment) {
+        $get_id_equipment = $this->connexion->prepare("SELECT id FROM equipments WHERE name = '".$equipment."'");
+        $get_id_equipment->setFetchMode(PDO::FETCH_ASSOC);
+        $get_id_equipment->execute();
+        $fetch_id_equipment = $get_id_equipment->fetch();
+
+        return $id_equipment = intval(($fetch_id_equipment)['id']);
+
+    }
+
+    public function Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_user,$id_location,$id_equipment){
+
+        $data = [
+            'arrival'=>$arrival,
+            'departure'=>$departure,
+            'length'=>$length,
+            'option_borne'=>$option_borne,
+            'option_discoclub'=>$option_discoclub,
+            'option_activities'=>$option_activities,
+            'rate'=>$rate,
+            'id_user'=>$id_user,
+            'id_location'=>$id_location,
+            'id_habit'=>$id_equipment,
+        ];
+
+        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_habit) VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_habit)");
+        $booking->execute($data);
+        
+        echo "Votre réservation est confirmée.";
+
+    }
+
+    // FONCTION UPDATE BOOKING 
+
+    public function UpdateBooking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_location, $id_habit){
+
+        $data = [
+            'arrival'=>$arrival,
+            'departure'=>$departure,
+            'length'=>$length,
+            'option_borne'=>$option_borne,
+            'option_discoclub'=>$option_discoclub,
+            'option_activities'=>$option_activities,
+            'rate'=>$rate,
+            'id_location'=>$id_location,
+            'id_habit'=>$id_habit,
+        ];
+
+        
+        $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=:arrival, departure=:departure, length=:length, option_borne = :option_borne, option_discoclub = :option_discoclub, option_activities = :option_activities, rate = :rate, id_location = :id_location, id_habit = :id_habit WHERE id_user ='".$id_user."'");
+        $updatebooking->execute();
+
+        echo "Votre réservation a bien été modifiée.";
+
+    }
+
+
+
+        
 
 }

@@ -1,26 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Merriweather:wght@700&display=swap');
 
 body {
     margin: 0;
     padding: 0;
+    color: black;
+    background-image: url('../assets/wallpaper_index.jpg');
+    background-repeat: no-repeat;
+    background-position: cover;
 }
 
-#section_welcome {
-    background-image: url('../assets/welcome.jpg');
-    width:100%;
+main {
+    width: 80%;
     height: 100vh;
+    margin : auto;
     text-align: center;
+    color: white;
+    text-decoration: 2px 2px 2px 2px black;
+    padding-top: 50px;
 }
 
-#titre_index {
-    color: white;
-    font-size: 50px;
-    font-family: 'Merriweather';
-    padding-top: 10vh;
+h2 {
+    size: 200px;
 }
 
-#intro_index {
+main a {
     color: white;
-    font-size: 27px;
-    font-family: 'Luxurious Roman';
+    text-decoration: none;
 }
+
+
+
+
+

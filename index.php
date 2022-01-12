@@ -12,22 +12,22 @@
 
         <main>
 
-        <section id="section_welcome">
-        <h2 id="titre_index">Bienvenue au camping des Happy Sardines</h2>
-        <br>
-        <p id="intro_index">
-            Nous sommes un camping 3 étoiles situé à La Ciotat, à 25 minutes de Marseille !
-            <br><br>
-            Nous possédons plusieurs emplacements pour vous accueillir, que vous ayez une tente ou un camping-car.
-            <br><br>
-            Nos emplacements sont répartis entre 3 secteurs à l'intérieur du camping : Le Maquis, La Plage et Les Pins.
-            <br><br>
-            Vous pouvez réserver à la nuitée ou pour plusieurs jours, quelque soit la saison !
-            <br><br>
-            Pour agrémenter votre séjour parmi nous, nous vous proposerons plusieurs options telles que l'accès à une borne électrique, et l'accès au Disco Club et à des activités. 
+            <section class="container">
 
-        </p>
-        </section>
+                <h2>Camping<h2>
+
+                <h1>Happy Sardines</h1>
+                
+                <p>
+
+                    Installez vous chez Happy Sardines</br>
+                    
+                    et découvrez le coeur de la FRENCH RIVIERA.</br>
+
+                    Découvrez le site <a href="view/camping.php">ici</a>.
+
+                </p>
+            </section>
 
 
         </main>

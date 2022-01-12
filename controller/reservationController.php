@@ -20,45 +20,51 @@ if (!empty($_POST)) {
         $departure = $_POST['departure'];
         $equipment = $_POST['equipments'];
         $location = $_POST['location'];
+        $id_user = $_SESSION['id'];
 
         if (isset($_POST['option_borne'])){
 
-            $option_borne = true;
+            $option_borne = 1;
 
         }
 
         else {
 
-            $option_borne = false;
+            $option_borne = 0;
 
         }
         
         if (isset($_POST['option_discoclub'])){
 
-            $option_discoclub = true;
+            $option_discoclub = 1;
 
         }
 
         else {
 
-            $option_discoclub = false;
+            $option_discoclub = 0;
 
         }
 
-        if (isset($_POST['activities'])) {
+        if (isset($_POST['option_activities'])) {
 
-            $option_activities = true;
+            $option_activities = 1;
 
         }
 
         else {
 
-            $option_activities = false;
+            $option_activities = 0;
 
         }
 
-        $today = date('Y-m-d');
-        $tomorrow = strtotime($today . "+1day");
+        $today_date = date('Y-m-d');
+        $tomorrow = strtotime($today_date . "+1day");
+        $tomorrow_date = date('Y-m-d', $tomorrow);
+
+        echo $today_date;
+
+        echo $tomorrow_date;
 
         $valid = (boolean) true;
 
@@ -72,7 +78,7 @@ if (!empty($_POST)) {
 
         // Check if arrival date is at least one day after today
 
-        if($arrival < $today ) {
+        if($arrival < $today_date ) {
             $valid = false;
             $err_arrival = "La date d'arrivée ne peut être antérieure à celle du jour.";
             echo "La date d'arrivée ne peut être antérieure à celle du jour.";
@@ -80,7 +86,7 @@ if (!empty($_POST)) {
         
         // Check if departure date is at least one day after arrival
 
-        if($departure < $tomorrow) {
+        if($departure < $tomorrow_date) {
             $valid = false;
             $err_departure = "La réservation doit être minimum de deux jours et une nuit.";
             echo "La réservation doit être minimum de deux jorus et une nuit.";
@@ -106,21 +112,28 @@ if (!empty($_POST)) {
 
             $booking_length = new Reservations ();
             $length = $booking_length->CalculLength($arrival, $departure);
+            echo " - durée '$length'";
 
             // getting the rate 
 
             $booking_rate = new Reservations ();
             $rate = $booking_rate->CalculRate($equipment, $option_borne, $option_discoclub, $option_activities, $length);
+            echo " - prix : '$rate'";
 
             //getting ids
 
-            $booking_ids = new Reservations ();
-            $booking_ids->GetIds($equipment, $location);
+            $booking_id_location = new Reservations ();
+            $id_location = $booking_id_location->GetIdLocation($location);
+            echo " id location '$id_location";
+
+            $booking_id_equipment = new Reservations ();
+            $id_equipment = $booking_id_equipment->GetIdEquipment($equipment);
+            echo " id equipement '$id_equipment";
 
             // booking in BDD
 
             $booking = new Reservations ();
-            $booking->Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, '', '', '');
+            $booking->Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_user, $id_location, $id_equipment);
 
         }
     }
