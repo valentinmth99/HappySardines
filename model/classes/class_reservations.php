@@ -176,17 +176,18 @@ class Reservations {
         $data = [
             'arrival'=>$arrival,
             'departure'=>$departure,
-            'length'=>$length,
-            'option_borne'=>$option_borne,
-            'option_discoclub'=>$option_discoclub,
-            'option_activities'=>$option_activities,
-            'rate'=>$rate,
-            'id_user'=>$id_user,
-            'id_location'=>$id_location,
-            'id_habit'=>$id_equipment,
+            'length'=>intval($length),
+            'option_borne'=>intval($option_borne),
+            'option_discoclub'=>intval($option_discoclub),
+            'option_activities'=>intval($option_activities),
+            'rate'=>intval($rate),
+            'id_user'=>intval($id_user),
+            'id_location'=>intval($id_location),
+            'id_equipment'=>intval($id_equipment),
         ];
 
-        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_habit) VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_habit)");
+        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_equipment) 
+        VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)");
         $booking->execute($data);
         
         echo "Votre réservation est confirmée.";
@@ -195,22 +196,22 @@ class Reservations {
 
     // FONCTION UPDATE BOOKING 
 
-    public function UpdateBooking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_location, $id_habit){
+    public function UpdateBooking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_location, $id_equipment){
 
         $data = [
             'arrival'=>$arrival,
             'departure'=>$departure,
-            'length'=>$length,
-            'option_borne'=>$option_borne,
-            'option_discoclub'=>$option_discoclub,
-            'option_activities'=>$option_activities,
-            'rate'=>$rate,
-            'id_location'=>$id_location,
-            'id_habit'=>$id_habit,
+            'length'=>intval($length),
+            'option_borne'=>intval($option_borne),
+            'option_discoclub'=>intval($option_discoclub),
+            'option_activities'=>intval($option_activities),
+            'rate'=>intval($rate),
+            'id_user'=>intval($id_user),
+            'id_location'=>intval($id_location),
+            'id_equipment'=>intval($id_equipment),
         ];
-
         
-        $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=:arrival, departure=:departure, length=:length, option_borne = :option_borne, option_discoclub = :option_discoclub, option_activities = :option_activities, rate = :rate, id_location = :id_location, id_habit = :id_habit WHERE id_user ='".$id_user."'");
+        $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=:arrival, departure=:departure, length=:length, option_borne = :option_borne, option_discoclub = :option_discoclub, option_activities = :option_activities, rate = :rate, id_location = :id_location, id_equipment = :id_equipment WHERE id_user ='".$id_user."'");
         $updatebooking->execute();
 
         echo "Votre réservation a bien été modifiée.";

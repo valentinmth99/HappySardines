@@ -62,10 +62,6 @@ if (!empty($_POST)) {
         $tomorrow = strtotime($today_date . "+1day");
         $tomorrow_date = date('Y-m-d', $tomorrow);
 
-        echo $today_date;
-
-        echo $tomorrow_date;
-
         $valid = (boolean) true;
 
         // Check if all necessary fields are fulfilled
@@ -111,29 +107,29 @@ if (!empty($_POST)) {
             // getting the length
 
             $booking_length = new Reservations ();
-            $length = $booking_length->CalculLength($arrival, $departure);
-            echo " - durée '$length'";
+            $length = $booking_length->CalculLength("$arrival", "$departure");
+            
 
             // getting the rate 
 
             $booking_rate = new Reservations ();
-            $rate = $booking_rate->CalculRate($equipment, $option_borne, $option_discoclub, $option_activities, $length);
-            echo " - prix : '$rate'";
+            $rate = $booking_rate->CalculRate("$equipment", "$option_borne", "$option_discoclub", "$option_activities", "$length");
+            
 
             //getting ids
 
             $booking_id_location = new Reservations ();
-            $id_location = $booking_id_location->GetIdLocation($location);
-            echo " id location '$id_location";
+            $id_location = $booking_id_location->GetIdLocation("$location");
 
             $booking_id_equipment = new Reservations ();
-            $id_equipment = $booking_id_equipment->GetIdEquipment($equipment);
-            echo " id equipement '$id_equipment";
+            $id_equipment = $booking_id_equipment->GetIdEquipment("$equipment");
+            
+
 
             // booking in BDD
 
             $booking = new Reservations ();
-            $booking->Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_user, $id_location, $id_equipment);
+            $booking->Booking("$arrival", "$departure", "$length", "$option_borne", "$option_discoclub", "$option_activities", "$rate", "$id_user", "$id_location", "$id_equipment");
 
         }
     }
