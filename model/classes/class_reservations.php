@@ -2,8 +2,8 @@
 
 class Reservations {
 
-    private $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
-    public $arrival, $departure, $length, $rate, $connexion;
+    private $id, $option_activities, $option_borne, $option_discoclub;
+    public $arrival, $departure, $length, $rate, $connexion, $location, $id_user, $id_habit, $id_location;
 
     public function __construct(){
         
@@ -35,6 +35,26 @@ class Reservations {
         $length = $intvl->days;
         
         return $length;
+
+    }
+
+    public function GetIds($equipment){
+
+        $id_user = $_SESSION['id'];
+
+        $get_id_location = $this->connexion->prepare("SELECT id FROM locations WHERE name = '".$location."'");
+        $get_id_location->setFetchMode(PDO::FETCH_ASSOC);
+        $get_id_location->execute();
+        $fetch_id_location = $get_id_location->fetch();
+
+        $id_location = intval(($fetch_id_location)['id']);
+
+        $get_id_equipment = $this->connexion->prepare("SELECT id FROM equipments WHERE name = '".$equipment."'");
+        $get_id_equipment->setFetchMode(PDO::FETCH_ASSOC);
+        $get_id_equipment->execute();
+        $fetch_id_equipment = $get_id_equipment->fetch();
+
+        $id_equipment = intval(($fetch_id_equipment)['id']);
 
     }
 
