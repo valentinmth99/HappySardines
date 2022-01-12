@@ -61,7 +61,7 @@ require('../controller/reservationController.php')
                                     <label for="option_discoclub">Accès au Disco-Club</label></div>
 
                                     <div><input type="checkbox" id="activities" name="option_activities">
-                                    <label for="activities">Accès aux activités</label></div>
+                                    <label for="option_activities">Accès aux activités</label></div>
                             </fieldset>
 
                             <input type="submit" name="calculate" value="Voir le tarif" class="submitbtn">

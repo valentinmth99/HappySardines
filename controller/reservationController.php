@@ -20,9 +20,42 @@ if (!empty($_POST)) {
         $departure = $_POST['departure'];
         $equipment = $_POST['equipments'];
         $location = $_POST['location'];
-        $option_borne = $_POST['option_borne'];
-        $option_discoclub = $_POST['option_discoclub'];
-        $option_activites = $_POST['activities'];
+        
+        if (isset($_POST['option_borne'])){
+
+            $option_borne = true;
+
+        }
+
+        else {
+
+            $option_borne = false;
+
+        }
+        
+        if (isset($_POST['option_discoclub'])){
+
+            $option_discoclub = true;
+
+        }
+
+        else {
+
+            $option_discoclub = false;
+
+        }
+
+        if (isset($_POST['activities'])) {
+
+            $option_activities = true;
+
+        }
+
+        else {
+
+            $option_activities = false;
+
+        }
 
         $today = date('Y-m-d');
         $tomorrow = date($today + "+1day");

@@ -27,6 +27,7 @@ class Locations {
     public function CalculSpaces($spaces){
         
         
+        
 
     }
 
