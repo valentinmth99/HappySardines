@@ -34,7 +34,7 @@ class Reservations {
         
         $length = $intvl->days;
         
-        return $lenght;
+        return $length;
 
     }
 
@@ -50,10 +50,10 @@ class Reservations {
             'rate'=>$rate,
             'id_user'=>$id_user,
             'id_location'=>$id_location,
-            'id_habit'=>$id_habit,
+            'id_equipment'=>$id_equipment,
         ];
 
-        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_habit) VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_habit)");
+        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_equipment) VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)");
         $booking->execute($data);
         
         echo "Votre réservation est confirmée.";

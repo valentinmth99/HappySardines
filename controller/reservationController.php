@@ -20,7 +20,7 @@ if (!empty($_POST)) {
         $departure = $_POST['departure'];
         $equipment = $_POST['equipments'];
         $location = $_POST['location'];
-        
+
         if (isset($_POST['option_borne'])){
 
             $option_borne = true;
@@ -58,7 +58,7 @@ if (!empty($_POST)) {
         }
 
         $today = date('Y-m-d');
-        $tomorrow = date($today + "+1day");
+        $tomorrow = strtotime($today . "+1day");
 
         $valid = (boolean) true;
 
@@ -89,12 +89,12 @@ if (!empty($_POST)) {
         // Check if available spaces on the location the user choose with CheckSpaces function (for the location) and CheckSize function(for the size of the equipment)
 
         $spaces = new Locations();
-        $availables_paces = $spaces->CheckSpaces($location);
+        $available_spaces = $spaces->CheckSpaces($location);
 
         $size = new Equipments();
         $equipment_size = $size->CheckSize($equipment);
 
-        if(($availablespaces - $equipmentsize) < 0) {
+        if(($available_spaces - $equipment_size) < 0) {
             $valid = false;
             $err_spaces ="L'espace sélectionné ne peut pas vous accueillir.";
             echo "L'espace sélectionné ne peut pas vous accueillir.";
@@ -110,7 +110,7 @@ if (!empty($_POST)) {
             // getting the rate 
 
             $booking_rate = new Reservations ();
-            $rate = $booking_rate->CalculRate($equipment, $option_borne, $option_discoclub, $option_activities, $lenght);
+            $rate = $booking_rate->CalculRate($equipment, $option_borne, $option_discoclub, $option_activities, $length);
 
             // booking in BDD
 
