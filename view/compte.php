@@ -75,11 +75,11 @@ require('../controller/compteController.php')
                             <td><?php echo $getinfos_user->login;?></td>
                         </tr>
                         <tr>
-                            <td>lastname</td>
+                            <td>Nom de famille</td>
                             <td><?php echo $getinfos_user->lastname;?></td>
                         </tr>
                         <tr>
-                            <td>firstname</td>
+                            <td>Prénom</td>
                             <td><?php echo $getinfos_user->firstname;?></td>
                         </tr>
                         <tr>
@@ -98,7 +98,12 @@ require('../controller/compteController.php')
 
                     <div><h2 class="boxtitle"> Vos réservations </h2></div>
 
-                
+                    
+
+                    <form action="vos-reservations.php" method="post">
+                        <input type="submit" name="consultbooking" value="Consulter votre réservation">
+                    </form>
+                    
                 </div>
             </section>
 

@@ -1,6 +1,7 @@
 <?php
 
 require('../model/classes/class_user.php');
+require('../model/classes/class_reservations.php');
 
 // FUNCTION CONNECT CONTROLLER
 
@@ -40,6 +41,9 @@ if (!empty($_POST)){
 if (isset($_SESSION['login'])) {
     $getinfos_user = new User;
     $getinfos_user->GetInfos();
+
+    $getinfos_booking = new Reservations;
+    $getinfos_booking->ConsultUserBooking();
 }
 
 // REDIRECTION PAGE INSCRIPTION

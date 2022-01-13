@@ -2,8 +2,8 @@
 
 class Reservations {
 
-    private $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
-    public $arrival, $departure, $length, $rate, $connexion;
+    public $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
+    public $arrival, $departure, $length, $rate, $connexion, $equipment, $location;
 
     public function __construct(){
         
@@ -40,15 +40,89 @@ class Reservations {
 
 
 
-    // FONCTION AFFICHAGE RESERVATION
+    // FONCTION LISTE DES RESERVATIONS D'UN USER SUR SON COMPTE
+    public function ListingUserBookings(){
 
-    public function Consult(){
+        $id_user = $_SESSION['id'];
+        $query = "SELECT arrival, departure, equipments.name, locations.name FROM reservations 
+        INNER JOIN equipments ON reservations.id_equipment = equipments.id 
+        INNER JOIN locations ON reservations.id_location = locations.id WHERE id_user=$id_user";
 
-        $consult = $this->connexion->prepare("SELECT arrival, departure, id_habit, id_location, option_activities, option_borne, option_discoclub, rate FROM reservations WHERE id_user=$id_user");
-        $consult->execute();
+        $list_booking = $this->connexion->prepare($query);
+        $list_booking->setFetchMode(PDO::FETCH_ASSOC);
+        $list_booking->execute();
+        $fetch_list_booking = $list_booking->fetch();
 
-        // Convertir id_habit en habit, id_lieux en lieu, id_option en options
+        var_dump($fetch_list_booking);
+
+        // for ($i=0; $fetch_list_booking[$id]; $i++){
+
+        //     $arrival = $fetch_list_booking['arrival'];
+        //     $departure = $fetch_list_booking['departure'];
+        //     $equipment = $fetch_list_booking['']
+            
+
+        // }
+
+    }
+
+    // FONCTION AFFICHAGE RESERVATION D'UN USER
+    public function ConsultUserBooking(){
+
+        $id_user = $_SESSION['id'];
+        $get_booking = $this->connexion->prepare("SELECT arrival, departure, option_borne, option_discoclub, option_activities, rate, id_location, id_equipment FROM reservations WHERE id=$id");
+        $get_booking->setFetchMode(PDO::FETCH_ASSOC);
+        $get_booking->execute();
+        $fetch_booking = $get_booking->fetch();
         
+        $this->arrival = $fetch_booking['arrival'];
+        $this->departure = $fetch_booking['departure'];
+        $this->rate = $fetch_booking['rate'];
+
+        if ($fetch_booking['id_equipment']=='1') {
+            $this->equipment = 'Tente';
+        }
+
+        else {
+            $this->equipment = 'Camping-car';
+        }
+
+        if ($fetch_booking['id_location']=='1') {
+            $this->location = 'La Plage';
+        }
+
+        elseif ($fetch_booking['id_location']=='2'){
+            $this->location = 'Le Maquis';
+        }
+
+        elseif ($fetch_booking['id_location']=='3'){
+            $this->location = 'Les Pins';
+        }
+
+        if ($fetch_booking['option_borne']=='1') {
+            $this->option_borne = 'Oui';
+        }
+
+        else {
+            $this->option_borne = 'Non';
+        }
+
+        if ($fetch_booking['option_discoclub']=='1'){
+            $this->option_discoclub = 'Oui';
+        }
+
+        else {
+            $this->option_discoclub = 'Non';
+        }
+
+        if ($fetch_booking['option_activities']=='1'){
+            $this->option_activities = 'Oui';
+        }
+
+        else {
+            $this->option_activities = 'Non';
+        }
+    
     }
 
     // FONCTION ANNULATION BOOKING
