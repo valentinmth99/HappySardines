@@ -263,6 +263,7 @@ class Reservations {
         $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_equipment) 
         VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)");
         $booking->execute($data);
+
         
         echo "Votre réservation est confirmée.";
 
@@ -289,6 +290,43 @@ class Reservations {
         $updatebooking->execute();
 
         echo "Votre réservation a bien été modifiée.";
+
+    }
+
+    // FONCTION RECHERCHE
+
+    public function SelectResByL($arrival, $departure, $location) {
+
+        // cette fonction sert à lister les réservations en cours chevauchantes sur la période choisie par l'utilisateur.
+        // par exemple pour une réservation du 10 au 20 du mois 
+        // 6 cas possible:
+        // - soit il existe une réservation 
+        // - cas 0 :avec une arrivée = $arrivée et un départ =$départ  (ex: du 10 au 20)
+        // - cas 1 : avec une arrivée < $arrivée et un départ < $départ et un départ > $arrivée (ex: du 5 au 15)
+        // - cas 2 : avec une arrivée > $arrivée et un départ > $départ  une arrivée < $ départ(ex: du 15 au 25)
+        // - cas 3 : avec une arrivée < $arrivée et un départ = $arrivée (ex: du 5 au 10 )
+        // - cas 4 : avec une arrivée = $départ et un départ > $départ (ex: du 20 au 25)
+        // - cas 5 : avec une arrivée < $arrivée et un départ > $départ (ex: du 5 au 25)
+
+        // sont donc exclues les réservations avec :
+        // - une arrivée < $arrivée et un départ <$arrivée (ex: du 5 au 9)
+        // - une arrivée > $départ et un départ > $départ (ex: du 21 au 25)
+
+        $query = "SELECT * FROM reservations WHERE id_location = '$id_location' AND  
+        (arrival = '$arrival' AND departure = '$departure') OR 
+        (arrival < '$arrival' AND departure < '$departure' AND departure > '$arrival') OR
+        (arrival > '$arrival' AND departure > '$departure' AND arrival < '$departure' ) OR
+        (arrival < '$arrival' AND departure = '$arrival') OR
+        (arrival = '$departure' AND departure > '$departure') OR
+        (arrival < '$arrival' AND departure > '$departure')" ;
+        
+
+        $select_res = $this->connexion->prepare($query);
+        $select_res->SetFetchMode(PDO::FETCH_ASSOC);
+        $assoc_select_res = $select_res->execute();
+
+        var_dump($assoc_select_res);
+
 
     }
 

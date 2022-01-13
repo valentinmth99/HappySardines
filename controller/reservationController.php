@@ -85,7 +85,7 @@ if (!empty($_POST)) {
         if($departure < $tomorrow_date) {
             $valid = false;
             $err_departure = "La réservation doit être minimum de deux jours et une nuit.";
-            echo "La réservation doit être minimum de deux jorus et une nuit.";
+            echo "La réservation doit être minimum de deux jours et une nuit.";
         }
 
         // Check if available spaces on the location the user choose with CheckSpaces function (for the location) and CheckSize function(for the size of the equipment)
