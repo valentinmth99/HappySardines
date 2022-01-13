@@ -3,7 +3,7 @@
 class Equipments {
 
     private $id; 
-    public $name, $size, $rate, $equipment;
+    public $type, $size, $rate, $equipment;
 
     public function __construct(){
         
@@ -26,7 +26,7 @@ class Equipments {
 
     public function CheckSize($equipment) {
 
-        $checksize = $this->connexion->prepare("SELECT size FROM equipments WHERE name = '".$equipment."'");
+        $checksize = $this->connexion->prepare("SELECT size FROM equipments WHERE type = '".$equipment."'");
         $checksize->setFetchMode(PDO::FETCH_ASSOC);
         $checksize->execute();
 
