@@ -130,7 +130,8 @@ if (!empty($_POST)) {
 
             $booking = new Reservations ();
             $booking->UpdateBooking("$arrival", "$departure", "$length", "$option_borne", "$option_discoclub", "$option_activities", "$rate", "$id_user", "$id_location", "$id_equipment");
-
+            
+            unset($_SESSION['id_reservation']);
         }
     }
 }

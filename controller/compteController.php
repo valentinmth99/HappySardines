@@ -41,9 +41,6 @@ if (!empty($_POST)){
 if (isset($_SESSION['login'])) {
     $getinfos_user = new User;
     $getinfos_user->GetInfos();
-
-    $getinfos_booking = new Reservations;
-    $getinfos_booking->ConsultUserBooking();
 }
 
 // REDIRECTION PAGE INSCRIPTION

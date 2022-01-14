@@ -78,14 +78,16 @@ class Reservations {
 
         // RETAPER CETTE MERDE  POUR ENLEVER LES IF INUTILE UTILISER UN INNER JOIN
         $id_user = $_SESSION['id'];
-        $get_booking = $this->connexion->prepare("SELECT arrival, departure, option_borne, option_discoclub, option_activities, rate, id_location, id_equipment FROM reservations WHERE reservations.id='".@$_GET['val']."'");
+        $get_booking = $this->connexion->prepare("SELECT id, arrival, departure, option_borne, option_discoclub, option_activities, rate, id_location, id_equipment FROM reservations WHERE reservations.id='".@$_GET['val']."'");
         $get_booking->setFetchMode(PDO::FETCH_ASSOC);
         $get_booking->execute();
         $fetch_booking = $get_booking->fetch();
         
+        $this->id_reservation = $fetch_booking['id'];
         $this->arrival = $fetch_booking['arrival'];
         $this->departure = $fetch_booking['departure'];
         $this->rate = $fetch_booking['rate'];
+        $_SESSION['id_reservation'] = $fetch_booking['id'];
 
         if ($fetch_booking['id_equipment']=='1') {
             $this->equipment = 'Tente';
@@ -333,21 +335,22 @@ class Reservations {
 
     public function UpdateBooking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_location, $id_equipment){
 
+        $id_reservation = $_SESSION['id_reservation'];
+
         $data = [
             'arrival'=>$arrival,
             'departure'=>$departure,
-            'length'=>intval($length),
-            'option_borne'=>intval($option_borne),
-            'option_discoclub'=>intval($option_discoclub),
-            'option_activities'=>intval($option_activities),
-            'rate'=>intval($rate),
-            'id_user'=>intval($id_user),
-            'id_location'=>intval($id_location),
-            'id_equipment'=>intval($id_equipment),
+            'length'=>$length,
+            'option_borne'=>$option_borne,
+            'option_discoclub'=>$option_discoclub,
+            'option_activities'=>$option_activities,
+            'rate'=>$rate,
+            'id_location'=>$id_location,
+            'id_equipment'=>$id_equipment,
         ];
         
         $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=:arrival, departure=:departure, length=:length, option_borne = :option_borne, option_discoclub = :option_discoclub, option_activities = :option_activities, rate = :rate, id_location = :id_location, id_equipment = :id_equipment WHERE id ='".$id_reservation."'");
-        $updatebooking->execute();
+        $updatebooking->execute($data);
 
         echo "Votre réservation a bien été modifiée.";
 

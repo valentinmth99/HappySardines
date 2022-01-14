@@ -1,7 +1,13 @@
 <?php 
 
+require('../model/classes/class_reservations.php');
+
 if (isset($_SESSION['login'])){
 
-    $consult_reservation_user = new Reservations;
-    $consult_reservation_user->
+    $consult_user_booking = new Reservations;
+    $consult_user_booking->ConsultUserBooking();
+  
 }
+
+
+?>
