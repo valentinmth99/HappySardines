@@ -23,39 +23,27 @@ if (!empty($_POST)) {
         $id_user = $_SESSION['id'];
 
         if (isset($_POST['option_borne'])){
-
             $option_borne = 1;
-
         }
 
         else {
-
             $option_borne = 0;
-
         }
         
         if (isset($_POST['option_discoclub'])){
-
             $option_discoclub = 1;
-
         }
 
         else {
-
             $option_discoclub = 0;
-
         }
 
         if (isset($_POST['option_activities'])) {
-
             $option_activities = 1;
-
         }
 
         else {
-
             $option_activities = 0;
-
         }
 
         $today_date = date('Y-m-d');
@@ -76,31 +64,48 @@ if (!empty($_POST)) {
 
         if($arrival < $today_date ) {
             $valid = false;
-            $err_arrival = "La date d'arrivée ne peut être antérieure à celle du jour.";
+            $err_date = "La date d'arrivée ne peut être antérieure à celle du jour.";
             echo "La date d'arrivée ne peut être antérieure à celle du jour.";
         }
-        
+
         // Check if departure date is at least one day after arrival
 
-        if($departure < $tomorrow_date) {
+        elseif($arrival > $departure) {
             $valid = false;
-            $err_departure = "La réservation doit être minimum de deux jours et une nuit.";
-            echo "La réservation doit être minimum de deux jours et une nuit.";
+            $err_date = "La date de départ ne peut pas être antérieure à l'arrivée.";
+            echo "La date de départ ne peut pas être antérieure à l'arrivée.";
         }
+
+        elseif($arrival == $departure) {
+            $valid = false;
+            $err_date ="La réservation doit être au moins d'une nuit.";
+            echo "La réservation doit être au moins d'une nuit.";
+        }
+
+
+        // Check available spaces with checkavailable function
+
+        $id_location = new Reservations();
+        $id_location->GetIdLocation($location);
+
+        $check_available = new Reservations();
+        $check_available->CheckAvailable($arrival, $departure, $location);
+
+        // $checkavailable = new Reservations();
+        // $checkavailable->CheckAvailable($arrival, $departure, $location);
+
+
+        
+        
 
         // Check if available spaces on the location the user choose with CheckSpaces function (for the location) and CheckSize function(for the size of the equipment)
 
-        $spaces = new Locations();
-        $available_spaces = $spaces->CheckSpaces($location);
+        // $spaces = new Locations();
+        // $available_spaces = $spaces->CheckSpaces($location);
 
-        $size = new Equipments();
-        $equipment_size = $size->CheckSize($equipment);
+        // $size = new Equipments();
+        // $equipment_size = $size->CheckSize($equipment);
 
-        if(($available_spaces - $equipment_size) < 0) {
-            $valid = false;
-            $err_spaces ="L'espace sélectionné ne peut pas vous accueillir.";
-            echo "L'espace sélectionné ne peut pas vous accueillir.";
-        }
 
         if($valid == true) {
 
@@ -123,8 +128,6 @@ if (!empty($_POST)) {
 
             $booking_id_equipment = new Reservations ();
             $id_equipment = $booking_id_equipment->GetIdEquipment("$equipment");
-            
-
 
             // booking in BDD
 
