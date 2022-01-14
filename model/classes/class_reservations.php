@@ -242,10 +242,7 @@ class Reservations {
         $get_id_location->execute();
         $fetch_id_location = $get_id_location->fetch();
 
-        $id_location = $fetch_id_location['id'];
-    
-        return $id_location;
-
+        return $id_location = intval(($fetch_id_location)['id']);
     }
 
     public function GetIdEquipment($equipment) {
@@ -260,16 +257,7 @@ class Reservations {
 
     // FONCTION POUR LISTER LES RESERVATIONS QUI SE CHEVAUCHENT OU SONT EN MEME TEMPS DANS UN MEME LIEUX
 
-    public function CheckAvailable($arrival, $departure, $location) {
-
-        $get_id_location = $this->connexion->prepare("SELECT id FROM locations WHERE name = '".$location."'");
-        $get_id_location->setFetchMode(PDO::FETCH_ASSOC);
-        $get_id_location->execute();
-        $fetch_id_location = $get_id_location->fetch();
-
-        $id_location = $fetch_id_location['id'];
-
-        echo $id_location;
+    public function SelectResByL($arrival, $departure, $location) {
 
         // cette fonction sert à lister les réservations en cours chevauchantes sur la période choisie par l'utilisateur.
         // par exemple pour une réservation du 10 au 20 du mois 
@@ -284,27 +272,22 @@ class Reservations {
         // sont donc exclues les réservations avec :
         // - une arrivée < $arrivée et un départ <$arrivée (ex: du 5 au 9)
         // - une arrivée > $départ et un départ > $départ (ex: du 21 au 25)
-
     
-        $query = "SELECT * FROM reservations
-        WHERE ( id_location = '".$id_location."') AND 
-        (
+        $query = "SELECT * FROM reservations WHERE id_location = '$id_location' AND  
         (arrival = '$arrival' AND departure = '$departure') OR 
         (arrival < '$arrival' AND departure < '$departure' AND departure > '$arrival') OR
         (arrival > '$arrival' AND departure > '$departure' AND arrival < '$departure' ) OR
         (arrival < '$arrival' AND departure = '$arrival') OR
         (arrival = '$departure' AND departure > '$departure') OR
-        (arrival < '$arrival' AND departure > '$departure')
-        )";
+        (arrival < '$arrival' AND departure > '$departure')" ;
         
     
         $select_res = $this->connexion->prepare($query);
         $select_res->SetFetchMode(PDO::FETCH_ASSOC);
-        $select_res->execute();
-
-        $assoc_select_res = $select_res->fetchAll();
-
+        $assoc_select_res = $select_res->execute();
+    
         var_dump($assoc_select_res);
+    
     
     }
 
@@ -349,7 +332,18 @@ class Reservations {
             'id_equipment'=>$id_equipment,
         ];
         
-        $updatebooking = $this->connexion->prepare("UPDATE reservations SET arrival=:arrival, departure=:departure, length=:length, option_borne = :option_borne, option_discoclub = :option_discoclub, option_activities = :option_activities, rate = :rate, id_location = :id_location, id_equipment = :id_equipment WHERE id ='".$id_reservation."'");
+        $query="UPDATE reservations 
+        SET arrival=:arrival, 
+        departure=:departure, 
+        length=:length, 
+        option_borne = :option_borne, 
+        option_discoclub = :option_discoclub, 
+        option_activities = :option_activities, 
+        rate = :rate, 
+        id_location = :id_location, 
+        id_equipment = :id_equipment, 
+        WHERE id ='".$id_reservation."'";
+        $updatebooking = $this->connexion->prepare($query);
         $updatebooking->execute($data);
 
         echo "Votre réservation a bien été modifiée.";
