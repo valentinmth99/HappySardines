@@ -255,9 +255,18 @@ class Reservations {
 
     }
 
-    // FONCTION POUR LISTER LES RESERVATIONS QUI SE CHEVAUCHENT OU SONT EN MEME TEMPS DANS UN MEME LIEUX
+  // FONCTION POUR LISTER LES RESERVATIONS QUI SE CHEVAUCHENT OU SONT EN MEME TEMPS DANS UN MEME LIEUX
 
-    public function SelectResByL($arrival, $departure, $location) {
+    public function CheckAvailable($arrival, $departure, $location) {
+
+        $get_id_location = $this->connexion->prepare("SELECT id FROM locations WHERE name = '".$location."'");
+        $get_id_location->setFetchMode(PDO::FETCH_ASSOC);
+        $get_id_location->execute();
+        $fetch_id_location = $get_id_location->fetch();
+
+        $id_location = $fetch_id_location['id'];
+
+        echo $id_location;
 
         // cette fonction sert à lister les réservations en cours chevauchantes sur la période choisie par l'utilisateur.
         // par exemple pour une réservation du 10 au 20 du mois 
@@ -268,27 +277,31 @@ class Reservations {
         // - cas 3 : avec une arrivée < $arrivée et un départ = $arrivée (ex: du 5 au 10 )
         // - cas 4 : avec une arrivée = $départ et un départ > $départ (ex: du 20 au 25)
         // - cas 5 : avec une arrivée < $arrivée et un départ > $départ (ex: du 5 au 25)
-    
+
         // sont donc exclues les réservations avec :
         // - une arrivée < $arrivée et un départ <$arrivée (ex: du 5 au 9)
         // - une arrivée > $départ et un départ > $départ (ex: du 21 au 25)
-    
-        $query = "SELECT * FROM reservations WHERE id_location = '$id_location' AND  
+
+
+        $query = "SELECT * FROM reservations
+        WHERE ( id_location = '".$id_location."') AND 
+        (
         (arrival = '$arrival' AND departure = '$departure') OR 
         (arrival < '$arrival' AND departure < '$departure' AND departure > '$arrival') OR
         (arrival > '$arrival' AND departure > '$departure' AND arrival < '$departure' ) OR
         (arrival < '$arrival' AND departure = '$arrival') OR
         (arrival = '$departure' AND departure > '$departure') OR
-        (arrival < '$arrival' AND departure > '$departure')" ;
+        (arrival < '$arrival' AND departure > '$departure')
+        )";
         
-    
+
         $select_res = $this->connexion->prepare($query);
         $select_res->SetFetchMode(PDO::FETCH_ASSOC);
-        $assoc_select_res = $select_res->execute();
-    
+        $select_res->execute();
+
+        $assoc_select_res = $select_res->fetchAll();
+
         var_dump($assoc_select_res);
-    
-    
     }
 
     public function Booking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_user,$id_location,$id_equipment){
