@@ -1,7 +1,11 @@
 <?php
 
 session_start();
-require('../controller/compteController.php')
+require('../controller/compteController.php');
+
+
+
+
 
 ?>
 
@@ -98,11 +102,12 @@ require('../controller/compteController.php')
 
                     <div><h2 class="boxtitle"> Vos réservations </h2></div>
 
-                    
+                    <div><?php 
+                        $test = new Reservations;
+                        $test->ListingUserBookings();
+                    ?></div>
 
-                    <form action="vos-reservations.php" method="post">
-                        <input type="submit" name="consultbooking" value="Consulter votre réservation">
-                    </form>
+                    
                     
                 </div>
             </section>

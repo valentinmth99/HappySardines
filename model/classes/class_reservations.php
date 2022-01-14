@@ -44,7 +44,7 @@ class Reservations {
     public function ListingUserBookings(){
 
         $id_user = $_SESSION['id'];
-        $query = "SELECT arrival, departure, equipments.type, locations.name FROM reservations 
+        $query = "SELECT reservations.id, arrival, departure, equipments.type, locations.name FROM reservations 
         INNER JOIN equipments ON reservations.id_equipment = equipments.id 
         INNER JOIN locations ON reservations.id_location = locations.id WHERE id_user=$id_user";
 
@@ -53,17 +53,18 @@ class Reservations {
         $list_booking->execute();
         $fetch_list_booking = $list_booking->fetchAll();
 
-        var_dump($fetch_list_booking);
-
 
         for ($i=0; isset($fetch_list_booking[$i]); $i++){
 
+            $id_reservation = $fetch_list_booking[$i]['id'];
             $arrival = $fetch_list_booking[$i]['arrival'];
             $departure = $fetch_list_booking[$i]['departure'];
             $equipment = $fetch_list_booking[$i]['type'];
             $location = $fetch_list_booking[$i]['name'];
 
-            echo "Votre séjour du $arrival au $departure en $equipment dans le $location";
+            echo "<div><a href='vos-reservations.php?val=".$id_reservation."'> Votre séjour du $arrival au $departure en $equipment dans le $location</a></div>";
+
+            // AJOUTER LE LIEN VERS LE BAIL DETAILLER DE LA RESERVATION
 
             
 
@@ -74,8 +75,10 @@ class Reservations {
     // FONCTION AFFICHAGE RESERVATION D'UN USER
     public function ConsultUserBooking(){
 
+
+        // RETAPER CETTE MERDE  POUR ENLEVER LES IF INUTILE UTILISER UN INNER JOIN
         $id_user = $_SESSION['id'];
-        $get_booking = $this->connexion->prepare("SELECT arrival, departure, option_borne, option_discoclub, option_activities, rate, id_location, id_equipment FROM reservations WHERE id=$id");
+        $get_booking = $this->connexion->prepare("SELECT arrival, departure, option_borne, option_discoclub, option_activities, rate, id_location, id_equipment FROM reservations WHERE reservations.id='".@$_GET['val']."'");
         $get_booking->setFetchMode(PDO::FETCH_ASSOC);
         $get_booking->execute();
         $fetch_booking = $get_booking->fetch();

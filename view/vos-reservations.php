@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-require('../controller/compteController.php')
+require('../controller/compteController.php');
+
 
 ?>
 
