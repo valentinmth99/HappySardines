@@ -83,29 +83,173 @@ if (!empty($_POST)) {
         }
 
 
-        // Check available spaces with checkavailable function
+        $booking_id_location = new Reservations ();
+        $id_location = $booking_id_location->GetIdLocation("$location");
+    
+        $booking_id_equipment = new Reservations ();
+        $id_equipment = $booking_id_equipment->GetIdEquipment("$equipment");
+    
+        // par exemple pour une réservation du 10 au 20 du mois 
+        // - soit il existe une réservation 
+        // - cas 1 :avec une arrivée = $arrivée et un départ =$départ  (ex: du 10 au 20)
+        // - cas 2 : avec une arrivée < $arrivée et un départ < $départ et un départ > $arrivée (ex: du 5 au 15)
+        // - cas 3 : avec une arrivée > $arrivée et un départ > $départ  une arrivée < $ départ(ex: du 15 au 25)
+        // - cas 4 : avec une arrivée < $arrivée et un départ > $départ (ex: du 5 au 25)
+    
+        // sont donc exclues les réservations avec :
+        // - une arrivée < $arrivée et un départ <$arrivée (ex: du 5 au 9) car hors des dates choisies par le client
+        // - une arrivée > $départ et un départ > $départ (ex: du 21 au 25) car hors des dates choisie par le client
+        // - une arrivée < $arrivée et un départ = $arrivée (ex: du 5 au 10 ) car le jour du départ ils libèrent la place aux nouveaux arrivants.
+        // - une arrivée = $départ et un départ > $départ (ex: du 20 au 25) car le jour d'arrivée, les clients libèrent leurs places.
+    
+    
+        $query_1 = "SELECT * FROM reservations
+        WHERE ( id_location = '".$id_location."') AND 
+        (
+        (arrival = '$arrival' AND departure = '$departure') OR                                 
+        (arrival < '$arrival' AND departure < '$departure' AND departure > '$arrival') OR       
+        (arrival > '$arrival' AND departure > '$departure' AND arrival < '$departure' ) OR                                     
+        (arrival < '$arrival' AND departure > '$departure')                                     
+        )";
 
-        $id_location = new Reservations();
-        $id_location->GetIdLocation($location);
+        // création du tableau des réservations chevauchants la période choisie par l'utilisateur
 
-        $check_available = new Reservations();
-        $check_available->CheckAvailable($arrival, $departure, $location);
+        $select_res = $bdd->prepare($query_1);
+        $select_res->SetFetchMode(PDO::FETCH_ASSOC);
+        $select_res->execute();
 
-        // $checkavailable = new Reservations();
-        // $checkavailable->CheckAvailable($arrival, $departure, $location);
+        $assoc = $select_res->fetchAll();
+
+        var_dump($assoc) ;
 
 
-        
-        
+        if (!empty($assoc)) {
 
-        // Check if available spaces on the location the user choose with CheckSpaces function (for the location) and CheckSize function(for the size of the equipment)
+            // durée en jours de la réservation choisie par l'utilisateur
+            $booking_length = new Reservations ();
+            $length_result = $booking_length->CalculLength("$arrival", "$departure");
+            $length = (int)$length_result;
 
-        // $spaces = new Locations();
-        // $available_spaces = $spaces->CheckSpaces($location);
+            // récupération de l'espace des équipements
+            if($id_equipment == 1) { $equipment_space = 1 ; } else { $equipment_space = 2 ; }
 
-        // $size = new Equipments();
-        // $equipment_size = $size->CheckSize($equipment);
+            // pour une réservation de 10 jours, l'espace du lieu est donc de 4x 10 soit 40
+            $location_space_time = 4*$length;
 
+            echo "<br> place du lieu = $location_space_time";
+
+            // pour une réservation de 10 jours avec un camping car, il va donc falloir 10(durée)x2(taille camping car) = 20 emplacements sur cette périodes.
+            $spaces_needed = (int) ($length * $equipment_space) ;
+            echo " <br> espace requis $spaces_needed" ;
+
+            // on créé une table qui va stocker les emplacements déjà pris sur la durée du séjour des réservations déjà enresgistrées.
+            $query_2 = "CREATE TABLE `camping`.`unavailable_space` ( `id` INT NOT NULL AUTO_INCREMENT , `space` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = MyISAM;";
+            $table = $bdd->prepare($query_2);
+            $table->execute();
+
+            $query_3 = "INSERT INTO unavailable_space (space) VALUES (:unavailable_space)";
+            $insert = $bdd->prepare($query_3);
+
+            for($i = 0 ; isset($assoc[$i]) ; $i++) { // on parcours le tableau
+
+                // l'espace requis sur la totalité du séjour et la durée * l'espace de l'équipment
+
+                // l'id equipment 1 = tente soit une place, l'id equipement 2 = camping car soit deux places
+
+                if ( $assoc[$i]['id_equipment'] == '1' ) { 
+                    $equipment_space = 1 ; 
+
+                } 
+                
+                elseif ($assoc[$i]['id_equipment'] == '2' ) { 
+                    $equipment_space = 2 ; 
+                }
+
+                // dans le cas ou on a comme l'utilisateur, une arrivée au 10 et un départ au 20 avec un camping car, on a donc 10x2 = 20 emplacements pris.
+                if( ($assoc[$i]['arrival'] == $arrival) && ($assoc[$i]['departure'] == $departure) ) {
+
+                    $firstDate  = new DateTime($arrival);
+                    $secondDate = new DateTime($departure);
+                    $intvl = $firstDate->diff($secondDate);
+
+                    $length = $intvl->days;
+
+                    $unavailable_space= $length * $equipment_space ;
+
+                    $insert->execute(['unavailable_space'=>$unavailable_space]);
+                }
+
+                // dans le cas d'une réservation du 5 au 15 avec un camping car, on ne retient que du 10 au 15 et l'espace pris sur la période chevauchante est donc de 5x2 = 10;
+                if ( ($assoc[$i]['arrival'] < $arrival) && ($assoc[$i]['departure'] < $departure) && ($assoc[$i]['departure'] > $arrival) ) {
+
+                    $firstDate  = new DateTime($arrival);
+                    $secondDate = new DateTime($assoc[$i]['departure']);
+                    $intvl = $firstDate->diff($secondDate);
+                    
+                    $length = $intvl->days;
+
+                    $unavailable_space = $length * $equipment_space ;
+
+                    $insert->execute(['unavailable_space'=>$unavailable_space]);
+                }
+
+                // dans le cas d'une réservation du 15 au 25 avec un campingcar, on ne retient que du 15 au 20 et l'espace pris sur la période chevauchante est donc de 5x2 = 10
+
+                if ( ($assoc[$i]['arrival'] > $arrival) && ($assoc[$i]['departure'] > $departure) && ($assoc[$i]['arrival'] < $departure) )  {
+
+                    $firstDate  = new DateTime($assoc[$i]['arrival']);
+                    $secondDate = new DateTime($departure);
+                    $intvl = $firstDate->diff($secondDate);
+                    
+                    $length = $intvl->days;
+
+                    $unavailable_space = $length * $equipment_space ;
+
+                    $insert->execute(['unavailable_space'=>$unavailable_space]);
+                }
+
+                // dans le cas d'une réservation du 5 au 25 avec un camping car, on ne retient que du 10 au 20 comme l'utilisateur donc 10x2
+
+                if ( ($assoc[$i]['arrival'] < $arrival) && ($assoc[$i]['departure'] > $departure) ) {
+
+                    $unavailable_space= $length * $equipment_space ;
+
+                    $insert->execute(['unavailable_space'=>$unavailable_space]);
+                } 
+
+            }
+
+            // on récupère les sommes stockées dans la table éphémères pour les additionner.
+
+            $query_4 = "SELECT SUM(space) FROM unavailable_space";
+            $sum = $bdd->prepare($query_4);
+            $sum->setFetchMode(PDO::FETCH_ASSOC);
+            $sum->execute();
+
+            $result = $sum->fetchAll();
+
+            // on fait la différence entre l'espace du terrain et la somme des espaces pris par les réservations déjà enregistrées sur la période
+            // choisie par l'utilisateur pour obtenir les places encore disponibles.
+
+
+            $spaces_available = (int) ($location_space_time - $result[0]['SUM(space)']) ;
+
+            // ensuite on soustrait à l'espace disponible l'espace nécessaire à la réservation de l'utilisateur
+
+            $substraction = $spaces_available - $spaces_needed;
+
+            // si le résultat est inférieur à 0 alors l'espace nécessaire est insuffisant.
+            if ($substraction < 0) {
+                $valid = false;
+                echo " Plus de place dans le lieu choisi.";
+            }
+
+            // on supprime la table éphémère.;
+
+            $drop_shortlived_table = new Reservations();
+            $drop_shortlived_table->DROPTABLE();
+        }
+    
 
         if($valid == true) {
 
@@ -134,7 +278,14 @@ if (!empty($_POST)) {
             $booking = new Reservations ();
             $booking->Booking("$arrival", "$departure", "$length", "$option_borne", "$option_discoclub", "$option_activities", "$rate", "$id_user", "$id_location", "$id_equipment");
 
+            // destroying short-lived table unavailable_space
+
+            
         }
+
+        
+
+
     }
 }
 
