@@ -1,58 +1,66 @@
-#calendrierMain{
+#calendrierMain {
     border:1px solid #4e637a;
-    width:203px;
-    }
-    #TopCalendrier{
+    width:80%;
+}
+
+#TopCalendrier  {
     text-align:center;
     background:#000000;
     height:25px;
     padding-top:5px;
     font-weight:bold;
-    width:203px;
-    }
-    #JCalendrier{
+    width:1000px;
+}
+
+#JCalendrier {
     background-color:#6c6a6a;
     overflow:hidden;
     font-weight:bold;
-    width:203px;}
-    
-    #JCalContenu{
+    width:203px;
+}
+
+#JCalContenu   {
     width:29px;
     text-align:center;
-    float:left;}
-    
-    .LigneJour{
+    float:left;
+}
+
+.LigneJour  {
     background-color:#ffffff;
     overflow:hidden;
     text-align:center;
-    width:203px;}
-    .jourVide{
+    width:203px;
+}
+
+.jourVide  {
     border:1px solid transparent;
     width:27px;
     float:left;
-    }
-    .linkcal a{
+}
+
+.linkcal a  {
     color: #FFFFFF;
-    }
-    .headcal {
+}
+.headcal {
     color: #FFFFFF;
-    }
-    .currentday{
+}
+
+.currentday{
     width:25px;
     height:24px;
     float:left;
-    }
-    
-    .currentday a{
+}
+
+.currentday a{
     color:#000000;
     font-size:14px;
     font-weight:bold;
-    }
-    .otherDay{
+}
+.otherDay   {
     background-color: #ffffff ;
     width:29px;
     height:25px;
     float:left;
     font-size:18px;
     color:#000000;
-    }
+}

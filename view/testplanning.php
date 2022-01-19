@@ -2,50 +2,66 @@
 
 //ETAPE 1 : DEFINITION DES VARIABLES 
 
-$year = date("Y");
-if(!isset($_GET['month'])) $monthnb = date("n");
-else {
-$monthnb = $_GET['month'];
-$year = $_GET['year'];
-if($monthnb <= 0) {
-$monthnb = 12;
-$year = $year - 1;
-}
-elseif($monthnb > 12) {
-$monthnb = 1;
-$year = $year + 1;
-}
-}
-$day = date("w");
-$nbdays = date("t", mktime(0,0,0,$monthnb,1,$year));
-$firstday = date("w",mktime(0,0,0,$monthnb,1,$year));
+    $year = date("Y");
 
-//ETAPE 2 : TRADUCTION JOURS EN FR
+    if(!isset($_GET['month'])) {
 
-$daytab[1] = 'Lu';
-$daytab[2] = 'Ma';
-$daytab[3] = 'Me';
-$daytab[4] = 'Je';
-$daytab[5] = 'Ve';
-$daytab[6] = 'Sa';
-$daytab[7] = 'Di';
+        $monthnb = date("n");
+    }
 
-//ETAPE 3 : INITIALISATION DE LA TABLE DU CALENDRIER
+    else {
+        $monthnb = $_GET['month'];
+        $year = $_GET['year'];
+    }
 
-$calendar = array();
+    if($monthnb <= 0) {
+        $monthnb = 12;
+        $year = $year - 1;
+    }
 
-$z = (int)$firstday;
-if($z == 0) $z =7;
-for($i = 1; $i <= ($nbdays/5); $i++){
-for($j = 1; $j <= 7 && $j-$z+1+(($i*7)-7) <= $nbdays; $j++){
-if($j < $z && ($j-$z+1+(($i*7)-7)) <= 0){
-$calendar[$i][$j] = null;
-}
-else {
-$calendar[$i][$j] = $j-$z+1+(($i*7)-7);
-}}}
+    elseif($monthnb > 12) {
+        $monthnb = 1;
+        $year = $year + 1;
+    }
 
-//ETAPE 4: TRADUCTION DES MOIS EN FRANCAIS
+    $day = date("w");
+    $nbdays = date("t", mktime(0,0,0,$monthnb,1,$year));
+    $firstday = date("w",mktime(0,0,0,$monthnb,1,$year));
+
+    //ETAPE 2 : TRADUCTION JOURS EN FR
+
+    $daytab[1] = 'Lu';
+    $daytab[2] = 'Ma';
+    $daytab[3] = 'Me';
+    $daytab[4] = 'Je';
+    $daytab[5] = 'Ve';
+    $daytab[6] = 'Sa';
+    $daytab[7] = 'Di';
+
+    //ETAPE 3 : INITIALISATION DE LA TABLE DU CALENDRIER
+
+    $calendar = array();
+
+    $z = (int)$firstday;
+
+    if($z == 0) {$z =7;}
+
+    for($i = 1; $i <= ($nbdays/5); $i++){
+    
+        for($j = 1; $j <= 7 && $j-$z+1+(($i*7)-7) <= $nbdays; $j++){
+            
+            if($j < $z && ($j-$z+1+(($i*7)-7)) <= 0){
+                $calendar[$i][$j] = null;
+            }
+
+            else {
+                $calendar[$i][$j] = $j-$z+1+(($i*7)-7);
+            }
+        }
+    
+    }  
+
+    //ETAPE 4: TRADUCTION DES MOIS EN FRANCAIS
 
 switch($monthnb) {
     case 1: $month = 'Janvier'; break;
@@ -59,7 +75,7 @@ switch($monthnb) {
     case 9: $month = 'Septembre'; break;
     case 10: $month = 'Octobre'; break;
     case 11: $month = 'Novembre'; break;
-    case 12: $month = 'D&eacute;cembre'; break;
+    case 12: $month = 'Décembre'; break;
     }
 
 ?>
@@ -80,39 +96,56 @@ switch($monthnb) {
         
         <main>
 
-<div id="calendrierMain">
+    <div id="calendrierMain">
 
-<div id="TopCalendrier">
-<span class="linkcal"><a href="testplanning.php?month=<?php echo $monthnb - 1; ?>&year=<?php echo $year; ?>"> << </a></span>
-<span class="headcal"><?php echo($month.' '.$year); ?></span>
-<span class="linkcal"><a href="testplanning.php?month=<?php echo $monthnb + 1; ?>&year=<?php echo $year; ?>"> >> </a></span>
-</div>
-<?php
-echo('<div id="JCalendrier">');
-for($i = 1; $i <= 7; $i++){
-echo('<div id="JCalContenu">'.$daytab[$i].'</div>');
-}
-echo('</div>');
-for($i = 1; $i <= count($calendar); $i++) {
-echo('<div class="LigneJour">');
-for($j = 1; $j <= 7 && $j-$z+1+(($i*7)-7) <= $nbdays; $j++){
-if($j-$z+1+(($i*7)-7) == date("j") && $monthnb == date("n") && $year == date("Y"))
-echo('<div class="currentday"><a href="#">'.$calendar[$i][$j].'</a></div>');
-else{
-if ( $calendar[$i][$j] == "" ) {
-echo ('<div class="jourVide"></div>');
-}
-else{
-$jour = $calendar[$i][$j];
-$datecomplete = $year."-".$monthnb."-".$jour;
+    <div id="TopCalendrier">
+        <span class="linkcal"><a href="testplanning.php?month=<?php echo $monthnb - 1; ?>&year=<?php echo $year; ?>"> << </a></span>
+        <span class="headcal"><?php echo($month.' '.$year); ?></span>
+        <span class="linkcal"><a href="testplanning.php?month=<?php echo $monthnb + 1; ?>&year=<?php echo $year; ?>"> >> </a></span>
+    </div>
 
-echo ('<div class="otherDay">'.$calendar[$i][$j].'</div>');
+    <?php
+    
+    echo('<div id="JCalendrier">');
 
-}
-}
-}
-echo('</div>');
-}
+    for($i = 1; $i <= 7; $i++){
+        
+        echo('<div id="JCalContenu">'.$daytab[$i].'</div>');
+    }
+
+    echo('</div>');
+
+    for($i = 1; $i <= count($calendar); $i++) {
+
+        echo('<div class="LigneJour">');
+
+        for($j = 1; $j <= 7 && $j-$z+1+(($i*7)-7) <= $nbdays; $j++){
+
+            if($j-$z+1+(($i*7)-7) == date("j") && $monthnb == date("n") && $year == date("Y"))
+
+                echo('<div class="currentday"><a href="#">'.$calendar[$i][$j].'</a></div>');
+
+            else{
+
+                if ( $calendar[$i][$j] == "" ) {
+
+                    echo ('<div class="jourVide"></div>');
+                }
+
+                else{
+
+                    $jour = $calendar[$i][$j];
+                    $datecomplete = $year."-".$monthnb."-".$jour;
+
+                    echo ('<div class="otherDay">'.$calendar[$i][$j].'</div>');
+
+                }
+            }
+        }
+
+        echo('</div>');
+
+    }
 ?>
 
 </div>
