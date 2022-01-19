@@ -89,8 +89,9 @@ if (!empty($_POST)) {
         $booking_id_equipment = new Reservations ();
         $id_equipment = $booking_id_equipment->GetIdEquipment("$equipment");
     
+        // On check s'il reste des places disponibles selon le lieu choisi.
         // par exemple pour une réservation du 10 au 20 du mois 
-        // - soit il existe une réservation 
+        // - il existe 4 cas de réservations qui pourraient chevaucher la période choisie par l'utilisateur.
         // - cas 1 :avec une arrivée = $arrivée et un départ =$départ  (ex: du 10 au 20)
         // - cas 2 : avec une arrivée < $arrivée et un départ < $départ et un départ > $arrivée (ex: du 5 au 15)
         // - cas 3 : avec une arrivée > $arrivée et un départ > $départ  une arrivée < $ départ(ex: du 15 au 25)
@@ -125,24 +126,30 @@ if (!empty($_POST)) {
 
         if (!empty($assoc)) {
 
-            // durée en jours de la réservation choisie par l'utilisateur
+            // durée en jours de la réservation choisie par l'utilisateur, soit pour une résa du 10 au 20, 10 jours.
+
             $booking_length = new Reservations ();
             $length_result = $booking_length->CalculLength("$arrival", "$departure");
             $length = (int)$length_result;
 
-            // récupération de l'espace des équipements
+
+            // récupération de la place prise par les équipements soit 2 places pour un camping car.
+
             if($id_equipment == 1) { $equipment_space = 1 ; } else { $equipment_space = 2 ; }
 
-            // pour une réservation de 10 jours, l'espace du lieu est donc de 4x 10 soit 40
+
+            // pour une réservation de 10 jours, l'espace disponible de base est donc de 4x 10 soit 40.
+
             $location_space_time = 4*$length;
 
-            echo "<br> place du lieu = $location_space_time";
 
             // pour une réservation de 10 jours avec un camping car, il va donc falloir 10(durée)x2(taille camping car) = 20 emplacements sur cette périodes.
+
             $spaces_needed = (int) ($length * $equipment_space) ;
-            echo " <br> espace requis $spaces_needed" ;
+
 
             // on créé une table qui va stocker les emplacements déjà pris sur la durée du séjour des réservations déjà enresgistrées.
+
             $query_2 = "CREATE TABLE `camping`.`unavailable_space` ( `id` INT NOT NULL AUTO_INCREMENT , `space` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = MyISAM;";
             $table = $bdd->prepare($query_2);
             $table->execute();
@@ -241,6 +248,7 @@ if (!empty($_POST)) {
             // si le résultat est inférieur à 0 alors l'espace nécessaire est insuffisant.
             if ($substraction < 0) {
                 $valid = false;
+                $err_reservation = "Il n'y a plus de places disponibles dans le lieu choisi avec votre équipement pour cette période.";
                 echo " Plus de place dans le lieu choisi.";
             }
 
