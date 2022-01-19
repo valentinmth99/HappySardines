@@ -60,10 +60,14 @@ require('../controller/vos-reservationsController.php');
                 </table>
 
                 <form action="update-booking.php" type="post">
-                <input type="submit" name="updatebookingform" value="Modifier votre réservation">
+                    <input type="submit" name="updatebookingform" value="Modifier votre réservation">
                 </form>
-            
-            <?php } ?>
+
+                <form action="cancel-booking.php" type="post">
+                    <input type="submit" name="cancelbooking" value="Annuler votre réservation">
+                </form>
+                    
+        <?php } ?>
         
         </main>        
     </body>

@@ -21,8 +21,10 @@ require('../controller/reservationController.php')
 
                 <h2 class="titre">RÉSERVATION</h2>
 
-                <?php if(isset($_SESSION['login'])) { ?>
+                <?php if(isset($_SESSION['login'])) { 
 
+                    if ($calculrate == 0){?>
+                    
                     <p class="intro"> 
                         Remplissez le formulaire ci-dessous pour faire votre réservation. <br>
                         Votre séjour doit être d'une durée minimum d'une nuit. <br>
@@ -65,9 +67,19 @@ require('../controller/reservationController.php')
                             </fieldset>
 
                             <input type="submit" name="calculate" value="Voir le tarif" class="submitbtn">
-
+                        
                         </form>
-
                     </div>
+                        <?php } 
 
-                <?php }  ?>
+                        else { ?>
+
+                            <p> Vous devrez régler un total de <?php echo $rate ?> euros pour ce séjour. </p>
+                            <form action="reservations.php" method="post">
+                            <input type="submit" name="book" value="Confirmer votre réservation" class="submitbtn">
+                            </form>
+                        
+                        <?php } 
+                } 
+
+        

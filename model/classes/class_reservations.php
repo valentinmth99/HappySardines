@@ -63,7 +63,23 @@ class Reservations {
             $equipment = $fetch_list_booking[$i]['type'];
             $location = $fetch_list_booking[$i]['name'];
 
-            echo "<div><a href='vos-reservations.php?val=".$id_reservation."'> Votre séjour du $arrival au $departure en $equipment dans le $location</a></div>";
+            if ($equipment == 'campingcar'){
+                $equipment = 'camping-car';
+            }
+
+            if ($location == 'plage'){
+                $location = "La Plage";
+            }
+
+            elseif ($location == 'pins'){
+                $location = 'Les Pins';
+            }
+
+            elseif ($location == 'maquis'){
+                $location = 'Le Maquis';
+            }
+
+            echo "<div><a href='vos-reservations.php?val=".$id_reservation."'> Votre séjour du $arrival au $departure en $equipment à l'emplacement $location</a></div>";
 
             // AJOUTER LE LIEN VERS LE BAIL DETAILLER DE LA RESERVATION
 
@@ -140,7 +156,8 @@ class Reservations {
 
     public function Cancel(){
 
-        $cancel = $this->connexion->prepare("DELETE * FROM reservations WHERE id=$id");
+        $id_reservation = $_SESSION['id_reservation'];
+        $cancel = $this->connexion->prepare("DELETE  FROM reservations WHERE reservations.id =$id_reservation");
         $cancel->execute();
 
         echo "Votre reservation a bien été annulée.";
@@ -247,6 +264,7 @@ class Reservations {
     }
 
     public function GetIdEquipment($equipment) {
+
         $get_id_equipment = $this->connexion->prepare("SELECT id FROM equipments WHERE type = '".$equipment."'");
         $get_id_equipment->setFetchMode(PDO::FETCH_ASSOC);
         $get_id_equipment->execute();

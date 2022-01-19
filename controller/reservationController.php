@@ -8,6 +8,7 @@ require('../model/classes/class_locations.php');
 
 require('../model/classes/class_equipments.php');
 
+$calculrate = 0;
 
 // CONTROLLER FUNCTION BOOKING
 
@@ -261,17 +262,10 @@ if (!empty($_POST)) {
 
         if($valid == true) {
 
+            $calculrate = 1;
             // getting the length
-
             $booking_length = new Reservations ();
             $length = $booking_length->CalculLength("$arrival", "$departure");
-            
-
-            // getting the rate 
-
-            $booking_rate = new Reservations ();
-            $rate = $booking_rate->CalculRate("$equipment", "$option_borne", "$option_discoclub", "$option_activities", "$length");
-            
 
             //getting ids
 
@@ -281,20 +275,51 @@ if (!empty($_POST)) {
             $booking_id_equipment = new Reservations ();
             $id_equipment = $booking_id_equipment->GetIdEquipment("$equipment");
 
-            // booking in BDD
-
-            $booking = new Reservations ();
-            $booking->Booking("$arrival", "$departure", "$length", "$option_borne", "$option_discoclub", "$option_activities", "$rate", "$id_user", "$id_location", "$id_equipment");
-
-            // destroying short-lived table unavailable_space
-
+            // getting the rate 
+            $booking_rate = new Reservations ();
+            $rate = $booking_rate->CalculRate("$equipment", "$option_borne", "$option_discoclub", "$option_activities", "$length");
             
+            $_SESSION['arrival'] = $arrival; 
+            $_SESSION['departure'] = $departure;
+            $_SESSION['id_equipment'] = $id_equipment; 
+            $_SESSION['id_location'] = $id_location; 
+            $_SESSION['length'] = $length;
+            $_SESSION['option_borne'] = $option_borne;
+            $_SESSION['option_discoclub'] = $option_discoclub;
+            $_SESSION['option_activities'] = $option_activities;
+            $_SESSION['rate'] = $rate;
         }
 
-        
-
-
     }
+}
+
+if (isset($_POST['book'])){
+
+    $arrival = $_SESSION['arrival'];
+    $departure = $_SESSION['departure'];
+    $length = $_SESSION['length'];
+    $option_borne = $_SESSION['option_borne'];
+    $option_discoclub = $_SESSION['option_discoclub'];
+    $option_activities = $_SESSION['option_activities'];
+    $rate = $_SESSION['rate'];
+    $id_user = $_SESSION['id'];
+    $id_equipment = $_SESSION['id_equipment'];
+    $id_location = $_SESSION['id_location'];
+    
+    // booking in BDD
+    $booking = new Reservations ();
+    $booking->Booking("$arrival", "$departure", "$length", "$option_borne", "$option_discoclub", "$option_activities", "$rate", "$id_user", "$id_location", "$id_equipment");
+
+    unset($_SESSION['arrival']);
+    unset($_SESSION['departure']);
+    unset($_SESSION['length']);
+    unset($_SESSION['option_borne']);
+    unset($_SESSION['option_discoclub']);
+    unset($_SESSION['option_activities']);
+    unset($_SESSION['rate']);
+    unset($_SESSION['id_equipment']);
+    unset($_SESSION['id_location']);
+
 }
 
 ?>
