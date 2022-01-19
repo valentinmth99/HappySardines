@@ -14,9 +14,10 @@
 
             <section class="container">
 
-                <h2>Camping<h2>
+                <h1>Camping <br>
 
-                <h1>Happy Sardines</h1>
+                    Happy Sardines
+                </h1>
                 
                 <p>
 
