@@ -27,7 +27,7 @@ require('../controller/compteController.php');
         
                 <section class="container">
 
-                    <div class="signin">
+                    <div class="box">
 
                         <div><h2 class="boxtitle">J'ai déjà un compte</h2></div>
 
@@ -44,12 +44,12 @@ require('../controller/compteController.php');
                         </form>
                     </div>
 
-                    <div class="suscribe">
+                    <div class="box">
 
-                        <h2 class="boxtitle">Je créé un compte</h2>
+                        <div><h2 class="boxtitle">Je créé un compte</h2><div>
 
                         <div class="textbox">Je peux réserver un séjour chez Happy Sardines.</div>
-                        <div class="textbox">Je peux consulter mes réservations.</div>
+                        <div class="textbox">Je peux consulter et modifier mes réservations.</div>
                         <div class="textbox">Je peux consulter et modifier mes informations.</div>
 
                         <form action="compte.php" method="post"><input type="submit" name="suscribe" class="usersubmit" value="Inscription"></form>
@@ -67,7 +67,7 @@ require('../controller/compteController.php');
 
             <?php if(isset($_SESSION['login'])) { ?> 
             
-            <section class="connected">
+            <section class="container">
 
                 <div class="infosbox">
 

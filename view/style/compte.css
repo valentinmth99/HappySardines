@@ -1,13 +1,90 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+    background: linear-gradient(319deg, #438dfffc, transparent);
+}
 
+main {
+    display: block;
+}
 
 .container {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     justify-content: space-around;
+    margin-top: 150px;
+    text-shadow: 1px 1px black;
 }
 
-.signin {
-    display:flex;
-    flex-direction:column;
+form {
+    width:100%;
+    text-align:center;
+}
+   
+fieldset {
+    padding:0 20px 20px 20px;
+    margin-bottom:10px;
+    border:1px solid #DF3F3F;
+}
+   
+legend {
+    color:#DF3F3F;
+    font-weight:bold
+}
+   
+label {
+    margin-top: 10px;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+   
+label.inline {
+    display:inline;
+    margin-right:50px;
+
+}
+   
+   
+input {
+    background-color:#FFF3F3;
+    padding:3px;
+    border:1px solid #F5C5C5;
+    border-radius:5px;
+    width:200px;
+    box-shadow:1px 1px 2px #C0C0C0 inset;
+}
+   
+select {
+    margin-top:10px;
+}
+   
+
+input[type=submit] {
+    width: 100px;
+    margin-left: 5px;
+    box-shadow: 1px 1px 1px #d83f3d;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+
+.box {
+    background-color: #f5a80bcc;
+    border-radius: 20px;
+    padding: 20px;
+    width:20%;
+}
+
+
+h2 {
+    text-align:center;
+    font-size: 30px;
+}
+
+.textbox {
+    margin-bottom:5px;
 }
 
