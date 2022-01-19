@@ -283,7 +283,7 @@ class Reservations {
 
     // FONCTION UPDATE BOOKING 
 
-    public function UpdateBooking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_location, $id_equipment){
+    public function UpdateBooking($arrival, $departure, $length, $option_borne, $option_discoclub, $option_activities, $rate, $id_user, $id_location, $id_equipment){
 
         $id_reservation = $_SESSION['id_reservation'];
 
@@ -295,6 +295,7 @@ class Reservations {
             'option_discoclub'=>$option_discoclub,
             'option_activities'=>$option_activities,
             'rate'=>$rate,
+            'id_user'=>$id_user,
             'id_location'=>$id_location,
             'id_equipment'=>$id_equipment,
         ];
@@ -307,8 +308,9 @@ class Reservations {
         option_discoclub = :option_discoclub, 
         option_activities = :option_activities, 
         rate = :rate, 
+        id_user = :id_user,
         id_location = :id_location, 
-        id_equipment = :id_equipment, 
+        id_equipment = :id_equipment 
         WHERE id ='".$id_reservation."'";
         $updatebooking = $this->connexion->prepare($query);
         $updatebooking->execute($data);
