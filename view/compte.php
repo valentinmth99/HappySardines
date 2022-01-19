@@ -69,7 +69,7 @@ require('../controller/compteController.php');
             
             <section class="container">
 
-                <div class="infosbox">
+                <div class="box">
 
                     <div><h2 class="boxtitle"> Vos informations </h2></div>
 
@@ -98,7 +98,7 @@ require('../controller/compteController.php');
 
                 </div>
 
-                <div class="reservationsbox">
+                <div class="box">
 
                     <div><h2 class="boxtitle"> Vos réservations </h2></div>
 
