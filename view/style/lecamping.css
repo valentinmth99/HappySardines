@@ -1,0 +1,32 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+    background: linear-gradient(319deg, #438dfffc, transparent);
+    
+}
+
+main {
+    display: block;
+    width:70%;
+    margin:auto;
+    color: white;
+    text-shadow: 1px 1px black;
+    text-align:center;
+}
+
+h1 {
+    margin: 20px 0;
+    color: #fff;
+    font-size: 8vh;
+    margin-top: 80px;
+}
+
+
+
+
+
+
+
+

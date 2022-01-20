@@ -23,7 +23,7 @@
                     <ul class="nav-tabs">
                         <li class="nav-tab"><a href="index.php">Accueil</a></li>
                         <li class="nav-tab"><a href="view/compte.php">Mon Compte</a></li>
-                        <li class="nav-tab"><a href="view/camping.php">Le Camping</a></li>
+                        <li class="nav-tab"><a href="view/lecamping.php">Le Camping</a></li>
                         <li class="nav-tab"><a href="view/reservations.php">Réservations</a></li>
                         <li class="nav-tab"><a href="view/tarif.php">Tarifs</a></li>
                         <li class="nav-tab"><a href="view/contacts.php">Contacts</a></li>
