@@ -337,10 +337,26 @@ class Reservations {
 
     }
 
+    // SUPPRIME LA TABLE EPHEMERE PERMETTANT LE CALCUL DES PLACES DISPOS
+
     public function DropTable() {
         $query = " DROP TABLE IF EXISTS unavailable_space";
         $drop_table = $this->connexion->prepare($query);
         $drop_table->execute();
+    }
+
+
+
+    // SELECTIONNE LES RESERVATIONS SELON LE PLANNING QUE LADMIN SOUHAITE AFFICHER
+
+    public function getReservationsPlanning () {
+        $query = "SELECT * FROM reservations WHERE id_location = '".$_POST['id_location']."'" ;
+        $get_reservations = $bdd->prepare($query);
+        $get_reservations->setFetchMode(PDO::FETCH_ASSOC);
+        $get_reservations->execute();
+
+        $assoc = $get_reservations->fetchAll();
+
     }
 
 

@@ -6,8 +6,8 @@ class Month {
     public $days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
     private $months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    private $month;
-    private $year;
+    public $month;
+    public $year;
 
 
     /** Month constructor
@@ -16,18 +16,16 @@ class Month {
     * @throws Exception
     */
 
-    public function __construct(?int $month = null, ?int $year = null) 
+    public function __construct($month = null,$year = null) 
     {
 
-        if ($month === null) {
+        if ($month === null || $month < 1 || $month > 12 ) {
             $month = intval(date('m'));
         }
 
         if ($year === null) {
             $year = intval(date('Y'));
         }
-        
-        $month = $month % 12 ;
 
         if ($year < 1970 ) 
         {
@@ -47,7 +45,18 @@ class Month {
 
     public function toString (): string {
         return $this->months[$this->month-1] .' '. $this->year;
+    
     }
+
+    public function currentMonth($month): int {
+        return $this->$months[$this->month-1];
+    }
+
+    public function currentYear($year): int {
+        return $this->$year;
+    }
+
+
 
     /**
     * Retourne le premier jour du mois
@@ -82,12 +91,48 @@ class Month {
     * @return bool
     */
 
-
-
-
     public function withinMonth ($date): bool {
         return $this->getStartingDay()->format('Y-m') === $date->format('Y-m');
     }
+
+    /**
+    * Renvoie le mois suivant
+    * @return Month
+    */
+
+    public function nextMonth (): Month {
+        $month = $this->month + 1;
+        $year = $this->year;
+        if ($month > 12) {
+            $month = 1;
+            $year +=1;
+        }
+
+        return new Month($month, $year);
+        
+    }
+
+    /**
+    * Renvoie le mois précédent
+    * @return Month
+    */
+
+    public function previousMonth (): Month {
+        $month = $this->month - 1;
+        $year = $this->year;
+        if ($month < 1) {
+            $month = 12;
+            $year -=1;
+        }
+
+        return new Month($month, $year);
+        
+    }
+
+
+
+
+
 
 
 
