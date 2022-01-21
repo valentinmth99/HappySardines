@@ -11,11 +11,12 @@
 
         <main>
 
-            <h1> Découvrez le Camping Happy Sardines ! </h1>
+            <h1> Découvrez le Camping<br>Happy Sardines ! </h1>
 
             <section class="flexbox_images">
 
                 <div><a href="#pins"><img src="assets/pins.JPG" id="pins_flex_image" alt="les_pins"></a></div>
+
                 <div class="under_flex">
                     <div><a href="#plage"><img src="assets/laplage.JPG"  class="flex_image" alt="la_plage"></a></div>
                     <div><a href="#maquis"><img src="assets/maquis.JPG" class="flex_image"alt="le_maquis"></a></div>
@@ -25,9 +26,11 @@
 
             <section class="flex_descriptions">
 
-                <div class="description" id="#plage">
+                <h2 id="plage">La Plage</h2>
 
-                    <h2>La Plage</h2>
+                <div class="description">
+
+                    
 
                     <div><img src="assets/laplage2.JPG" alt="la_plage_2" class="desc_image"></div>
 
@@ -46,9 +49,11 @@
                 
                 </div>
 
+                <h2 id="pins">Les Pins</h2>
+
                 <div class="description" id="#pins">
 
-                    <h2>Les Pins</h2>
+                    
 
                     <div><img src="assets/pins2.JPG" alt="pins_2" class="desc_image"></div>
 
@@ -67,9 +72,11 @@
                 
                 </div>
 
-                <div class="description" id="#maquis">
+                <h2 id="maquis">Le Maquis</h2>
 
-                    <h2>Le Maquis</h2>
+                <div class="description">
+
+                    
 
                     <div><img src="assets/maquis2.PNG" alt="maquis_2" class="desc_image"></div>
 

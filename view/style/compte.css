@@ -56,29 +56,39 @@ input {
     padding:3px;
     border:1px solid #F5C5C5;
     border-radius:5px;
-    width:200px;
+    max-width:100%;
+    width:80%;
     box-shadow:1px 1px 2px #C0C0C0 inset;
+
 }
    
 select {
     margin-top:10px;
 }
-   
-
-input[type=submit] {
-    width: 100px;
-    margin-left: 5px;
-    box-shadow: 1px 1px 1px #d83f3d;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
 
 .box {
     background-color: #f5a80bcc;
     border-radius: 20px;
     padding: 20px;
     width:30%;
+    position:relative;
+    text-align:center;
+}
+   
+
+.button {
+    margin-top:40px;
+}
+
+input[type=submit] {
+    width: 100px;
+    margin-left: 5px;
+    box-shadow: 1px 1px 1px #d83f3d;
+    cursor: pointer;
+    position:absolute;
+    bottom:10px;
+    left: 25%;
+    right: 25%;
 }
 
 
@@ -89,6 +99,10 @@ h2 {
 
 .textbox {
     margin-bottom:5px;
+    font-size:18px;
+    margin-bottom:5px;
     
 }
+
+
 

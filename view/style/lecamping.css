@@ -1,9 +1,10 @@
 html, body {
     margin: 0;
-    height: 100%;
+    height: auto;
     width: 100%;
     color: white;
     background: linear-gradient(319deg, #438dfffc, transparent);
+    background-repeat:none;
     
 }
 
@@ -19,9 +20,64 @@ main {
 h1 {
     margin: 20px 0;
     color: #fff;
-    font-size: 8vh;
+    font-size: 6vh;
     margin-top: 80px;
 }
+
+.flexbox_images {
+    display: flex;
+    flex-direction:row;
+    padding-top:50px;
+    height:auto;
+    width:auto;
+}
+
+.flexbox_images {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+
+.under_flex {
+    display:flex;
+    flex-direction:column;
+    justify-content: space-around;
+}
+
+#pins_flex_image {
+    max-width:150%;
+    height:auto;
+    width:448px;
+    margin-right:10px;
+
+}
+
+.flex_image {
+    max-width:100%;
+    height:auto;
+    width:400px;
+}
+
+.flex_descriptions {
+    display:flex;
+    flex-direction:column;
+}
+
+.description {
+    display:flex;
+    flex-direction:row;
+}
+
+.desc_image {
+    height:auto;
+    width:300px;
+}
+
+
+
+
+
+
 
 
 

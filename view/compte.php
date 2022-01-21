@@ -39,7 +39,7 @@ require('../controller/compteController.php');
                             <div><label for="password" class="userlabel">Mot de passe</label></div>
                             <div><input type="password" class="userinput" name="password"></div>
 
-                            <div><input type="submit" name="connexion" class="usersubmit" value="Se connecter"></div>
+                            <div class="button"><input type="submit" name="connexion" class="usersubmit" value="Se connecter"></div>
 
                         </form>
                     </div>
@@ -52,7 +52,7 @@ require('../controller/compteController.php');
                         <div class="textbox">Je peux consulter et modifier mes réservations.</div>
                         <div class="textbox">Je peux consulter et modifier mes informations.</div>
 
-                        <form action="compte.php" method="post"><input type="submit" name="suscribe" class="usersubmit" value="Inscription"></form>
+                        <div class="button"><form action="compte.php" method="post"><input type="submit" name="suscribe" class="usersubmit" value="Inscription"></form></div>
 
 
                     </div>

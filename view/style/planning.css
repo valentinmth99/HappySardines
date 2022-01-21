@@ -1,0 +1,32 @@
+.planning__table {
+    width:80%;
+    height:80%;
+}
+
+.planning__table td {
+    padding: 10px;
+    border: 1px solid black;
+    vertical-align: top;
+    width: calc(100%7);
+    height:18%;
+
+}
+
+.planning__table--6weeks td {
+    height: 10%;
+}
+
+.planning__weekday {
+    font-weight: bold;
+    color: black;
+    font-size:1.2em;
+}
+
+.planning_day {
+    font-size:1.3em;
+}
+
+.planning__othermonth .planning__day {
+    opacity:0.2;
+
+}
