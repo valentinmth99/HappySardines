@@ -8,6 +8,7 @@ class Month {
     private $months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     public $month;
     public $year;
+    private $id_location;
 
 
     /** Month constructor
@@ -47,16 +48,6 @@ class Month {
         return $this->months[$this->month-1] .' '. $this->year;
     
     }
-
-    public function currentMonth($month): int {
-        return $this->$months[$this->month-1];
-    }
-
-    public function currentYear($year): int {
-        return $this->$year;
-    }
-
-
 
     /**
     * Retourne le premier jour du mois

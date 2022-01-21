@@ -1,7 +1,15 @@
 <?php 
 session_start();
-include ('classes/class_reservations.php');
+require ('classes/class_reservations.php');
 require ('classes/class_user.php');
+require ('bdd.php');
 
-$test = new Reservations;
-$test->CheckAvailable();
+$date = new Reservations();
+$date->BetweenDates();
+
+
+
+
+
+
+?>

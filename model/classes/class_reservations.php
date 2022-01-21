@@ -2,7 +2,7 @@
 
 class Reservations {
 
-    public $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
+    public $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub, $id_reservation;
     public $arrival, $departure, $length, $rate, $connexion, $equipment, $location, $substraction;
     private $equipment_space;
 
@@ -37,8 +37,6 @@ class Reservations {
         return $length;
 
     }
-
-
 
 
     // FONCTION LISTE DES RESERVATIONS D'UN USER SUR SON COMPTE
@@ -104,6 +102,8 @@ class Reservations {
         $this->arrival = $fetch_booking['arrival'];
         $this->departure = $fetch_booking['departure'];
         $this->rate = $fetch_booking['rate'];
+
+
         $_SESSION['id_reservation'] = $fetch_booking['id'];
 
         if ($fetch_booking['id_equipment']=='1') {
@@ -173,6 +173,8 @@ class Reservations {
         $consultall->execute();
 
         $consultallresult =$consultall->fetchAll();
+
+        var_dump($consultallresult);
 
     }
 
@@ -347,20 +349,37 @@ class Reservations {
 
 
 
-    // SELECTIONNE LES RESERVATIONS SELON LE PLANNING QUE LADMIN SOUHAITE AFFICHER
+    // LISTE LES JOURS DE RESERVATIONS ENTRE DEUX DATES POUR REMPLIR LE PLANNING
 
-    public function getReservationsPlanning () {
-        $query = "SELECT * FROM reservations WHERE id_location = '".$_POST['id_location']."'" ;
-        $get_reservations = $bdd->prepare($query);
-        $get_reservations->setFetchMode(PDO::FETCH_ASSOC);
-        $get_reservations->execute();
-
-        $assoc = $get_reservations->fetchAll();
-
-    }
-
-
-
+    public function BetweenDates () {
+        $query = "SELECT reservations.id, reservations.id_user, reservations.arrival, reservations.departure, reservations.id_location  FROM reservations INNER JOIN locations on locations.id = reservations.id_location WHERE locations.name ='".@$_GET['location']."'";
+        $request = $this->connexion->prepare($query);
+        $request->setFetchMode(PDO::FETCH_ASSOC);
+        $request->execute();
         
+        $assoc = $request->fetchAll();
 
+        var_dump($assoc) ;
+
+        foreach ($assoc as $result) {
+
+            $arrival = strtotime($result['arrival']);
+            $departure = strtotime($result['departure']);
+            $id_user = $result['id_user'];
+            $id_reservation = $result['id'];
+
+            for ($i = $arrival ; $i<= $departure; $i += 86400) {
+
+                $data = array(
+                    "id_reservation"=>$id_reservation,
+                    "id_user"=>$id_user,
+                    "date"=>date('Y-m-d', $i),
+                ) ;
+
+                var_dump($data);
+
+            }
+
+        }
+    }
 }
