@@ -361,6 +361,8 @@ class Reservations {
 
         var_dump($assoc) ;
 
+        $between_dates[] = array();
+
         foreach ($assoc as $result) {
 
             $arrival = strtotime($result['arrival']);
@@ -370,16 +372,15 @@ class Reservations {
 
             for ($i = $arrival ; $i<= $departure; $i += 86400) {
 
-                $data = array(
-                    "id_reservation"=>$id_reservation,
-                    "id_user"=>$id_user,
-                    "date"=>date('Y-m-d', $i),
-                ) ;
-
-                var_dump($data);
+                $between_dates[$i]['id_reservation'] = $id_reservation;
+                $between_dates[$i]['id_user'] = $id_user;
+                $between_dates[$i]['date'] = date("Y-m-d", $i);
 
             }
 
         }
+
+        var_dump($between_dates);
+        return $between_dates;
     }
 }
