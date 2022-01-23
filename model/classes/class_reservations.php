@@ -352,7 +352,11 @@ class Reservations {
     // LISTE LES JOURS DE RESERVATIONS ENTRE DEUX DATES POUR REMPLIR LE PLANNING
 
     public function BetweenDates()  {
-        $query = "SELECT reservations.id, reservations.id_user, reservations.arrival, reservations.departure, reservations.id_location  FROM reservations INNER JOIN locations on locations.id = reservations.id_location WHERE locations.name ='".@$_GET['location']."'";
+        $query = "SELECT reservations.id, reservations.id_user, reservations.arrival, reservations.departure, reservations.id_location, users.firstname, users.lastname 
+        FROM reservations 
+        INNER JOIN locations on locations.id = reservations.id_location 
+        INNER JOIN users on users.id = reservations.id_user
+        WHERE locations.name ='".@$_GET['location']."'";
         $request = $this->connexion->prepare($query);
         $request->setFetchMode(PDO::FETCH_ASSOC);
         $request->execute();
@@ -370,11 +374,15 @@ class Reservations {
             $departure = strtotime($assoc[$i]['departure']);
             $id_user = $assoc[$i]['id_user'];
             $id_reservation = $assoc[$i]['id'];
+            $lastname = $assoc[$i]['lastname'];
+            $firstname = $assoc[$i]['firstname'];
 
             for ($j = $arrival ; $j<= $departure; $j += 86400) {
 
                 $between_dates[$i][$j]['id_reservation'] = $id_reservation;
                 $between_dates[$i][$j]['id_user'] = $id_user;
+                $between_dates[$i][$j]['firstname'] = $firstname;
+                $between_dates[$i][$j]['lastname'] = $lastname;
                 $between_dates[$i][$j]['date'] = date("Y-m-d", $j);
 
             }
@@ -402,7 +410,7 @@ class Reservations {
 
                 if ( $result['date'] == $time ) {
 
-                    $result['id_reservation'];
+                    echo "<div> Réservation ".$result['id_reservation'].", de ".$result['firstname']." ".$result['lastname']."</div>";
 
 
                 }
