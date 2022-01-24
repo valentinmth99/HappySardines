@@ -13,6 +13,7 @@ class User {
     public $lastname;
     public $connexion;
     public $session;
+    private $admin;
 
     
     // DECLARATION DES METHODES 
@@ -44,9 +45,10 @@ class User {
             'firstname'=>$firstname,
             'lastname'=>$lastname,
             'password'=>md5($password),
+            'admin'=>'0',
         ];
 
-        $register = $this->connexion->prepare("INSERT into users (login, email, firstname, lastname, password) VALUES (:login, :email, :firstname, :lastname, :password)");
+        $register = $this->connexion->prepare("INSERT into users (login, email, firstname, lastname, password, admin) VALUES (:login, :email, :firstname, :lastname, :password, :admin)");
         $register->execute($data);
 
         $message = "Vous êtes inscrit.";
@@ -69,6 +71,7 @@ class User {
 
             $_SESSION['login'] = $login;
             $_SESSION['id'] = $connectresult[0]['id'];
+            $_SESSION['admin'] = $connectresult[0]['admin'];
             header('Location: compte.php?val="'.$connectresult[0]['login']."'");
         }
 

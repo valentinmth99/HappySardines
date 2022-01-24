@@ -1,4 +1,8 @@
-<html lang="fr">
+<?php
+
+session_start();
+
+?><html lang="fr">
     <head>
         <meta charset="utf-8">
         <title>Compte</title> 

@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+
+
+?>
+
 <html lang=fr>
     <head>
         <meta charset="utf-8">

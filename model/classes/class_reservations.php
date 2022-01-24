@@ -410,7 +410,7 @@ class Reservations {
 
                 if ( $result['date'] == $time ) {
 
-                    echo "<div> Réservation ".$result['id_reservation'].", de ".$result['firstname']." ".$result['lastname']."</div>";
+                    echo "<div> N° ".$result['id_reservation']." -".$result['firstname']." ".$result['lastname']."</div>";
 
 
                 }

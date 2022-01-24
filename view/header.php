@@ -1,6 +1,8 @@
 <?php
 
 
+
+
 ?>
 
 <head>
@@ -21,11 +23,13 @@
                 </label>
                 <div class="nav-container">
                     <ul class="nav-tabs">
-                        <li class="nav-tab"><a href="index.php">Accueil</a></li>
-                        <li class="nav-tab"><a href="view/compte.php">Mon Compte</a></li>
-                        <li class="nav-tab"><a href="view/lecamping.php">Le Camping</a></li>
-                        <li class="nav-tab"><a href="view/reservations.php">Réserver</a></li>
-                        <li class="nav-tab"><a href="view/tarifs.php">Tarifs</a></li>
+                        <li class="nav-tab"><a href="../index.php">Accueil</a></li>
+                        <li class="nav-tab"><a href="compte.php">Mon Compte</a></li>
+                        <li class="nav-tab"><a href="lecamping.php">Le Camping</a></li>
+                        <li class="nav-tab"><a href="reservations.php">Réserver</a></li>
+                        <li class="nav-tab"><a href="tarifs.php">Tarifs</a></li>
+                        <li class="nav-tab"><?php if (isset($_SESSION['admin']) == '1') { ?><a href="planning.php">Planning</a></li><?php } ?>
+                        <li class="nav-tab"><?php if (isset($_SESSION['admin']) == '1') { ?><a href="planning.php">Gestion tarifs</a></li><?php } ?>
                         <li class="nav-tab"><?php if(isset($_SESSION['login'])){?><a href="../model/deconnexion.php">Déconnexion</a><?php }?></li> 
                     </ul>
                 </div>

@@ -31,6 +31,8 @@ $currentyear = date('Y');
     <body>
         <main>
 
+            <?php require('header.php');?>
+
             <h1>Planning mensuel</h1>
 
             
