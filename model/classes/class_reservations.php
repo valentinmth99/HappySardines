@@ -166,9 +166,9 @@ class Reservations {
 
     // FONCTION ADMIN AFFICHER TOUTES RESERVATIONS 
 
-    public function ConsultAll(){
+    public function ConsultAllByLocation(){
 
-        $consultall = $this->connexion->prepare("SELECT * FROM reservations");
+        $consultall = $this->connexion->prepare("SELECT * FROM reservations where location ='".@$_GET['location']."'");
         $consultall->setFetchMode(PDO::FETCH_ASSOC);
         $consultall->execute();
 

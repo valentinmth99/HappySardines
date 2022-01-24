@@ -2,7 +2,7 @@
 
 session_start();
 
-require('../controller/reservationController.php')
+require('../controller/bookingController.php')
 
 ?>
 
@@ -80,7 +80,7 @@ require('../controller/reservationController.php')
                     else { ?>
 
                         <p> Vous devrez régler un total de <?php echo $rate ?> euros pour ce séjour. </p>
-                        <form action="reservations.php" method="post">
+                        <form action="reserver.php" method="post">
                         <input type="submit" name="book" value="Confirmer votre réservation" class="submitbtn">
                         </form>
                     

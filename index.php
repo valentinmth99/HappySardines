@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -13,6 +19,7 @@
                 <div class="logo-container">
                     <img class="logo" src="view/assets/logo.png" alt="Logo">
                 </div>
+                
                 <nav>
                     <input class="hidden" type="checkbox" id="menuToggle">
                         <label class="menu-btn" for="menuToggle">
@@ -26,11 +33,11 @@
                             <li class="nav-tab"><a href="index.php">Accueil</a></li>
                             <li class="nav-tab"><a href="view/compte.php">Mon Compte</a></li>
                             <li class="nav-tab"><a href="view/lecamping.php">Le Camping</a></li>
-                            <li class="nav-tab"><a href="view/reservations.php">Réserver</a></li>
+                            <li class="nav-tab"><?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '0') { ?><a href="view/reserver.php">Réserver</a> <?php } else { ?><a href="view/reservations.php">Réservations</a><?php } ?></li>
                             <li class="nav-tab"><a href="view/tarifs.php">Tarifs</a></li>
-                            <?php if (isset($_SESSION['admin']) == '1') { ?><li class="nav-tab"><a href="planning.php">Planning</a></li><?php } ?>
-                            <?php if (isset($_SESSION['admin']) == '1') { ?><li class="nav-tab"><a href="planning.php">Gestion tarifs</a></li><?php } ?>
-                            <?php if(isset($_SESSION['login'])){?><li class="nav-tab"><a href="../model/deconnexion.php">Déconnexion</a><?php }?></li> 
+                            <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1') { ?><li class="nav-tab"><a href="view/planning.php">Planning</a></li><?php } ?>
+                            <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1') { ?><li class="nav-tab"><a href="view/planning.php">Gestion tarifs</a></li><?php } ?>
+                            <?php if(isset($_SESSION['login'])){?><li class="nav-tab"><a href="model/deconnexion.php">Déconnexion</a><?php }?></li>
                         </ul>
                     </div>
                   

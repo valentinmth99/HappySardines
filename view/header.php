@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 ?>
 
 <head>
@@ -26,7 +23,7 @@
                         <li class="nav-tab"><a href="../index.php">Accueil</a></li>
                         <li class="nav-tab"><a href="compte.php">Mon Compte</a></li>
                         <li class="nav-tab"><a href="lecamping.php">Le Camping</a></li>
-                        <li class="nav-tab"><a href="reserver.php">Réserver</a></li>
+                        <li class="nav-tab"><?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '0') { ?><a href="reserver.php">Réserver</a> <?php } else { ?><a href="reservations.php">Réservations</a><?php } ?></li>
                         <li class="nav-tab"><a href="tarifs.php">Tarifs</a></li>
                         <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1') { ?><li class="nav-tab"><a href="planning.php">Planning</a></li><?php } ?>
                         <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1') { ?><li class="nav-tab"><a href="planning.php">Gestion tarifs</a></li><?php } ?>
