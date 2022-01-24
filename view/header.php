@@ -28,8 +28,8 @@
                         <li class="nav-tab"><a href="lecamping.php">Le Camping</a></li>
                         <li class="nav-tab"><a href="reserver.php">Réserver</a></li>
                         <li class="nav-tab"><a href="tarifs.php">Tarifs</a></li>
-                        <?php if (isset($_SESSION['admin']) == '1') { ?><li class="nav-tab"><a href="planning.php">Planning</a></li><?php } ?>
-                        <?php if (isset($_SESSION['admin']) == '1') { ?><li class="nav-tab"><a href="planning.php">Gestion tarifs</a></li><?php } ?>
+                        <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1') { ?><li class="nav-tab"><a href="planning.php">Planning</a></li><?php } ?>
+                        <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1') { ?><li class="nav-tab"><a href="planning.php">Gestion tarifs</a></li><?php } ?>
                         <?php if(isset($_SESSION['login'])){?><li class="nav-tab"><a href="../model/deconnexion.php">Déconnexion</a><?php }?></li> 
                     </ul>
                 </div>
