@@ -11,10 +11,6 @@ $start = $month->getStartingDay()->modify('last monday');
 $currentmonth = date('m');
 $currentyear = date('Y');
 
-$dates = new Reservations();
-$dates->BetweenDates();
-
-var_dump($dates);
 
 
 
@@ -22,6 +18,7 @@ var_dump($dates);
 ?>
 
 <html lang="fr">
+
     <head>
         <meta charset="utf-8">
         <title>Planning</title> 
@@ -72,7 +69,23 @@ var_dump($dates);
 
                                 <?php if ($i === 0 ) { ?> <div class="planning__weekday"><?php echo $day ; } ?></div>
 
-                                <div class="planning__day"><?php echo $date->format('d')?></div>
+                                <div class="planning__day">
+                            
+                                    <?php echo $date->format('d') ;?>
+                
+                                </div>
+
+                                <div> 
+                                    <?php 
+                                        $newdate = new Reservations;
+                                        $newdate->DisplayReservation($date);
+                                          
+                                    ?>
+                                </div>
+
+                                
+
+
                             </td>
 
                         <?php } ?>

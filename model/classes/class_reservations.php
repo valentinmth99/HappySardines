@@ -351,36 +351,70 @@ class Reservations {
 
     // LISTE LES JOURS DE RESERVATIONS ENTRE DEUX DATES POUR REMPLIR LE PLANNING
 
-    public function BetweenDates () {
-        $query = "SELECT reservations.id, reservations.id_user, reservations.arrival, reservations.departure, reservations.id_location  FROM reservations INNER JOIN locations on locations.id = reservations.id_location WHERE locations.name ='".@$_GET['location']."'";
+    public function BetweenDates()  {
+        $query = "SELECT reservations.id, reservations.id_user, reservations.arrival, reservations.departure, reservations.id_location, users.firstname, users.lastname 
+        FROM reservations 
+        INNER JOIN locations on locations.id = reservations.id_location 
+        INNER JOIN users on users.id = reservations.id_user
+        WHERE locations.name ='".@$_GET['location']."'";
         $request = $this->connexion->prepare($query);
         $request->setFetchMode(PDO::FETCH_ASSOC);
         $request->execute();
         
         $assoc = $request->fetchAll();
 
-        var_dump($assoc) ;
-
         $between_dates[] = array();
 
-        foreach ($assoc as $result) {
+        // var_dump($assoc);
 
-            $arrival = strtotime($result['arrival']);
-            $departure = strtotime($result['departure']);
-            $id_user = $result['id_user'];
-            $id_reservation = $result['id'];
 
-            for ($i = $arrival ; $i<= $departure; $i += 86400) {
+        for ($i = 0 ; isset($assoc[$i]) ; $i ++) {
 
-                $between_dates[$i]['id_reservation'] = $id_reservation;
-                $between_dates[$i]['id_user'] = $id_user;
-                $between_dates[$i]['date'] = date("Y-m-d", $i);
+            $arrival = strtotime($assoc[$i]['arrival']);
+            $departure = strtotime($assoc[$i]['departure']);
+            $id_user = $assoc[$i]['id_user'];
+            $id_reservation = $assoc[$i]['id'];
+            $lastname = $assoc[$i]['lastname'];
+            $firstname = $assoc[$i]['firstname'];
+
+            for ($j = $arrival ; $j<= $departure; $j += 86400) {
+
+                $between_dates[$i][$j]['id_reservation'] = $id_reservation;
+                $between_dates[$i][$j]['id_user'] = $id_user;
+                $between_dates[$i][$j]['firstname'] = $firstname;
+                $between_dates[$i][$j]['lastname'] = $lastname;
+                $between_dates[$i][$j]['date'] = date("Y-m-d", $j);
 
             }
 
         }
 
-        var_dump($between_dates);
+        // var_dump($between_dates);
+
         return $between_dates;
+    }
+
+    // AFFICHE LA RESERVATION DANS LE PLANNING 
+
+    public function DisplayReservation ($date) {
+
+        $get_between_dates = new Reservations;
+        $between_dates = $get_between_dates->BetweenDates();
+
+        $time = $date->format('Y-m-d');
+        $timestamp = strtotime($time);
+
+        for ($i = 0  ; isset($between_dates[$i]) ; $i ++) {
+
+            foreach ( $between_dates[$i] as $result) {
+
+                if ( $result['date'] == $time ) {
+
+                    echo "<div> Réservation ".$result['id_reservation'].", de ".$result['firstname']." ".$result['lastname']."</div>";
+
+
+                }
+            }
+        }
     }
 }
