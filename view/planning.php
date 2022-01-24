@@ -1,8 +1,14 @@
 <?php
 
+session_start();
+
 require('../model/classes/Month.php');
 require('../model/classes/class_reservations.php');
 require('../model/classes/class_user.php');
+require('../model/classes/class_admin.php');
+
+$check_admin = new Admin;
+$check_admin->CheckAdmin();
 
 
 $month = new Month($_GET['month'] ?? null, $_GET['year'] ?? null);
@@ -10,6 +16,8 @@ $start = $month->getStartingDay()->modify('last monday');
 
 $currentmonth = date('m');
 $currentyear = date('Y');
+
+
 
 
 
@@ -23,7 +31,6 @@ $currentyear = date('Y');
         <meta charset="utf-8">
         <title>Planning</title> 
         <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style/planning.css">
 
     </head>
@@ -83,6 +90,15 @@ $currentyear = date('Y');
                                         $newdate->DisplayReservation($date);
                                           
                                     ?>
+                                </div>
+
+                                <div>
+                                    <?php
+                                
+
+                                    ?>
+
+
                                 </div>
 
                                 

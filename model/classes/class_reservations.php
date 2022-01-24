@@ -415,6 +415,16 @@ class Reservations {
 
                 }
             }
+
+            
         }
+
+        return $between_dates;
     }
+
+    // AFFICHE LES EMPLACEMENTS RESTANTS DANS LE PLANNING
+
+ 
+
+    
 }

@@ -28,9 +28,9 @@
                             <li class="nav-tab"><a href="view/lecamping.php">Le Camping</a></li>
                             <li class="nav-tab"><a href="view/reservations.php">Réserver</a></li>
                             <li class="nav-tab"><a href="view/tarifs.php">Tarifs</a></li>
-                            <li class="nav-tab"><?php if (isset($_SESSION['admin']) == '1') { ?><a href="planning.php">Planning</a></li><?php } ?>
-                            <li class="nav-tab"><?php if (isset($_SESSION['admin']) == '1') { ?><a href="planning.php">Gestion tarifs</a></li><?php } ?>
-                            <li class="nav-tab"><?php if(isset($_SESSION['login'])){?><a href="../model/deconnexion.php">Déconnexion</a><?php }?></li> 
+                            <?php if (isset($_SESSION['admin']) == '1') { ?><li class="nav-tab"><a href="planning.php">Planning</a></li><?php } ?>
+                            <?php if (isset($_SESSION['admin']) == '1') { ?><li class="nav-tab"><a href="planning.php">Gestion tarifs</a></li><?php } ?>
+                            <?php if(isset($_SESSION['login'])){?><li class="nav-tab"><a href="../model/deconnexion.php">Déconnexion</a><?php }?></li> 
                         </ul>
                     </div>
                   
@@ -53,7 +53,7 @@
                     
                     et découvrez le coeur de la FRENCH RIVIERA.</br>
 
-                    Découvrez le site <a href="view/camping.php">ici</a>.
+                    Découvrez le site <a href="view/lecamping.php">ici</a>.
 
                 </p>
             </section>
