@@ -107,8 +107,6 @@ require('../controller/compteController.php');
                         $test->ListingUserBookings();
                     ?></div>
 
-                    
-                    
                 </div>
             </section>
 

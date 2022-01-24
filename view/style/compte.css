@@ -1,10 +1,9 @@
 html, body {
     margin: 0;
+    padding: 0;
     height: 100%;
     width: 100%;
-    color: white;
     background: linear-gradient(319deg, #438dfffc, transparent);
-    
 }
 
 main {
@@ -18,7 +17,6 @@ main {
     flex-direction: row;
     justify-content: space-around;
     margin-top: 150px;
-    text-shadow: 1px 1px black;
 }
 
 form {
@@ -26,40 +24,28 @@ form {
     text-align:center;
 }
    
-fieldset {
-    padding:0 20px 20px 20px;
-    margin-bottom:10px;
-    border:1px solid #DF3F3F;
-}
-   
-legend {
-    color:#DF3F3F;
-    font-weight:bold
-}
-   
 label {
     margin-top: 10px;
     display: block;
     margin-bottom: 5px;
     font-size: 18px;
+    color:rgb(36, 159, 168);
 }
    
 label.inline {
     display:inline;
     margin-right:50px;
-
 }
    
    
 input {
-    background-color:#FFF3F3;
+    background-color:rgb(255, 255, 255);
     padding:3px;
-    border:1px solid #F5C5C5;
+    border:1px solid rgb(36, 159, 168);
     border-radius:5px;
     max-width:100%;
     width:80%;
     box-shadow:1px 1px 2px #C0C0C0 inset;
-
 }
    
 select {
@@ -67,28 +53,31 @@ select {
 }
 
 .box {
-    background-color: #f5a80bcc;
+    background: rgb(223, 223, 223);
     border-radius: 20px;
     padding: 20px;
     width:30%;
     position:relative;
     text-align:center;
 }
-   
 
-.button {
-    margin-top:40px;
+.boxtitle {
+    color: white;
 }
 
 input[type=submit] {
-    width: 100px;
-    margin-left: 5px;
-    box-shadow: 1px 1px 1px #d83f3d;
+    background: linear-gradient(90deg, rgb(167, 167, 167), rgb(78, 78, 78));
+    color: white;
+    border: white solid;
+    border-radius: 6px;
+    font-size: 20px;
+    margin-top: 30px;
+    width: 10vw;
+}
+
+input[type=submit]:hover {
+    transform: scale(1.05);
     cursor: pointer;
-    position:absolute;
-    bottom:10px;
-    left: 25%;
-    right: 25%;
 }
 
 
@@ -101,7 +90,19 @@ h2 {
     margin-bottom:5px;
     font-size:18px;
     margin-bottom:5px;
-    
+    color: rgb(36, 159, 168);
+}
+
+table {
+    color: rgb(36, 159, 168);
+    border-radius: 10px;
+    border: 0;
+}
+
+td {
+    padding: 15px 15px 5px 15px;
+    border: 0;
+    font-size: 20px;
 }
 
 

@@ -10,6 +10,7 @@ require('../controller/reservationController.php')
     <head>
         <meta charset="utf-8">
         <title>Réservation</title>
+        <link rel="stylesheet" href="style/reservations.css">
     </head>
     <body>
 
@@ -35,10 +36,10 @@ require('../controller/reservationController.php')
                         <form action="reservations.php" method="post" class="styleform">
 
                             <label for="arrival">Date d'arrivée* :</label>
-                            <div><input type="date" name="arrival"></div>
+                            <div><input class="date" type="date" name="arrival"></div>
 
                             <label for="departure">Date de départ* :</label>
-                            <div><input type="date" name="departure"></div>
+                            <div><input class="date" type="date" name="departure"></div>
 
                             <label for="equipments">Tente ou camping-car* ?</label>
                             <div><select name="equipments" id="equipment-select">
@@ -56,14 +57,14 @@ require('../controller/reservationController.php')
 
                             <fieldset>
                                 <legend>Désirez-vous des options ?</legend>
-                                    <div><input type="checkbox" id="elec" name="option_borne">
-                                    <label for="option_borne">Borne électrique</label></div>
+                                    <input type="checkbox" id="elec" name="option_borne">
+                                    <label for="option_borne">Borne électrique</label>
 
-                                    <div><input type="checkbox" id="club" name="option_discoclub">
-                                    <label for="option_discoclub">Accès au Disco-Club</label></div>
+                                    <input type="checkbox" id="club" name="option_discoclub">
+                                    <label for="option_discoclub">Accès au Disco-Club</label>
 
-                                    <div><input type="checkbox" id="activities" name="option_activities">
-                                    <label for="option_activities">Accès aux activités</label></div>
+                                    <input type="checkbox" id="activities" name="option_activities">
+                                    <label for="option_activities">Accès aux activités</label>
                             </fieldset>
 
                             <input type="submit" name="calculate" value="Voir le tarif" class="submitbtn">
