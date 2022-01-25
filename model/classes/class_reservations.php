@@ -2,8 +2,8 @@
 
 class Reservations {
 
-    public $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub, $id_reservation;
-    public $arrival, $departure, $length, $rate, $connexion, $equipment, $location, $substraction;
+    public $id, $id_user, $id_habit, $id_location, $option_activities, $option_borne, $option_discoclub;
+    public $arrival, $departure, $length, $rate, $connexion, $equipment, $location, $id_reservation;
     private $equipment_space;
 
     public function __construct(){
@@ -298,6 +298,40 @@ class Reservations {
         $booking->execute($data);
         
         echo "Votre réservation est confirmée.";
+
+    }
+
+    public function ResearchReservations ($query) {
+
+        $research_reservations = $this->connexion->prepare($query);
+        $research_reservations->setFetchMode(PDO::FETCH_ASSOC);
+        $research_reservations->execute();
+    
+        $assoc = $research_reservations->fetchAll();
+
+        var_dump($assoc);
+
+        foreach ($assoc as $result) { echo "
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Réservation n°</th>
+                    <th>Arrivée</th>
+                    <th>Départ</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <
+
+        
+
+
+
+
+      
 
     }
 

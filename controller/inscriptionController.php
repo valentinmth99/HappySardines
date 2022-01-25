@@ -12,13 +12,13 @@ if (!empty($_POST)) {
 
     if (isset($_POST['suscribe'])) {
 
-        $login = trim($_POST['login']);
-        $email = trim($_POST['email']);
-        $firstname = trim(ucwords(strtolower($_POST['firstname'])));
-        $lastname = trim(ucwords(strtolower($_POST['lastname'])));
-        $checkemail = trim($_POST['checkemail']);
-        $checkpassword = trim($_POST['checkpassword']);
-        $password = trim($_POST['password']);
+        $login = htmlspecialchars(trim($_POST['login']));
+        $email = htmlspecialchars((trim($_POST['email']));
+        $firstname = htmlspecialchars(trim(ucwords(strtolower($_POST['firstname']))));
+        $lastname = htmlspecialchars(trim(ucwords(strtolower($_POST['lastname']))));
+        $checkemail = htmlspecialchars(trim($_POST['checkemail']));
+        $checkpassword = htmlspecialchars(trim($_POST['checkpassword']));
+        $password = htmlspecialchars(trim($_POST['password']));
 
 
         $valid = (boolean) true;

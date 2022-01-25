@@ -6,7 +6,7 @@ class User {
 
     
 
-    private $id;
+    public $id;
     public $login;
     public $email;
     public $firstname;
@@ -147,7 +147,8 @@ class User {
         echo "La nouvelle adresse email a été enregistrée.";
     }
 
-    
+
+
 
 
 
