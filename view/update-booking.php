@@ -10,7 +10,7 @@ require('../controller/update-bookingController.php')
     <head>
         <meta charset="utf-8">
         <title>Modifier votre réservation</title>
-        <link rel="stylesheet" href="style/reservations.css">
+        <link rel="stylesheet" href="style/reserver.css">
     </head>
     <body>
 
@@ -65,6 +65,10 @@ require('../controller/update-bookingController.php')
                                     <label for="option_activities">Accès aux activités</label>
                             </fieldset>
 
+                            <?php if(isset($err_field)){echo $err_field;} 
+                                  if(isset($err_date)){echo $err_date;}
+                                  if(isset($err_reservation)){echo $err_reservation;}?>
+                            <br>
                             <input type="submit" name="updatebooking" value="Modifier votre réservation" class="submitbtn">
 
                         </form>

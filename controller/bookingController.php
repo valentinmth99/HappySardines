@@ -58,7 +58,6 @@ if (!empty($_POST)) {
         if(empty($arrival) || empty($departure) || empty($equipment) || empty($location)) {
             $valid = false;
             $err_field = "Les champs avec (*) doivent être remplis.";
-            echo "Les champs avec (*) doivent être remplis.";
         }
 
         // Check if arrival date is at least one day after today
@@ -66,7 +65,6 @@ if (!empty($_POST)) {
         if($arrival < $today_date ) {
             $valid = false;
             $err_date = "La date d'arrivée ne peut être antérieure à celle du jour.";
-            echo "La date d'arrivée ne peut être antérieure à celle du jour.";
         }
 
         // Check if departure date is at least one day after arrival
@@ -74,15 +72,12 @@ if (!empty($_POST)) {
         elseif($arrival > $departure) {
             $valid = false;
             $err_date = "La date de départ ne peut pas être antérieure à l'arrivée.";
-            echo "La date de départ ne peut pas être antérieure à l'arrivée.";
         }
 
         elseif($arrival == $departure) {
             $valid = false;
             $err_date ="La réservation doit être au moins d'une nuit.";
-            echo "La réservation doit être au moins d'une nuit.";
         }
-
 
         $booking_id_location = new Reservations ();
         $id_location = $booking_id_location->GetIdLocation("$location");
@@ -121,9 +116,6 @@ if (!empty($_POST)) {
         $select_res->execute();
 
         $assoc = $select_res->fetchAll();
-
-        var_dump($assoc) ;
-
 
         if (!empty($assoc)) {
 
@@ -250,7 +242,6 @@ if (!empty($_POST)) {
             if ($substraction < 0) {
                 $valid = false;
                 $err_reservation = "Il n'y a plus de places disponibles dans le lieu choisi avec votre équipement pour cette période.";
-                echo " Plus de place dans le lieu choisi.";
             }
 
             // on supprime la table éphémère.;

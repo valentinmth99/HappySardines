@@ -9,7 +9,7 @@ require('../controller/cancel-bookingController.php');
     <head>
         <meta charset="utf-8">
         <title>Annuler votre réservation</title> 
-        <link rel="stylesheet" type="text/css" href="style/reservations.css">
+        <link rel="stylesheet" type="text/css" href="style/reserver.css">
     </head>
 
     <body>
@@ -18,7 +18,7 @@ require('../controller/cancel-bookingController.php');
 
         <main>
 
-            <div><h2 class="titre"> Annuler votre réservation </h2></div>
+            <div><h2 class="boxtitle"> Annuler votre réservation </h2></div>
 
                 <p class="intro">Êtes-vous sûr de vouloir annuler cette réservation ?</p>
 

@@ -37,28 +37,24 @@ if (isset($_POST)){
         if (empty($newlogin)) {
             $valid = false;
             $err_login = "Renseignez votre login.";
-            echo "Renseignez votre login.";
         }
 
         elseif (strlen(6>$newlogin)>20) {
             $valid = false;
             $err_login = "Le login doit contenir entre 6 et 20 caractères.";
             $login="";
-            echo "Le login doit contenir entre 6 et 20 caractères.";
         }
 
         elseif (!preg_match("#^[a-z0-9A-Z]+$#" ,$newlogin)) {
             $valid = false;
             $err_login = "Le login doit uniquement contenir des lettres minuscules et des chiffres.";
             $login="";
-            echo "Le login doit uniquement contenir des lettres minuscules et des chiffres. ";
         }
 
         elseif ($resultlog) {
             $valid = false;
             $err_login = "Ce login est déjà utilisé.";
             $login ="";
-            echo "Ce login est déjà utilisé.";
         }
 
 
@@ -67,27 +63,23 @@ if (isset($_POST)){
         if (empty($newfirstname)) {
             $valid = false;
             $err_firstname = "Renseignez votre prénom.";
-            echo "Renseignez votre prénom.";
         }
 
         elseif (!preg_match("#^[a-zA-Z]+$#", $newfirstname)) {
             $valid = false;
             $err_firstname ="Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
             $firstname ="";
-            echo "Votre prénom ne doit pas contenir de chiffres ou de caractères spéciaux.";
         }
 
         if (empty($newlastname)) {
             $valid = false;
             $err_lastname = "Renseignez votre nom.";
-            echo "Renseignez votre nom.";
         }
 
         elseif (!preg_match("#^[a-zA-Z]+$#", $newlastname)) {
             $valid = false;
             $err_lastname = "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
             $lastname ="";
-            echo "Votre nom ne doit pas contenir de chiffres ou de caractères spéciaux.";
         }
 
         // check PASSWORD  ------
@@ -101,11 +93,9 @@ if (isset($_POST)){
         if($resultpassword == false ) {
             $valid = false;
             $err_passwordinfos = "Le mot de passe est incorrect.";
-            echo "Le mot de passe est incorrect.";
         }
 
         if($valid==true) {
-
             $updateinfos_user = new User();
             $updateinfos_user->UpdateInfos("$newlogin", "$newfirstname", "$newlastname");
         }
@@ -134,40 +124,34 @@ if (!empty($_POST)){
         if(empty($password)) {
             $valid = false;
             $err_actualpassword = "Renseignez votre mot de passe actuel.";
-            echo "Renseignez votre mot de passe actuel.";
         }
 
         elseif($resultpassword == false) {
             $valid = false;
             $password = '';
             $err_actualpassword = "Le mot de passe actuel est incorrect.";
-            echo "Le mot de passe actuel est incorrect.";
         }
 
         if(empty($newpassword)) {
             $valid = false;
             $err_newpassword = "Renseignez votre nouveau mot de passe.";
-            echo "Renseignez votre nouveau mot de passe.";
         }
 
         elseif (strlen($newpassword)<8) {
             $valid = false;
             $newpassword ='';
             $err_newpassword ="Le mot de passe doit contenir au moins 8 caractères.";
-            echo "Le mot de passe doit contenir au moins 8 caractères.";
         }
 
         elseif(empty($checkpassword)) {
             $valid = false;
             $err_checkpassword = "Confirmez votre mot de passe.";
-            echo "Confirmez votre mot de passe.";
 
         }
 
         elseif($newpassword !== $checkpassword) {
             $valid = false;
             $err_passwords = "Les mots de passe ne correspondent pas.";
-            echo "Les mots de passe ne correspondent pas.";
         }
 
         if ($valid == true) {
@@ -203,35 +187,29 @@ if (!empty($_POST)) {
         if (empty($newemail)) {
             $valid=false;
             $err_email = "Renseignez l'email.";
-            echo "Renseignez l'email.";
-
         }
 
         elseif(filter_var($newemail, FILTER_VALIDATE_EMAIL) == false) {
             $valid=false;
             $err_email = "Votre email n'est pas au bon format";
             $email="";
-            echo "Votre email n'est pas au bon format";
         }
         
         elseif ($resultmail) {
             $valid = false;
             $err_email = "Cette adresse mail est déjà utilisée.";
             $email ="";
-            echo "Cette adresse mail est déjà utilisée.";
         }
 
         elseif (empty($checkemail)) {
             $valid = false;
             $err_checkemail = "Veuillez confirmer votre email.";
-            echo "Veuillez confirmer votre email.";
         }
 
         elseif ($checkemail !== $newemail) {
             $valid = false;
             $err_checkemail = "Les emails ne correspondent pas.";
             $checkemail = "";
-            echo "Les emails ne correspondent pas.";
         }
 
        // check PASSWORD  ------

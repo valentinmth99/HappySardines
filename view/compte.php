@@ -33,13 +33,15 @@ require('../controller/compteController.php');
 
                         <form action="compte.php" method="post">
 
-                            <div><label for="login" class="userlabel">Login</label></div>
-                            <div><input type="text" class="userinput" name="login"></div>
+                            <?php if(isset($err_login)){echo $err_login;}?>
+                            <div><label for="login">Login</label></div>
+                            <div><input type="text" name="login"></div>
 
-                            <div><label for="password" class="userlabel">Mot de passe</label></div>
-                            <div><input type="password" class="userinput" name="password"></div>
+                            <?php if(isset($err_password)){echo $err_password;} if(isset($err_connexion)){echo $err_connexion;}?>
+                            <div><label for="password">Mot de passe</label></div>
+                            <div><input type="password" name="password"></div>
 
-                            <div class="button"><input type="submit" name="connexion" class="usersubmit" value="Se connecter"></div>
+                            <input type="submit" name="connexion" value="Se connecter"></div>
 
                         </form>
                     </div>
@@ -52,7 +54,9 @@ require('../controller/compteController.php');
                         <div class="textbox">Je peux consulter et modifier mes réservations.</div>
                         <div class="textbox">Je peux consulter et modifier mes informations.</div>
 
-                        <div class="button"><form action="compte.php" method="post"><input type="submit" name="suscribe" class="usersubmit" value="Inscription"></form></div>
+                        <form action="compte.php" method="post">
+                            <input type="submit" name="suscribe" value="Inscription">
+                        </form>
 
 
                     </div>

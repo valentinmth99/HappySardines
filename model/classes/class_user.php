@@ -1,7 +1,5 @@
 <?php
 
-
-
 class User {
 
     
@@ -67,18 +65,17 @@ class User {
         $connectresult = $connect->fetchall();
 
         if($connectresult) {
-            echo "Vous êtes connecté.";
 
             $_SESSION['login'] = $login;
             $_SESSION['id'] = $connectresult[0]['id'];
             $_SESSION['admin'] = $connectresult[0]['admin'];
             header('Location: compte.php?val="'.$connectresult[0]['login']."'");
+
         }
 
         else {
             
-            echo "Le login et/ou le mot de passe est incorrect.";
-            $err_connexion = "Le login et/ou le mot de passe est incorrect.";
+            $connexion = 0;
             
         }
     }

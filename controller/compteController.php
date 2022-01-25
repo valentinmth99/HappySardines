@@ -18,19 +18,23 @@ if (!empty($_POST)){
         if (empty($login)) {
             $valid = false;
             $err_login = "Veuillez renseigner votre login.";
-            echo "Veuillez renseigner votre login.";
         }
 
         if (empty($password)) {
             $valid = false;
-            $err_login = "Veuillez renseigner votre mot de passe.";
-            echo "Veuillez renseigner votre mot de passe.";
+            $err_password = "Veuillez renseigner votre mot de passe.";
         }
 
         if($valid == true) {
 
             $connect_user = new User ;
             $connect_user->Connect("$login", "$password");
+
+            if($connexion == 0){
+
+                $err_connexion = "Le login et/ou le mot de passe sont incorrects.";
+
+            }
         }
 
     }

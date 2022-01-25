@@ -11,7 +11,7 @@ require('../controller/bookingController.php')
     <head>
         <meta charset="utf-8">
         <title>Réservation</title>
-        <link rel="stylesheet" href="style/reservations.css">
+        <link rel="stylesheet" href="style/reserver.css">
     </head>
 
     <body>
@@ -32,9 +32,9 @@ require('../controller/bookingController.php')
                             Remplissez le formulaire ci-dessous pour faire votre réservation. <br>
                             Votre séjour doit être d'une durée minimum d'une nuit. <br>
                         </p>
-
+                        
                         <div class="formbox">
-
+                            
                             <form action="reserver.php" method="post" class="styleform">
 
                                 <label for="arrival">Date d'arrivée* :</label>
@@ -71,6 +71,10 @@ require('../controller/bookingController.php')
                                         <label for="option_activities">Accès aux activités</label>
                                 </fieldset>
 
+                                <?php if(isset($err_field)){echo $err_field;} 
+                                      if(isset($err_date)){echo $err_date;}
+                                      if(isset($err_reservation)){echo $err_reservation;}?>
+                                <br>
                                 <input type="submit" name="calculate" value="Voir le tarif" class="submitbtn">
                             
                             </form>

@@ -77,7 +77,7 @@ class Reservations {
                 $location = 'Le Maquis';
             }
 
-            echo "<div><a href='vos-reservations.php?val=".$id_reservation."'> Votre séjour du $arrival au $departure en $equipment à l'emplacement $location</a></div>";
+            echo "<a class='bookinglinks' href='vos-reservations.php?val=".$id_reservation."'> ➤ Votre séjour du $arrival au $departure en $equipment à l'emplacement $location <br><br></a>";
 
             // AJOUTER LE LIEN VERS LE BAIL DETAILLER DE LA RESERVATION
 
