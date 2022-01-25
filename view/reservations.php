@@ -4,17 +4,20 @@ session_start();
 
 require('../model/classes/class_user.php');
 require('../model/classes/class_admin.php');
-require('../controller/reservationsController.php');
+require('../model/classes/class_reservations.php');
 
 $check_admin = new Admin;
 $check_admin->CheckAdmin();
+
+
+
 
 ?>
 
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Compte</title> 
+        <title>Réservations</title> 
         <link rel="stylesheet" type="text/css" href="style/compte.css">
     </head>
 
@@ -64,9 +67,32 @@ $check_admin->CheckAdmin();
 
                 <div class="box">
 
-                    <div><h2 class="boxtitle"> Détailss </h2></div>
+                    <div><h2 class="boxtitle"> Résultats de recherche </h2></div>
+
+                    <table border='1'>
+                        <thead>
+                            <tr>
+                                <th>Réservation n°</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Arrivée</th>
+                                <th>Départ</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php 
+                                $reservations_listing = new Reservations;
+                                $reservations_listing->ResearchReservations();
+                            ?>
+
+                        </tbody>
+
+                    </table>
+
 
                 </div>
+
             </section>
 
         
