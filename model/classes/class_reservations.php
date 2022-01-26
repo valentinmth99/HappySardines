@@ -352,7 +352,7 @@ class Reservations {
         
             $assoc = $research_reservations->fetchAll();
 
-            foreach ($assoc as $result) { 
+            foreach ($assoc as $result) {
 
                 $arrival_timestamp = strtotime($result['arrival']) ;
                 $arrival = date('d-m-Y', $arrival_timestamp);
@@ -526,9 +526,7 @@ class Reservations {
         
         $assoc = $get_details->fetchAll();
 
-        $_SESSION['id_reservation'] = $assoc['id'];
-
-        echo $_SESSION['id_reservation'];
+        $_SESSION['id_reservation'] = $assoc[0]['id'];
 
         foreach ($assoc as $result) { 
     
