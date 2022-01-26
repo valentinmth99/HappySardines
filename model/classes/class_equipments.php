@@ -26,7 +26,8 @@ class Equipments {
 
     public function CheckSize($equipment) {
 
-        $checksize = $this->connexion->prepare("SELECT size FROM equipments WHERE type = '".$equipment."'");
+        $query = "SELECT size FROM equipments WHERE type = '".$equipment."'";
+        $checksize = $this->connexion->prepare($query);
         $checksize->setFetchMode(PDO::FETCH_ASSOC);
         $checksize->execute();
 

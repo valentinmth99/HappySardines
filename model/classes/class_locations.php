@@ -33,7 +33,8 @@ class Locations {
 
     public function CheckSpaces($location){
 
-        $checkspaces = $this->connexion->prepare("SELECT spaces FROM locations WHERE name='".$location."'");
+        $query = "SELECT spaces FROM locations WHERE name='".$location."'";
+        $checkspaces = $this->connexion->prepare($query);
         $checkspaces->setFetchMode(PDO::FETCH_ASSOC);
         $checkspaces->execute();
 

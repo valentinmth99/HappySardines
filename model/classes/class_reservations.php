@@ -96,7 +96,8 @@ class Reservations {
 
 
         $id_user = $_SESSION['id'];
-        $get_booking = $this->connexion->prepare("SELECT id, arrival, departure, option_borne, option_discoclub, option_activities, rate, id_location, id_equipment FROM reservations WHERE reservations.id='".@$_GET['val']."'");
+        $query = "SELECT id, arrival, departure, option_borne, option_discoclub, option_activities, rate, id_location, id_equipment FROM reservations WHERE reservations.id='".@$_GET['val']."'";
+        $get_booking = $this->connexion->prepare($query);
         $get_booking->setFetchMode(PDO::FETCH_ASSOC);
         $get_booking->execute();
         $fetch_booking = $get_booking->fetch();
@@ -166,7 +167,8 @@ class Reservations {
     public function Cancel(){
 
         $id_reservation = $_SESSION['id_reservation'];
-        $cancel = $this->connexion->prepare("DELETE  FROM reservations WHERE reservations.id =$id_reservation");
+        $query = "DELETE  FROM reservations WHERE reservations.id =$id_reservation";
+        $cancel = $this->connexion->prepare($query);
         $cancel->execute();
 
         echo "Votre reservation a bien été annulée.";
@@ -177,13 +179,13 @@ class Reservations {
 
     public function ConsultAllByLocation(){
 
-        $consultall = $this->connexion->prepare("SELECT * FROM reservations where location ='".@$_GET['location']."'");
+        $query = "SELECT * FROM reservations where location ='".@$_GET['location']."'"
+        $consultall = $this->connexion->prepare($query);
         $consultall->setFetchMode(PDO::FETCH_ASSOC);
         $consultall->execute();
 
         $consultallresult =$consultall->fetchAll();
 
-        var_dump($consultallresult);
 
     }
 
@@ -191,9 +193,10 @@ class Reservations {
 
     public function CalculRate ($equipment, $option_borne, $option_discoclub, $option_activities, $length) {
 
-    // CALCUL PRIX TENTE/CAMPING CAR
+        // CALCUL PRIX TENTE/CAMPING CAR
 
-        $get_rate_equipment = $this->connexion->prepare("SELECT rate FROM equipments WHERE type = '".$equipment."'");    
+        $query = "SELECT rate FROM equipments WHERE type = '".$equipment."'";
+        $get_rate_equipment = $this->connexion->prepare($query);    
         $get_rate_equipment->setFetchMode(PDO::FETCH_ASSOC);
         $get_rate_equipment->execute();
 
@@ -201,11 +204,11 @@ class Reservations {
 
         $rate_equipment = intval($result_rate_equipment['rate']);
         
-    // CALCUL PRIX OPTIONS
+        // CALCUL PRIX OPTIONS
 
        if ($option_borne==1) {
-
-            $get_rate_option_1 = $this->connexion->prepare("SELECT rate from options WHERE id='1'");
+            $query_1 = "SELECT rate from options WHERE id='1'";
+            $get_rate_option_1 = $this->connexion->prepare($query_1);
             $get_rate_option_1->setFetchMode(PDO::FETCH_ASSOC);
             $get_rate_option_1->execute();
 
@@ -222,7 +225,8 @@ class Reservations {
 
         if ($option_discoclub==1) {
 
-            $get_rate_option_2 = $this->connexion->prepare("SELECT rate from options WHERE id='2'");
+            $query_2 = "SELECT rate from options WHERE id='2'";
+            $get_rate_option_2 = $this->connexion->prepare($query_2);
             $get_rate_option_2->setFetchMode(PDO::FETCH_ASSOC);
             $get_rate_option_2->execute();
 
@@ -240,7 +244,8 @@ class Reservations {
 
         if ($option_activities==1) {
 
-            $get_rate_option_3 = $this->connexion->prepare("SELECT rate from options WHERE id='3'");
+            $query_3 = "SELECT rate from options WHERE id='3'";
+            $get_rate_option_3 = $this->connexion->prepare($query_3);
             $get_rate_option_3->setFetchMode(PDO::FETCH_ASSOC);
             $get_rate_option_3->execute();
 
@@ -266,7 +271,8 @@ class Reservations {
 
     public function GetIdLocation($location){
 
-        $get_id_location = $this->connexion->prepare("SELECT id FROM locations WHERE name = '".$location."'");
+        $query = "SELECT id FROM locations WHERE name = '".$location."'";
+        $get_id_location = $this->connexion->prepare($query);
         $get_id_location->setFetchMode(PDO::FETCH_ASSOC);
         $get_id_location->execute();
         $fetch_id_location = $get_id_location->fetch();
@@ -276,7 +282,8 @@ class Reservations {
 
     public function GetIdEquipment($equipment) {
 
-        $get_id_equipment = $this->connexion->prepare("SELECT id FROM equipments WHERE type = '".$equipment."'");
+        $query = "SELECT id FROM equipments WHERE type = '".$equipment."'";
+        $get_id_equipment = $this->connexion->prepare($query);
         $get_id_equipment->setFetchMode(PDO::FETCH_ASSOC);
         $get_id_equipment->execute();
         $fetch_id_equipment = $get_id_equipment->fetch();
@@ -302,8 +309,9 @@ class Reservations {
             'id_equipment'=>intval($id_equipment),
         ];
 
-        $booking = $this->connexion->prepare("INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_equipment) 
-        VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)");
+        $query = "INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_equipment) 
+        VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)"
+        $booking = $this->connexion->prepare($query);
         $booking->execute($data);
         
         echo "Votre réservation est confirmée.";
