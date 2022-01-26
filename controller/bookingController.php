@@ -69,12 +69,12 @@ if (!empty($_POST)) {
 
         // Check if departure date is at least one day after arrival
 
-        elseif($arrival > $departure) {
+        elseif(!empty($arrival) && !empty ($departure) && $arrival > $departure) {
             $valid = false;
             $err_date = "La date de départ ne peut pas être antérieure à l'arrivée.";
         }
 
-        elseif(!empty($arrival) && !empty($arrival == $departure) {
+        elseif(!empty($arrival) && !empty ($departure) && ($arrival == $departure)) {
             $valid = false;
             $err_date ="La réservation doit être au moins d'une nuit.";
         }

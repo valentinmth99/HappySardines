@@ -71,18 +71,14 @@ if (!empty($_POST)) {
             $err_field = "Les champs avec (*) doivent être remplis.";
         }
 
-        // Check if arrival date is at least one day after today
-
-        elseif($arrival < $today_date ) {
+        elseif(!empty($arrival) && !empty ($departure) && $arrival > $departure) {
             $valid = false;
-            $err_date = "La date d'arrivée ne peut être antérieure à celle du jour.";
+            $err_date = "La date de départ ne peut pas être antérieure à l'arrivée.";
         }
-        
-        // Check if departure date is at least one day after arrival
 
-        if($departure < $tomorrow_date) {
+        elseif(!empty($arrival) && !empty ($departure) && ($arrival == $departure)) {
             $valid = false;
-            $err_date = "La réservation doit être minimum de deux jours et une nuit.";
+            $err_date ="La réservation doit être au moins d'une nuit.";
         }
 
         // check if available spaces
