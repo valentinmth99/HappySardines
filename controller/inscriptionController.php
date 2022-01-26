@@ -37,10 +37,9 @@ if (!empty($_POST)) {
             $err_login = "Renseignez votre login.";
         }
 
-        elseif (strlen(6<$login) || strlen($login>20)) {
+        elseif ( strlen($login)<6 || strlen($login)>20) {
             $valid = false;
             $err_login = "Le login doit contenir entre 6 et 20 caractères.";
-            $login="";
         }
 
         elseif (!preg_match("#^[a-z0-9A-Z]+$#" ,$login)) {
