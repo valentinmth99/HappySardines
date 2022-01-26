@@ -315,6 +315,7 @@ class Reservations {
         $param = array();
 
         if (isset($_POST['research'])) {
+            
     
             $arrival = htmlspecialchars($_POST['arrival']);
             $departure = htmlspecialchars($_POST['departure']);
@@ -334,11 +335,16 @@ class Reservations {
 
             $query = "SELECT reservations.id, reservations.arrival, reservations.departure, users.firstname, users.lastname from reservations
             INNER JOIN users on users.id = reservations.id_user ";
-            $query2 = "ORDER BY reservations.id DESC";
+            $query2 = " ORDER BY reservations.id DESC";
+
+            if(!count($whereParts)) {
+                $query .= $query2;
+            }
     
             if(count($whereParts)) {
-                $query .= "WHERE " . implode('AND ', $whereParts). $query2;
+                $query .= "WHERE " . implode('AND ', $whereParts).  $query2;
             }
+      
 
             $research_reservations = $this->connexion->prepare($query);
             $research_reservations->setFetchMode(PDO::FETCH_ASSOC);
