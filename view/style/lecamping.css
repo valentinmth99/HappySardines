@@ -2,9 +2,8 @@ html, body {
     margin: 0;
     height: auto;
     width: 100%;
-    color: white;
     background: linear-gradient(319deg, #438dfffc, transparent);
-    background-repeat:none;
+    background-repeat:no-repeat;
     
 }
 
@@ -12,9 +11,13 @@ main {
     display: block;
     width:70%;
     margin:auto;
-    color: white;
     text-shadow: 1px 1px black;
     text-align:center;
+    padding-bottom: 5vh;
+}
+
+.flex_descriptions {
+    padding-top: 3vh;
 }
 
 h1 {
@@ -24,23 +27,22 @@ h1 {
     margin-top: 80px;
 }
 
+h2 {
+    color:rgb(63, 182, 182);
+    text-shadow: 1px 1px grey;
+}
+
+#camping_name {
+    font-size: 6vh;
+    color: rgb(63, 182, 182);
+}
+
 .flexbox_images {
     display: flex;
     flex-direction:row;
     padding-top:50px;
     height:auto;
     width:auto;
-}
-
-.flexbox_images {
-    display: flex;
-    flex-direction:row;
-    justify-content: space-around;
-}
-
-.under_flex {
-    display:flex;
-    flex-direction:column;
     justify-content: space-around;
 }
 
@@ -49,7 +51,6 @@ h1 {
     height:auto;
     width:448px;
     margin-right:10px;
-
 }
 
 .flex_image {
@@ -58,14 +59,10 @@ h1 {
     width:400px;
 }
 
-.flex_descriptions {
-    display:flex;
-    flex-direction:column;
-}
-
 .description {
-    display:flex;
-    flex-direction:row;
+    color:rgb(63, 182, 182);
+    text-shadow: 1px 1px white;
+    padding-top: 5vh;
 }
 
 .desc_image {

@@ -15,7 +15,7 @@ session_start();
 
         <main>
 
-            <h1> Découvrez le Camping<br>Happy Sardines ! </h1>
+            <h1> Découvrez le Camping<br><span id="camping_name">Happy Sardines</span> ! </h1>
 
             <section class="flexbox_images">
 
@@ -30,75 +30,32 @@ session_start();
 
             <section class="flex_descriptions">
 
-                <h2 id="plage">La Plage</h2>
-
-                <div class="description">
-
-                    
+                <h2 id="plage">La Plage</h2>                    
 
                     <div><img src="assets/laplage2.JPG" alt="la_plage_2" class="desc_image"></div>
 
                     <div class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Placerat hendrerit tempor rhoncus neque pharetra a donec molestie primis turpis viverra pellentesque dignissim vel bibendum. 
-                        Consequat ipsum eget eu cursus aliquam viverra laoreet placerat morbi augue netus mauris ornare gravida. Nisl primis tortor 
-                        semper morbi erat lacus duis gravida curabitur cursus. Rhoncus id cursus aptent vitae hendrerit eros curabitur nam nibh dignissim. 
-                        Justo vivamus praesent eu integer suscipit pharetra primis facilisis vitae.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Placerat hendrerit tempor rhoncus neque pharetra a donec molestie primis turpis viverra pellentesque dignissim vel bibendum. 
-                        Consequat ipsum eget eu cursus aliquam viverra laoreet placerat morbi augue netus mauris ornare gravida. Nisl primis tortor 
-                        semper morbi erat lacus duis gravida curabitur cursus. Rhoncus id cursus aptent vitae hendrerit eros curabitur nam nibh dignissim. 
-                        Justo vivamus praesent eu integer suscipit pharetra primis facilisis vitae.
+                        Venez vous installer au bord de l'eau, avec le bruit des vagues qui bercent votre sommeil. Ouh mais c'est cro mignon ! <br>
+                        Pouvoir aller piquer une tête en 30 secondes depuis son chez-soi, c'est quand même le pied !
                     </div>
-                
-                </div>
 
                 <h2 id="pins">Les Pins</h2>
-
-                <div class="description" id="#pins">
-
-                    
 
                     <div><img src="assets/pins2.JPG" alt="pins_2" class="desc_image"></div>
 
                     <div class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Placerat hendrerit tempor rhoncus neque pharetra a donec molestie primis turpis viverra pellentesque dignissim vel bibendum. 
-                        Consequat ipsum eget eu cursus aliquam viverra laoreet placerat morbi augue netus mauris ornare gravida. Nisl primis tortor 
-                        semper morbi erat lacus duis gravida curabitur cursus. Rhoncus id cursus aptent vitae hendrerit eros curabitur nam nibh dignissim. 
-                        Justo vivamus praesent eu integer suscipit pharetra primis facilisis vitae.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Placerat hendrerit tempor rhoncus neque pharetra a donec molestie primis turpis viverra pellentesque dignissim vel bibendum. 
-                        Consequat ipsum eget eu cursus aliquam viverra laoreet placerat morbi augue netus mauris ornare gravida. Nisl primis tortor 
-                        semper morbi erat lacus duis gravida curabitur cursus. Rhoncus id cursus aptent vitae hendrerit eros curabitur nam nibh dignissim. 
-                        Justo vivamus praesent eu integer suscipit pharetra primis facilisis vitae.
+                        Profitez d'un emplacement sous la protection des pins, qui vous garantiront ombre et fraîcheur. <br>
+                        Vous serez à proximité de toutes les commodités du camping, dans un milieu naturel ressourçant !
                     </div>
                 
-                </div>
-
-                <h2 id="maquis">Le Maquis</h2>
-
-                <div class="description">
-
-                    
+                <h2 id="maquis">Le Maquis</h2>                    
 
                     <div><img src="assets/maquis2.PNG" alt="maquis_2" class="desc_image"></div>
 
                     <div class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Placerat hendrerit tempor rhoncus neque pharetra a donec molestie primis turpis viverra pellentesque dignissim vel bibendum. 
-                        Consequat ipsum eget eu cursus aliquam viverra laoreet placerat morbi augue netus mauris ornare gravida. Nisl primis tortor 
-                        semper morbi erat lacus duis gravida curabitur cursus. Rhoncus id cursus aptent vitae hendrerit eros curabitur nam nibh dignissim. 
-                        Justo vivamus praesent eu integer suscipit pharetra primis facilisis vitae.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Placerat hendrerit tempor rhoncus neque pharetra a donec molestie primis turpis viverra pellentesque dignissim vel bibendum. 
-                        Consequat ipsum eget eu cursus aliquam viverra laoreet placerat morbi augue netus mauris ornare gravida. Nisl primis tortor 
-                        semper morbi erat lacus duis gravida curabitur cursus. Rhoncus id cursus aptent vitae hendrerit eros curabitur nam nibh dignissim. 
-                        Justo vivamus praesent eu integer suscipit pharetra primis facilisis vitae.
+                        Venez profiter de l'emplacement le plus diversifié en terme de paysages ! <br>
+                        Vous ne serez pas déçu. 
                     </div>
-                
-                </div>
-
         
             </section>
 

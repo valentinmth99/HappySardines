@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&family=Playfair+Display:ital,wght@1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap');
 
 main {
     text-align: center;
@@ -10,13 +10,11 @@ main {
 
 .liste_tarif {
     list-style: none;
-    font-style: 'Playfair Display';
     color: rgb(105, 105, 105);
     font-size: 20px;
 }
 
 .titre {
-    font-family: 'Luxurious Roman';
     padding-bottom: 1vh;
     padding-top: 1vh;
     font-size: 30px;
