@@ -5,7 +5,7 @@ session_start();
 ?><html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Compte</title> 
+        <title>Le Camping</title> 
         <link rel="stylesheet" type="text/css" href="style/lecamping.css">
     </head>
 

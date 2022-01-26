@@ -71,9 +71,9 @@ require('../controller/bookingController.php')
                                         <label for="option_activities">Accès aux activités</label>
                                 </fieldset>
 
-                                <?php if(isset($err_field)){echo $err_field;} 
-                                      if(isset($err_date)){echo $err_date;}
-                                      if(isset($err_reservation)){echo $err_reservation;}?>
+                                <?php if(isset($err_field)){echo "<div class='err_form'> $err_field<div>";} 
+                                      if(isset($err_date)){echo "<div class='err_form'> $err_date<div>";}
+                                      if(isset($err_reservation)){echo "<div class='err_form'> $err_reservation<div>";}?>
                                 <br>
                                 <input type="submit" name="calculate" value="Voir le tarif" class="submitbtn">
                             
@@ -83,13 +83,14 @@ require('../controller/bookingController.php')
 
                     else { ?>
 
-                        <p> Vous devrez régler un total de <?php echo $rate ?> euros pour ce séjour. </p>
-                        <form action="reserver.php" method="post">
+                        <p class="intro"> Vous devrez régler un total de <b><?php echo $rate ?></b> euros pour ce séjour. </p>
+                        <form action="confirm-booking.php" method="post">
                         <input type="submit" name="book" value="Confirmer votre réservation" class="submitbtn">
+                        <input type="submit" name="nobook" value="Retour" class="submitbtn">
                         </form>
-                    
-                    <?php } 
 
+                        <?php }
+ 
                 } 
                 
                 else { ?>

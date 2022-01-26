@@ -3,8 +3,7 @@ html, body {
     height: auto;
     width: 100%;
     background: linear-gradient(319deg, #438dfffc, transparent);
-    background-repeat:no-repeat;
-    
+    background-repeat: no-repeat;
 }
 
 main {

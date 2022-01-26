@@ -51,3 +51,13 @@ input[type=submit]:hover {
     transform: scale(1.05);
     cursor: pointer;
 }
+
+.err_form {
+    color: rgb(0, 0, 0);
+    font-weight:600;
+}
+
+p {
+    color: rgb(0, 0, 0);
+    font-weight:600;
+}

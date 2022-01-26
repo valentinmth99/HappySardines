@@ -313,8 +313,6 @@ class Reservations {
         VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)"
         $booking = $this->connexion->prepare($query);
         $booking->execute($data);
-        
-        echo "Votre réservation est confirmée.";
 
     }
 
@@ -414,8 +412,6 @@ class Reservations {
         WHERE id ='".$id_reservation."'";
         $updatebooking = $this->connexion->prepare($query);
         $updatebooking->execute($data);
-
-        echo "Votre réservation a bien été modifiée.";
 
     }
 

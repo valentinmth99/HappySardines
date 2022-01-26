@@ -17,7 +17,8 @@ require('../controller/inscriptionController.php');
         <?php require('header.php') ?>
 
         <main>
-
+            
+            <?php if ($form_register == 1){ ?>
             <h1> Créer mon compte </h1>
 
             <div class="box">
@@ -58,6 +59,15 @@ require('../controller/inscriptionController.php');
 
                 </form>
             </div>
+            
+            <?php } else { ?>
+
+                <p id="success_message">Vous êtes inscrit avec succès, redirection en cours...</p>
+
+            <?php header("Refresh: 3 ; url=compte.php"); } ?>
+            
+
+    
         </main>
 
      <!-- REQUIRE LE FOOTER -->

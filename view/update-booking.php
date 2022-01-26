@@ -22,8 +22,9 @@ require('../controller/update-bookingController.php')
 
                 <h2 class="titre">MODIFIER VOTRE RÉSERVATION</h2>
 
-                <?php if(isset($_SESSION['login'])) { ?>
-
+                <?php if(isset($_SESSION['login'])) { 
+                    
+                    if($form_updatebooking == 1) { ?>
                     <p class="intro"> 
                         Remplissez le formulaire ci-dessous pour modifier votre réservation. <br>
                         Votre séjour doit être d'une durée minimum d'une nuit. <br>
@@ -65,14 +66,30 @@ require('../controller/update-bookingController.php')
                                     <label for="option_activities">Accès aux activités</label>
                             </fieldset>
 
-                            <?php if(isset($err_field)){echo $err_field;} 
-                                  if(isset($err_date)){echo $err_date;}
-                                  if(isset($err_reservation)){echo $err_reservation;}?>
+                            <?php if(isset($err_field)){echo "<div class='err_form'> $err_field<div>";} 
+                                  if(isset($err_date)){echo "<div class='err_form'> $err_date<div>";}
+                                  if(isset($err_reservation)){echo "<div class='err_form'> $err_reservation<div>";}?>
                             <br>
                             <input type="submit" name="updatebooking" value="Modifier votre réservation" class="submitbtn">
 
                         </form>
 
                     </div>
+                    <?php } 
+                    
+                    if ($form_updatebooking == 0) { ?>
 
-                <?php }  ?>
+                        <p class="intro">Votre réservation a bien été modifiée.</p>
+                    
+                    <?php  }
+
+                } ?>
+            </section>
+        </main>
+    
+        <!-- REQUIRE FOOTER -->
+    
+    </body>
+
+            
+

@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap');
 
 body {
-    
     margin: 0;
     height: 1000vh;
     width: 1000vh;
     color: white;
+}
 
+main {
+    background: linear-gradient(319deg, #438dfffc, transparent);
 }
 
 #section-flex {

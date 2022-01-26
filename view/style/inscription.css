@@ -72,3 +72,8 @@ h1 {
     font-weight:600;
 }
 
+#success_message {
+    font-size: 25px;
+    color: white;
+}
+

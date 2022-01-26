@@ -48,9 +48,7 @@ class User {
 
         $register = $this->connexion->prepare("INSERT into users (login, email, firstname, lastname, password, admin) VALUES (:login, :email, :firstname, :lastname, :password, :admin)");
         $register->execute($data);
-
-        $message = "Vous êtes inscrit.";
-        echo "Vous êtes inscrit.";
+    
     }
 
     //FUNCTION CONNECT ---------------------------------------------------------------------------------------
@@ -114,8 +112,6 @@ class User {
 
         $updateinfos->execute($data);
              
-        echo "Modification enregistrées avec succès.";
-        $message = "Modifications enregistrées avec succès.";
         $_SESSION['login'] = $newlogin;
   
     }
@@ -127,9 +123,6 @@ class User {
         $updatepassword = $this->connexion->prepare("UPDATE users SET password='".md5($newpassword)."' WHERE login ='".$_SESSION['login']."'");
         $updatepassword->execute();
 
-        $message = "Le nouveau mot de passe a bien été enregistré.";
-
-        echo "Le nouveau mot de passe a bien été enregistré.";
     }
 
     //UPDATEEMAIL ---------------------------------------------------------------------------------------------
@@ -139,9 +132,6 @@ class User {
         $updateemail = $this->connexion->prepare("UPDATE users SET email='".$newemail."' WHERE login ='".$_SESSION['login']."'");
         $updateemail->execute();
 
-        $message = "La nouvelle adresse email a été enregistrée.";
-
-        echo "La nouvelle adresse email a été enregistrée.";
     }
 
 

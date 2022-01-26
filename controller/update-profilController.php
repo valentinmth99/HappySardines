@@ -4,6 +4,10 @@ require('../model/bdd.php');
 
 require('../model/classes/class_user.php');
 
+$success_infos = 0;
+$success_password = 0;
+$success_mail = 0;
+
 // CONTROLLER FUNCTION UPDATEINFOS
 
 if (isset($_POST)){
@@ -39,7 +43,7 @@ if (isset($_POST)){
             $err_login = "Renseignez votre login.";
         }
 
-        elseif (strlen($newlogin)<6 || strlen($newlogin)>20)) {
+        elseif (strlen($newlogin)<6 || strlen($newlogin)>20) {
             $valid = false;
             $err_login = "Le login doit contenir entre 6 et 20 caractères.";
             $login="";
@@ -98,6 +102,7 @@ if (isset($_POST)){
         if($valid==true) {
             $updateinfos_user = new User();
             $updateinfos_user->UpdateInfos("$newlogin", "$newfirstname", "$newlastname");
+            $success_infos = 1;
         }
     }
 }
@@ -158,6 +163,8 @@ if (!empty($_POST)){
 
             $updatepassword_user = new User();
             $updatepassword_user->UpdatePassword("$newpassword");
+            $success_password = 1;
+
         }
     }
 }
@@ -234,13 +241,8 @@ if (!empty($_POST)) {
         if($valid==true) {
             $updateemail = new User ();
             $updateemail->UpdateEmail($newemail);
+            $success_mail = 1;
         }
-
-
-
-        
-
-
     }
 }
 

@@ -8,7 +8,7 @@ require('../model/classes/class_locations.php');
 
 require('../model/classes/class_equipments.php');
 
-
+$form_updatebooking = 1;
 // CONTROLLER FUNCTION BOOKING
 
 if (!empty($_POST)) {
@@ -287,6 +287,8 @@ if (!empty($_POST)) {
             $booking->UpdateBooking("$arrival", "$departure", "$length", "$option_borne", "$option_discoclub", "$option_activities", "$rate", "$id_user", "$id_location", "$id_equipment");
             
             unset($_SESSION['id_reservation']);
+
+            $form_updatebooking = 0;
         }
     }
 }

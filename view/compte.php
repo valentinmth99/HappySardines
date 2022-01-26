@@ -33,12 +33,12 @@ require('../controller/compteController.php');
 
                         <form action="compte.php" method="post">
 
-                            <?php if(isset($err_login)){echo $err_login;}?>
                             <div><label for="login">Login</label></div>
+                            <?php if (isset($err_login)) {echo "<p class='err_form'> $err_login<p>";}?>
                             <div><input type="text" name="login"></div>
 
-                            <?php if(isset($err_password)){echo $err_password;} if(isset($err_connexion)){echo $err_connexion;}?>
                             <div><label for="password">Mot de passe</label></div>
+                            <?php if(isset($err_password)){echo "<p class='err_form'> $err_password<p>";} if(isset($err_connexion)){echo"<p class='err_form'> $err_connexion<p>";}?>
                             <div><input type="password" name="password"></div>
 
                             <input type="submit" name="connexion" value="Se connecter"></div>
