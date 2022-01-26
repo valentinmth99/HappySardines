@@ -39,7 +39,7 @@ if (isset($_POST)){
             $err_login = "Renseignez votre login.";
         }
 
-        elseif (strlen(6>$newlogin)>20) {
+        elseif (strlen(6<$newlogin) || strlen($newlogin>20)) {
             $valid = false;
             $err_login = "Le login doit contenir entre 6 et 20 caractères.";
             $login="";

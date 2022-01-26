@@ -10,8 +10,6 @@ $check_admin = new Admin;
 $check_admin->CheckAdmin();
 
 
-
-
 ?>
 
 <html lang="fr">

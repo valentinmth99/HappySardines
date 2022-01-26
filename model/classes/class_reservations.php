@@ -55,9 +55,13 @@ class Reservations {
 
         for ($i=0; isset($fetch_list_booking[$i]); $i++){
 
+            $arrival_timestamp = strtotime($fetch_list_booking[$i]['arrival']) ;
+            $arrival = date('d-m-Y', $arrival_timestamp);
+
+            $departure_timestamp = strtotime($fetch_list_booking[$i]['departure']) ;
+            $departure = date('d-m-Y', $departure_timestamp);
+
             $id_reservation = $fetch_list_booking[$i]['id'];
-            $arrival = $fetch_list_booking[$i]['arrival'];
-            $departure = $fetch_list_booking[$i]['departure'];
             $equipment = $fetch_list_booking[$i]['type'];
             $location = $fetch_list_booking[$i]['name'];
 
@@ -91,16 +95,21 @@ class Reservations {
     public function ConsultUserBooking(){
 
 
-        // RETAPER CETTE MERDE  POUR ENLEVER LES IF INUTILE UTILISER UN INNER JOIN
         $id_user = $_SESSION['id'];
         $get_booking = $this->connexion->prepare("SELECT id, arrival, departure, option_borne, option_discoclub, option_activities, rate, id_location, id_equipment FROM reservations WHERE reservations.id='".@$_GET['val']."'");
         $get_booking->setFetchMode(PDO::FETCH_ASSOC);
         $get_booking->execute();
         $fetch_booking = $get_booking->fetch();
+
+        $arrival_timestamp = strtotime($fetch_booking['arrival']) ;
+        $arrival = date('d-m-Y', $arrival_timestamp);
+
+        $departure_timestamp = strtotime($fetch_booking['departure']) ;
+        $departure = date('d-m-Y', $departure_timestamp);
         
         $this->id_reservation = $fetch_booking['id'];
-        $this->arrival = $fetch_booking['arrival'];
-        $this->departure = $fetch_booking['departure'];
+        $this->arrival = $arrival;
+        $this->departure = $departure;
         $this->rate = $fetch_booking['rate'];
 
 
@@ -322,6 +331,7 @@ class Reservations {
             if($lastname) { $whereParts[] = "users.lastname = '$lastname'"; }
             
             //BUILD THE QUERY
+
             $query = "SELECT reservations.id, reservations.arrival, reservations.departure, users.firstname, users.lastname from reservations
             INNER JOIN users on users.id = reservations.id_user ";
             $query2 = "ORDER BY reservations.id DESC";
@@ -336,13 +346,21 @@ class Reservations {
         
             $assoc = $research_reservations->fetchAll();
 
-            foreach ($assoc as $result) { echo "
+            foreach ($assoc as $result) { 
+
+                $arrival_timestamp = strtotime($result['arrival']) ;
+                $arrival = date('d-m-Y', $arrival_timestamp);
+    
+                $departure_timestamp = strtotime($result['departure']) ;
+                $departure = date('d-m-Y', $departure_timestamp);
+                
+                echo "
                 <tr>
                     <td><a href='reservations-details.php?val=".$result['id']." '>".$result['id']."</a></td>
                     <td><a href='reservations-details.php?val=".$result['id']." '>".$result['firstname']."</a></td>
                     <td><a href='reservations-details.php?val=".$result['id']." '>".$result['lastname']."</a></td>
-                    <td><a href='reservations-details.php?val=".$result['id']." '>".$result['arrival']."</a></td>
-                    <td><a href='reservations-details.php?val=".$result['id']." '>".$result['departure']."</a></td>
+                    <td><a href='reservations-details.php?val=".$result['id']." '>".$arrival."</a></td>
+                    <td><a href='reservations-details.php?val=".$result['id']." '>".$departure."</a></td>
                 </tr> "; 
             } 
         }
@@ -502,7 +520,58 @@ class Reservations {
         
         $assoc = $get_details->fetchAll();
 
-        var_dump($assoc);
+        $_SESSION['id_reservation'] = $assoc['id'];
+
+        echo $_SESSION['id_reservation'];
+
+        foreach ($assoc as $result) { 
+    
+            $arrival_timestamp = strtotime($result['arrival']) ;
+            $arrival = date('d-m-Y', $arrival_timestamp);
+
+            $departure_timestamp = strtotime($result['departure']) ;
+            $departure = date('d-m-Y', $departure_timestamp);
+
+            
+
+            
+            echo "
+            
+            <table border='1'>
+                <thead>
+                    <tr>
+                        <th colspan='2'>Réservation n° '".$result['id']."'</td>
+                    <tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>".$result['firstname']."</td>
+                        <td>".$result['lastname']."</td>
+                    </tr>
+
+                    <tr>
+                        <td>".$arrival."</td>
+                        <td>".$departure."</td>
+                    </tr>
+
+                    <tr>
+                        <td>".$result['name']."</td>
+                        <td>".$result['type']."</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan='2'>".$result['rate']." €</td>
+                    </tr>
+
+                </tbody>
+            </table>";
+
+
+        }
+
+        return $_SESSION['id_reservation'] = $result['id'];
 
 
 

@@ -13,7 +13,7 @@ if (!empty($_POST)) {
     if (isset($_POST['suscribe'])) {
 
         $login = htmlspecialchars(trim($_POST['login']));
-        $email = htmlspecialchars((trim($_POST['email']));
+        $email = htmlspecialchars(trim($_POST['email']));
         $firstname = htmlspecialchars(trim(ucwords(strtolower($_POST['firstname']))));
         $lastname = htmlspecialchars(trim(ucwords(strtolower($_POST['lastname']))));
         $checkemail = htmlspecialchars(trim($_POST['checkemail']));
@@ -37,7 +37,7 @@ if (!empty($_POST)) {
             $err_login = "Renseignez votre login.";
         }
 
-        elseif (strlen(6>$login)>20) {
+        elseif (strlen(6<$login) || strlen($login>20)) {
             $valid = false;
             $err_login = "Le login doit contenir entre 6 et 20 caractères.";
             $login="";

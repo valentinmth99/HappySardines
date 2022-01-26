@@ -73,7 +73,7 @@ if (!empty($_POST)) {
 
         // Check if arrival date is at least one day after today
 
-        if($arrival < $today_date ) {
+        elseif($arrival < $today_date ) {
             $valid = false;
             $err_date = "La date d'arrivée ne peut être antérieure à celle du jour.";
         }
