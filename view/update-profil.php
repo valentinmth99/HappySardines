@@ -123,7 +123,7 @@ $getinfos_user->Getinfos();
 
         </main>
 
-     <!-- REQUIRE LE FOOTER -->
+        <?php require('footer.php'); ?>
     
     </body>
 </html>

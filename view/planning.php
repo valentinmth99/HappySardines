@@ -37,19 +37,18 @@ $currentyear = date('Y');
     </head>
 
     <body>
+
+        <?php require('header.php');?>
+        
         <main>
 
-            <?php require('header.php');?>
+            <h2 id="title_planning">Planning mensuel</h2>
 
-            <h1>Planning mensuel</h1>
-
-            
-                
                 <div class="d-flex flex-row align-itmes-center justify-content-around">
 
-                    <a href="planning.php?location=plage&month=<?php echo $currentmonth; ?>&year=<?php echo $currentyear;?>">La Plage</a>
-                    <a href="planning.php?location=pins&month=<?php echo $currentmonth ;?>&year=<?php echo $currentyear;?>">Les Pins</a>
-                    <a href="planning.php?location=maquis&month=<?php echo $currentmonth; ?>&year=<?php echo $currentyear;?>">Le Maquis</a>
+                    <a class="locationplanning" href="planning.php?location=plage&month=<?php echo $currentmonth; ?>&year=<?php echo $currentyear;?>">La Plage</a>
+                    <a class="locationplanning" href="planning.php?location=pins&month=<?php echo $currentmonth ;?>&year=<?php echo $currentyear;?>">Les Pins</a>
+                    <a class="locationplanning" href="planning.php?location=maquis&month=<?php echo $currentmonth; ?>&year=<?php echo $currentyear;?>">Le Maquis</a>
 
                 </div>
 
@@ -64,8 +63,8 @@ $currentyear = date('Y');
                     <h2><?php echo $month->toString() ; ?></h2>
 
                     <div>
-                        <a href="planning.php?location=<?php echo @$_GET['location']?>&month=<?php echo $month->previousMonth()->month?>&year=<?php echo $month->previousMonth()->year?>" class="btn btn-primary">&lt;</a>
-                        <a href="planning.php?location=<?php echo @$_GET['location']?>&month=<?php echo $month->nextMonth()->month?>&year=<?php echo $month->nextMonth()->year?>" class="btn btn-primary">&gt;</a>
+                        <a href="planning.php?location=<?php echo @$_GET['location']?>&month=<?php echo $month->previousMonth()->month?>&year=<?php echo $month->previousMonth()->year?>" class="btn-primary">&lt;</a>
+                        <a href="planning.php?location=<?php echo @$_GET['location']?>&month=<?php echo $month->nextMonth()->month?>&year=<?php echo $month->nextMonth()->year?>" class="btn-primary">&gt;</a>
                     </div>
 
                 </div>
@@ -81,7 +80,7 @@ $currentyear = date('Y');
                             $date = (clone $start)->modify("+" .($k + $i * 7). "days")?>
 
                                 
-                                <td class="<?php if($month->withinMonth($date)===false) {echo "planning__othermonth";}?>">
+                                <td class="planning_cell"<?php if($month->withinMonth($date)===false) {echo "planning__othermonth";}?>">
 
                                     <?php if ($i === 0 ) { ?> <div class="planning__weekday"><?php echo $day ; } ?></div>
 
@@ -91,45 +90,22 @@ $currentyear = date('Y');
                     
                                     </div>
 
-                                    <div> 
+                                    <div class="planning__reservations"> 
                                         <?php 
                                             $newdate = new Reservations;
                                             $newdate->DisplayReservation($date);
-                                            
                                         ?>
-                                    </div>
-
-                                    <div>
-                                        <?php
-                                    
-
-                                        ?>
-
-
-                                    </div>
-
-                                    
-
-
+                                    </div>                                    
                                 </td>
 
                             <?php } ?>
                         </tr>
-
-
-
                     <?php }?>
-
-
                 </table>
             <?php }?>
-
-            
-
-
         </main>
 
-     <!-- REQUIRE LE FOOTER -->
+        <?php require('footer.php'); ?>
     
     </body>
 </html>

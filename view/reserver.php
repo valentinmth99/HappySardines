@@ -104,6 +104,9 @@ require('../controller/bookingController.php')
             </section>
 
         </main>
+
+        <?php require('footer.php'); ?>
+        
     </body>
 </html>
         

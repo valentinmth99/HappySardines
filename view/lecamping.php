@@ -61,7 +61,7 @@ session_start();
 
         </main>
 
-     <!-- REQUIRE LE FOOTER -->
+        <?php require('footer.php'); ?>
     
     </body>
 </html>

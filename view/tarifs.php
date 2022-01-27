@@ -20,7 +20,7 @@ session_start();
 
             <section class="content_tarif">
             
-            <h2 class="titre"><u>Tarifs du camping pour 2022 (par jour)</u></h2> 
+            <h2 class="titre">Tarifs du camping pour 2022 (par jour)</h2> 
 
             <ul class="liste_tarif">
                 <li>⇾ Tente : 10€</li>
@@ -42,4 +42,8 @@ session_start();
             </section>
 
         </main>
+
+        <?php require('footer.php'); ?>
+
     </body>
+</html>

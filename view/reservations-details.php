@@ -20,7 +20,7 @@ $check_admin->CheckAdmin();
     <head>
         <meta charset="utf-8">
         <title>Infos Réservation</title> 
-        <link rel="stylesheet" type="text/css" href="style/compte.css">
+        <link rel="stylesheet" type="text/css" href="style/reservations-details.css">
     </head>
 
     <body>
@@ -29,25 +29,27 @@ $check_admin->CheckAdmin();
 
         <main>
 
-            <section>
+            <section id="section_flex">
                 <?php 
                     $get_reservation_details = new Reservations ;
                     $get_reservation_details->GetReservationsDetails();
                 ?>
 
                 <form action="update-booking.php" type="post">
-                    <input type="submit" name="updatebookingform" value="Modifier votre réservation" class="submitbtn1">
+                    <input type="submit" name="updatebookingform" value="Modifier la réservation" class="submitbtn">
                 </form>
 
                 <form action="cancel-booking.php" type="post">
-                    <input type="submit" name="cancelbooking" value="Annuler votre réservation" class="submitbtn">
+                    <input type="submit" name="cancelbooking" value="Annuler la réservation" class="submitbtn">
                 </form>
 
 
             </section>
 
-        
         </main>
+
+        <?php require('footer.php'); ?>
+        
     </body>
 </html>
 

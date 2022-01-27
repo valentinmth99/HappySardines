@@ -70,7 +70,7 @@ require('../controller/inscriptionController.php');
     
         </main>
 
-     <!-- REQUIRE LE FOOTER -->
+        <?php require('footer.php'); ?>
     
     </body>
 </html>

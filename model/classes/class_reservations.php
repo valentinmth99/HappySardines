@@ -171,8 +171,6 @@ class Reservations {
         $cancel = $this->connexion->prepare($query);
         $cancel->execute();
 
-        echo "Votre reservation a bien été annulée.";
-
     }
 
     // FONCTION ADMIN AFFICHER TOUTES RESERVATIONS 
@@ -368,11 +366,11 @@ class Reservations {
                 
                 echo "
                 <tr>
-                    <td><a href='reservations-details.php?val=".$result['id']." '>".$result['id']."</a></td>
-                    <td><a href='reservations-details.php?val=".$result['id']." '>".$result['firstname']."</a></td>
-                    <td><a href='reservations-details.php?val=".$result['id']." '>".$result['lastname']."</a></td>
-                    <td><a href='reservations-details.php?val=".$result['id']." '>".$arrival."</a></td>
-                    <td><a href='reservations-details.php?val=".$result['id']." '>".$departure."</a></td>
+                    <td><a class='listbooking' href='reservations-details.php?val=".$result['id']." '>".$result['id']."</a></td>
+                    <td><a class='listbooking' href='reservations-details.php?val=".$result['id']." '>".$result['firstname']."</a></td>
+                    <td><a class='listbooking' href='reservations-details.php?val=".$result['id']." '>".$result['lastname']."</a></td>
+                    <td><a class='listbooking' href='reservations-details.php?val=".$result['id']." '>".$arrival."</a></td>
+                    <td><a class='listbooking' href='reservations-details.php?val=".$result['id']." '>".$departure."</a></td>
                 </tr> "; 
             } 
         }
@@ -486,7 +484,7 @@ class Reservations {
 
                 if ( $result['date'] == $time ) {
 
-                    echo "<div><a href='reservations-details.php?val=".$result['id_reservation']."'> 
+                    echo "<div class='planning__reservations'><a href='reservations-details.php?val=".$result['id_reservation']."'> 
                             N° ".$result['id_reservation']." -".$result['firstname']." ".$result['lastname']."
                             </a>
                         </div>"
@@ -545,7 +543,7 @@ class Reservations {
             
             echo "
             
-            <table border='1'>
+            <table>
                 <thead>
                     <tr>
                         <th colspan='2'>Réservation n° '".$result['id']."'</td>
@@ -570,7 +568,7 @@ class Reservations {
                     </tr>
 
                     <tr>
-                        <td colspan='2'>".$result['rate']." €</td>
+                        <td>".$result['rate']." €</td>
                     </tr>
 
                 </tbody>

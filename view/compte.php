@@ -119,7 +119,7 @@ require('../controller/compteController.php');
 
         </main>
 
-     <!-- REQUIRE LE FOOTER -->
+        <?php require('footer.php'); ?>
     
     </body>
 </html>

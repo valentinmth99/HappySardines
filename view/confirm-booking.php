@@ -55,6 +55,9 @@ unset($_SESSION['id_location']); ?>
             <?php header("Refresh: 3 ; url=compte.php"); ?>
         
         </main>
+
+        <?php require('footer.php'); ?>
+        
     </body>
 </html>
 

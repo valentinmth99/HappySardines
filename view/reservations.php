@@ -93,7 +93,9 @@ $check_admin->CheckAdmin();
 
             </section>
 
-        
         </main>
+
+        <?php require('footer.php'); ?>
+        
     </body>
 </html>

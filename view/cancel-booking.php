@@ -17,6 +17,8 @@ require('../controller/cancel-bookingController.php');
         <?php require('header.php')?>
 
         <main>
+            
+            <?php if($cancelled == 0){ ?>
 
             <div><h2 class="boxtitle"> Annuler votre réservation </h2></div>
 
@@ -29,9 +31,19 @@ require('../controller/cancel-bookingController.php');
                 <form action="compte.php">
                     <input class="submitbtn" type="submit" name="nocancel" value="Je n'annule pas">
                 </form>
+            
+            </div>
+
+            <?php } if($cancelled == 1) { ?>
+            
+                <p class="intro"> Votre réservation est annulée. </p>
+
+            <?php } ?>
+            
+
 
         </main>
         
-        <!-- REQUIRE FOOTER -->
+        <?php require('footer.php'); ?>
 
     </body>

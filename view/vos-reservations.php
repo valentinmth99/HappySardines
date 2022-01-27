@@ -74,5 +74,7 @@ require('../controller/vos-reservationsController.php');
                     
         <?php } ?>
         
-        </main>        
+        </main>
+        
+        <?php require('footer.php'); ?>
     </body>

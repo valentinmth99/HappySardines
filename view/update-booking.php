@@ -87,7 +87,7 @@ require('../controller/update-bookingController.php')
             </section>
         </main>
     
-        <!-- REQUIRE FOOTER -->
+        <?php require('footer.php'); ?>
     
     </body>
 
