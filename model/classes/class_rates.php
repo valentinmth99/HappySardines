@@ -46,10 +46,35 @@ class Rates {
         $get_options_rate =  $get_rate->fetchAll();
 
         return $get_options_rate;
+    }
 
-        
+    public function UpdateRate($set, $table, $rate1, $rate2) {
 
-        
+        $query = "UPDATE :table " ;
+
+        $query .= $set ;
+
+        echo $query;
+
+        $data = [
+            'table'=> $table,
+            'rate1'=> $rate1,
+            'rate2'=>$rate2,
+        ] ;
+
+       
+
+        $update_rate = $this->connexion->prepare($query);
+        $update_rate->execute($data);
+
+
+
+
+
+
+
+
+
     }
 
 

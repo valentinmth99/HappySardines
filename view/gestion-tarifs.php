@@ -1,9 +1,11 @@
 <?php
 
+session_start();
 
 require('../model/classes/class_reservations.php');
 require('../model/classes/class_admin.php');
 require('../model/classes/class_rates.php');
+require('../controller/update-ratesController.php');
 
 $get_site_rate = new Rates;
 $site_rate = $get_site_rate->DisplaySiteRate(); 
@@ -11,16 +13,11 @@ $site_rate = $get_site_rate->DisplaySiteRate();
 $get_options_rate = new Rates;
 $options_rate = $get_options_rate->DisplayOptionsRate();
 
-var_dump($options_rate);
-
 $option1_rate = $options_rate[0]['rate'];
 $option2_rate = $options_rate[1]['rate'];
 $option3_rate = $options_rate[2]['rate'];
 
-
-
-
-
+echo " SESSION LOGIN '".$_SESSION['login']."'";
 
 ?>
 
@@ -46,6 +43,7 @@ $option3_rate = $options_rate[2]['rate'];
                     <label for="day_size_rate">Emplacement / jour<label>
                     <input type="number" id="day_site_rate" name="day_site_rate" value="<?php echo $site_rate ?>">
                     <label for="password">Mot de passe<label>
+                    <?php if (isset($err_password)) { echo $err_password ;} ?>
                     <input type="password" name="password" placeholder="Confirmez avec votre mot de passe administrateur">
                     <input type="submit" value="Modifier" name="update_site_rate">
                     
