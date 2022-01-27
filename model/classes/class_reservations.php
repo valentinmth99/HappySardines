@@ -179,7 +179,7 @@ class Reservations {
 
     public function ConsultAllByLocation(){
 
-        $query = "SELECT * FROM reservations where location ='".@$_GET['location']."'"
+        $query = "SELECT * FROM reservations where location ='".@$_GET['location']."'";
         $consultall = $this->connexion->prepare($query);
         $consultall->setFetchMode(PDO::FETCH_ASSOC);
         $consultall->execute();
@@ -310,7 +310,7 @@ class Reservations {
         ];
 
         $query = "INSERT INTO reservations (arrival, departure, length, option_borne, option_discoclub, option_activities, rate, id_user, id_location, id_equipment) 
-        VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)"
+        VALUES (:arrival, :departure, :length, :option_borne, :option_discoclub, :option_activities, :rate, :id_user, :id_location, :id_equipment)";
         $booking = $this->connexion->prepare($query);
         $booking->execute($data);
 
