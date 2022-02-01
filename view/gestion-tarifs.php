@@ -17,7 +17,6 @@ $option1_rate = $options_rate[0]['rate'];
 $option2_rate = $options_rate[1]['rate'];
 $option3_rate = $options_rate[2]['rate'];
 
-echo " SESSION LOGIN '".$_SESSION['login']."'";
 
 ?>
 
@@ -40,10 +39,10 @@ echo " SESSION LOGIN '".$_SESSION['login']."'";
             <section class="container">
 
                 <form action ="gestion-tarifs.php" method="post">
-                    <label for="day_size_rate">Emplacement / jour<label>
-                    <input type="number" id="day_site_rate" name="day_site_rate" value="<?php echo $site_rate ?>">
+                    <label for="day_site_rate">Emplacement / jour<label>
+                    <input type="number" id="rate" name="rate" value="<?php echo $site_rate ?>">
                     <label for="password">Mot de passe<label>
-                    <?php if (isset($err_password)) { echo $err_password ;} ?>
+                    <?php if (isset($err_password_1)) { echo $err_password_1 ;} ?>
                     <input type="password" name="password" placeholder="Confirmez avec votre mot de passe administrateur">
                     <input type="submit" value="Modifier" name="update_site_rate">
                     
@@ -52,6 +51,7 @@ echo " SESSION LOGIN '".$_SESSION['login']."'";
                 <form action ="gestion-tarifs.php" method="post">
                     <label for="option1_rate">Borne électrique / jour <label>
                     <input type="number" id="option1_rate" name="option1_rate" value="<?php echo $option1_rate ;?>">
+                    <?php if (isset($err_password_2)) { echo $err_password_2 ;} ?>
                     <input type="password" name="password">
                     <input type="submit" value="Modifier" name="update_option1_rate">
                   
@@ -60,14 +60,16 @@ echo " SESSION LOGIN '".$_SESSION['login']."'";
                 <form action ="gestion-tarifs.php" method="post">
                     <label for="option2_rate">Accès DiscoClub / jour <label>
                     <input type="number" id="option2_rate" name="option2_rate" value="<?php echo $option2_rate ;?>">
+                    <?php if (isset($err_password_3)) { echo $err_password_3 ;} ?>
                     <input type="password" name="password" placeholder="Confirmez avec votre mot de passe administrateur">
-                    <input type="submit" value="Modifier" name="update__option2_rate">
+                    <input type="submit" value="Modifier" name="update_option2_rate">
                     
                 </form>
 
                 <form action ="gestion-tarifs.php" method="post">
                     <label for="option3_rate">Pack activités / jour<label>
-                    <input type="number" id="option3_rate" name="option3_rate" value="<?php echo $option3_rate ;?>"> 
+                    <input type="number" id="option3_rate" name="option3_rate" value="<?php echo $option3_rate ;?>">
+                    <?php if (isset($err_password_4)) { echo $err_password_4 ;} ?> 
                     <input type="password" name="password" placeholder="Confirmez avec votre mot de passe administrateur">
                     <input type="submit" value="Modifier" name="update_option3_rate">
                     

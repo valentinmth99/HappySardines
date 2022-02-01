@@ -11,7 +11,6 @@ class Rates {
 
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=camping', 'root', '');
-            echo "Connecté à la bdd";
             $this->connexion=$bdd;
             
         }
@@ -48,32 +47,15 @@ class Rates {
         return $get_options_rate;
     }
 
-    public function UpdateRate($set, $table, $rate1, $rate2) {
-
-        $query = "UPDATE :table " ;
-
-        $query .= $set ;
-
-        echo $query;
+    public function UpdateRate($query, $table, $rate, $id) {
 
         $data = [
-            'table'=> $table,
-            'rate1'=> $rate1,
-            'rate2'=>$rate2,
+            'rate' => $rate,
+            'id' => $id,
         ] ;
-
-       
 
         $update_rate = $this->connexion->prepare($query);
         $update_rate->execute($data);
-
-
-
-
-
-
-
-
 
     }
 
