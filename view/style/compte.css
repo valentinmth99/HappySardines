@@ -26,6 +26,7 @@ label {
     margin-bottom: 5px;
     font-size: 18px;
     color:rgb(36, 159, 168);
+    text-shadow: 1px 1px black;
 }  
    
 input {
@@ -42,7 +43,7 @@ input {
     background: rgb(223, 223, 223);
     border-radius: 20px;
     padding: 20px;
-    
+    margin-bottom: 6vh;
     max-width: fit-content;
     position:relative;
     text-align:center;
@@ -101,4 +102,9 @@ td {
 .listbooking {
     color: rgb(99, 99, 99);
     font-size: 18px;
+}
+
+#tarifs_title {
+    text-align: center;
+    text-shadow: 1px 1px black;
 }
