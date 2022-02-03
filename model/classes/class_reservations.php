@@ -45,7 +45,7 @@ class Reservations {
         $id_user = $_SESSION['id'];
         $query = "SELECT reservations.id, arrival, departure, equipments.type, locations.name FROM reservations 
         INNER JOIN equipments ON reservations.id_equipment = equipments.id 
-        INNER JOIN locations ON reservations.id_location = locations.id WHERE id_user=$id_user";
+        INNER JOIN locations ON reservations.id_location = locations.id WHERE id_user=$id_user ORDER BY arrival DESC";
 
         $list_booking = $this->connexion->prepare($query);
         $list_booking->setFetchMode(PDO::FETCH_ASSOC);
