@@ -1,93 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Quintessential&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 html, body {
     margin: 0;
     height: auto;
-    width: 100%;
     background: linear-gradient(319deg, #438dfffc, transparent);
-    background-repeat: no-repeat;
 }
 
 main {
-    display: block;
-    width:70%;
-    margin:auto;
-    text-shadow: 1px 1px black;
-    text-align:center;
-    padding-bottom: 5vh;
-}
-
-.flex_descriptions {
-    padding-top: 3vh;
-    font-family: 'Quintessential';
+    text-align: center;
 }
 
 h1 {
     margin: 20px 0;
     color: #fff;
-    font-size: 6vh;
-    margin-top: 80px;
+    font-size: 8vh;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
-h2 {
-    color:rgb(63, 182, 182);
-    text-shadow: 1px 1px grey;
-    font-family: 'Quintessential';
+span {
+    color:rgb(36, 159, 168);
 }
 
-#camping_name {
-    font-size: 6vh;
-    color: rgb(63, 182, 182);
-}
-
-.flexbox_images {
-    display: flex;
-    flex-direction:row;
-    padding-top:50px;
-    height:auto;
-    width:auto;
+article {
+    display: flex; 
+    flex-direction: row;
     justify-content: space-around;
+    padding-bottom: 8vh;
 }
 
-#pins_flex_image {
-    max-width:150%;
-    height:auto;
-    width:448px;
-    margin-right:10px;
+section {
+    position: relative;
+    padding: 0;
+    width: 500px;
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
 }
 
-.flex_image {
-    max-width:100%;
-    height:auto;
-    width:400px;
+.text_image {
+    opacity: 0;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    color: #ffffff;
+    background-color: rgba(200, 200, 200, 0.5);
+    width: 500px;
+    height: 100px;
+    transition: all 400ms ease-out;
+    text-align: center;
+    font-family: 'Poppins';
+    text-shadow: 1px 1px black;
 }
 
-.description {
-    color:rgb(63, 182, 182);
-    text-shadow: 1px 1px white;
-    padding-top: 5vh;
-    border: 5px rgb(167, 167, 167) double;
-    padding-bottom: 6vh;
-    padding-left: -30vw;
-    margin-top: 8vh;
-    border-radius: 20px;
+section .text_image:hover {
+    opacity: 1;
 }
 
-.desc_image {
-    height:auto;
-    width:300px;
+section .text_image p {
+    height: 0;
+    opacity: 1;
+    transition-delay: 0s;
+    transition-duration: 0.4s;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+section .text_image:hover p {
+    opacity: 1;
+    transform: translateY(40px);
+}
