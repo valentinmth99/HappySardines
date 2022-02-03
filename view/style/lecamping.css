@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quintessential&display=swap');
+
 html, body {
     margin: 0;
     height: auto;
@@ -17,6 +19,7 @@ main {
 
 .flex_descriptions {
     padding-top: 3vh;
+    font-family: 'Quintessential';
 }
 
 h1 {
@@ -29,6 +32,7 @@ h1 {
 h2 {
     color:rgb(63, 182, 182);
     text-shadow: 1px 1px grey;
+    font-family: 'Quintessential';
 }
 
 #camping_name {
@@ -62,6 +66,11 @@ h2 {
     color:rgb(63, 182, 182);
     text-shadow: 1px 1px white;
     padding-top: 5vh;
+    border: 5px rgb(167, 167, 167) double;
+    padding-bottom: 6vh;
+    padding-left: -30vw;
+    margin-top: 8vh;
+    border-radius: 20px;
 }
 
 .desc_image {

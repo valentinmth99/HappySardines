@@ -3,8 +3,6 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
 }
 
 main {
@@ -12,7 +10,7 @@ main {
     padding-top: 5vh;
     color: white;
     background: linear-gradient(319deg, #438dfffc, transparent);
-    background-size: cover;
+    padding-bottom: 2vh;
 }
 
 fieldset{
@@ -63,6 +61,7 @@ input.date, select {
     font-size: 25px;
     opacity: 0.8;
     margin-top: 2vh;
+    margin-bottom: 5vh;
 }
 
 .submitbtn:hover {
