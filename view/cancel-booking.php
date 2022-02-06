@@ -24,6 +24,8 @@ require('../controller/cancel-bookingController.php');
 
                 <p class="intro">Êtes-vous sûr de vouloir annuler cette réservation ?</p>
 
+                <p class="intro">Attention, vous avez jusqu'à 48 heures avant votre date d'arrivée pour annuler votre réservation. </p>
+
                 <form action="cancel-booking.php" method="post">
                     <input class="submitbtn" type="submit" name="confirmcancel" value="Confirmer l'annulation">
                 </form>
