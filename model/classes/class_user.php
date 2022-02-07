@@ -16,7 +16,7 @@ class User {
     
     // DECLARATION DES METHODES 
 
-    public function __construct() {  //VOIR POURQUOI LE CHEMIN REQUIRE FONCTIONNE PAS SA MERE
+    public function __construct() { 
         $bdd = new PDO('mysql:host=localhost;dbname=camping', 'root', '');
 
         try {

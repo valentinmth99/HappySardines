@@ -2,7 +2,7 @@
 
 session_start();
 
-require('../model/classes/Month.php');
+require('../model/classes/class_month.php');
 require('../model/classes/class_reservations.php');
 require('../model/classes/class_user.php');
 require('../model/classes/class_admin.php');
