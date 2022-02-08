@@ -190,17 +190,7 @@ if (!empty($_POST)) {
                     $length = $intvl->days;
                     $length = $length+1;
 
-                    echo " CAS 1 <br>";
-
-                    echo " premier jour '".$firstDate->format('Y-m-d')."' <br> ";
-                    echo " dernier jour '".$secondDate->format('Y-m-d')."' <br>" ;
-                    echo "durée $length  <br>"; 
-
-
                     $unavailable_space= $length * $equipment_space ;
-
-                    echo " durée $length fois equipmenet $equipment_space égal espace déjà pris  $unavailable_space <br>";
-
 
                     $insert->execute(['unavailable_space'=>$unavailable_space]);
                 }
@@ -215,16 +205,7 @@ if (!empty($_POST)) {
                     $length = $intvl->days;
                     $length = $length+1;
 
-
-                    echo " CAS 2 <br>";
-
-                    echo " premier jour '".$firstDate->format('Y-m-d')."' <br> ";
-                    echo " dernier jour '".$secondDate->format('Y-m-d')."' <br>" ;
-                    echo "durée $length  <br>"; 
-
                     $unavailable_space = $length * $equipment_space ;
-
-                    echo " durée $length fois equipmenet $equipment_space égal espace déjà pris  $unavailable_space <br>";
 
                     $insert->execute(['unavailable_space'=>$unavailable_space]);
                 }
@@ -240,16 +221,7 @@ if (!empty($_POST)) {
                     $length = $intvl->days;
                     $length = $length+1;
 
-                    echo " CAS 3 <br>";
-
-                    echo " premier jour '".$firstDate->format('Y-m-d')."' <br> ";
-                    echo " dernier jour '".$secondDate->format('Y-m-d')."' <br>" ;
-                    echo "durée $length  <br>"; 
-
-
                     $unavailable_space = $length * $equipment_space ;
-
-                    echo " durée $length fois equipmenet $equipment_space égal espace déjà pris  $unavailable_space <br>";
 
                     $insert->execute(['unavailable_space'=>$unavailable_space]);
                 }
@@ -265,15 +237,7 @@ if (!empty($_POST)) {
                     $length = $intvl->days;
                     $length = $length+1;
 
-                    echo " CAS 4 <br>";
-
-                    echo " premier jour '".$firstDate->format('Y-m-d')."' <br> ";
-                    echo " dernier jour '".$secondDate->format('Y-m-d')."' <br>" ;
-                    echo "durée $length  <br>"; 
-
                     $unavailable_space= $length * $equipment_space ;
-
-                    echo " durée $length fois equipmenet $equipment_space égal espace déjà pris  $unavailable_space <br>";
 
                     $insert->execute(['unavailable_space'=>$unavailable_space]);
                 } 
@@ -290,17 +254,7 @@ if (!empty($_POST)) {
                     $length = $intvl->days;
                     $length = $length+1;
 
-                    
-                    echo " CAS 5 <br>";
-
-                    echo " premier jour '".$firstDate->format('Y-m-d')."' <br> ";
-                    echo " dernier jour '".$secondDate->format('Y-m-d')."' <br>" ;
-                    echo "durée $length  <br>"; 
-
-
                     $unavailable_space= $length * $equipment_space ;
-
-                    echo " durée $length fois equipmenet $equipment_space égal espace déjà pris  $unavailable_space <br>";
 
                     $insert->execute(['unavailable_space'=>$unavailable_space]);
                 } 
@@ -317,17 +271,7 @@ if (!empty($_POST)) {
                     $length = $intvl->days;
                     $length = $length+1;
 
-                    
-                    echo " CAS 6 <br>";
-
-                    echo " premier jour '".$firstDate->format('Y-m-d')."' <br> ";
-                    echo " dernier jour '".$secondDate->format('Y-m-d')."' <br>" ;
-                    echo "durée $length  <br>"; 
-
-
                     $unavailable_space= $length * $equipment_space ;
-
-                    echo " durée $length fois equipmenet $equipment_space égal espace déjà pris  $unavailable_space <br>";
 
                     $insert->execute(['unavailable_space'=>$unavailable_space]);
                 } 
@@ -344,17 +288,7 @@ if (!empty($_POST)) {
                     $length = $intvl->days;
                     $length = $length+1;
 
-                    
-                    echo " CAS 7 <br>";
-
-                    echo " premier jour '".$firstDate->format('Y-m-d')."' <br> ";
-                    echo " dernier jour '".$secondDate->format('Y-m-d')."' <br>" ;
-                    echo "durée $length  <br>"; 
-
-
                     $unavailable_space= $length * $equipment_space ;
-
-                    echo " durée $length fois equipmenet $equipment_space égal espace déjà pris  $unavailable_space <br>";
 
                     $insert->execute(['unavailable_space'=>$unavailable_space]);
                 } 
@@ -370,8 +304,6 @@ if (!empty($_POST)) {
             $sum->execute();
 
             $result = $sum->fetchAll();
-
-            var_dump($result) ;
 
             // on fait la différence entre l'espace du terrain et la somme des espaces pris par les réservations déjà enregistrées sur la période
             // choisie par l'utilisateur pour obtenir les places encore disponibles.
