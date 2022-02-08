@@ -122,8 +122,6 @@ if (!empty($_POST)) {
 
         $assoc = $select_res->fetchAll();
 
-        var_dump($assoc);
-
         if (!empty($assoc)) {
 
             // durée en jours de la réservation choisie par l'utilisateur, soit pour une résa du 10 au 20, 10 jours.
@@ -132,29 +130,17 @@ if (!empty($_POST)) {
             $length_result = $booking_length->CalculLength("$arrival", "$departure");
             $length = (int)$length_result;
 
-            echo " durée choisi utilisateur $length <br>";
-
-
             // récupération de la place prise par les équipements soit 2 places pour un camping car.
 
             if($id_equipment == 1) { $equipment_space = 1 ; } else { $equipment_space = 2 ; }
-
 
             // pour une réservation de 10 jours, l'espace disponible de base est donc de 4x 10 soit 40.
 
             $location_space_time = 4*$length;
 
-            echo " espace dispo de base sur l'emplacement pendant le séjour chois par l'utilisateur $location_space_time <br>" ;
-
-
             // pour une réservation de 10 jours avec un camping car, il va donc falloir 10(durée)x2(taille camping car) = 20 emplacements sur cette périodes.
 
             $spaces_needed = (int) ($length * $equipment_space) ;
-
-            echo " espace nécessaire pendant le séjour chois par l'utilisateur $spaces_needed <br>" ;
-
-
-
 
             // on créé une table qui va stocker les emplacements déjà pris sur la durée du séjour des réservations déjà enresgistrées.
 
@@ -311,14 +297,9 @@ if (!empty($_POST)) {
 
             $spaces_available = (int) ($location_space_time - $result[0]['SUM(space)']) ;
 
-            echo "espaces encore disponibles = $spaces_available <br>" ;
-
             // ensuite on soustrait à l'espace disponible l'espace nécessaire à la réservation de l'utilisateur
 
             $substraction = $spaces_available - $spaces_needed;
-
-            echo "résultat de la soustraction  espaces disponibles $spaces_available - espaces requis $spaces_needed égal $substraction<br>" ;
-
 
             // si le résultat est inférieur à 0 alors l'espace nécessaire est insuffisant.
             if ($substraction < 0) {

@@ -135,9 +135,6 @@ if (!empty($_POST)) {
             $length_result = $booking_length->CalculLength("$arrival", "$departure");
             $length = (int)$length_result;
 
-            echo " durée choisi utilisateur $length <br>";
-
-
             // récupération de la place prise par les équipements soit 2 places pour un camping car.
 
             if($id_equipment == 1) { $equipment_space = 1 ; } else { $equipment_space = 2 ; }
@@ -147,17 +144,9 @@ if (!empty($_POST)) {
 
             $location_space_time = 4*$length;
 
-            echo " espace dispo de base sur l'emplacement pendant le séjour chois par l'utilisateur $location_space_time <br>" ;
-
-
             // pour une réservation de 10 jours avec un camping car, il va donc falloir 10(durée)x2(taille camping car) = 20 emplacements sur cette périodes.
 
             $spaces_needed = (int) ($length * $equipment_space) ;
-
-            echo " espace nécessaire pendant le séjour chois par l'utilisateur $spaces_needed <br>" ;
-
-
-
 
             // on créé une table qui va stocker les emplacements déjà pris sur la durée du séjour des réservations déjà enresgistrées.
 
@@ -194,9 +183,6 @@ if (!empty($_POST)) {
                     $length = $length+1;
 
                     $unavailable_space= $length * $equipment_space ;
-
-                    echo " durée $length fois equipmenet $equipment_space égal espace déjà pris  $unavailable_space <br>";
-
 
                     $insert->execute(['unavailable_space'=>$unavailable_space]);
                 }
