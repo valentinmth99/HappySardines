@@ -140,7 +140,6 @@ if (!empty($_POST)) {
         }
 
         if ($valid==true) {
-
             $create_user = new User();
             $create_user->Register("$login", "$email", "$firstname", "$lastname", "$password");
             $form_register = 0; 
